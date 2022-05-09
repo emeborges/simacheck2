@@ -1,7 +1,5 @@
 import { Flex, Heading, Text, List, ListIcon, ListItem, Button } from "@chakra-ui/react"
 
-
-import { IoMapSharp } from 'react-icons/io5'
 import { IoIosNotifications } from 'react-icons/io'
 import { BiStopwatch } from 'react-icons/bi'
 import { BsFillCalendarEventFill } from 'react-icons/bs'

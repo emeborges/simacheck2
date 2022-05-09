@@ -1,6 +1,5 @@
 import { Flex, Heading, Text, List, ListIcon, ListItem, Button } from "@chakra-ui/react"
 
-
 import { IoMapSharp } from 'react-icons/io5'
 import { MdOutlineGroups } from 'react-icons/md'
 import { AiTwotoneCalendar } from 'react-icons/ai'

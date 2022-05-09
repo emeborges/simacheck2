@@ -1,9 +1,7 @@
 import { Flex, Heading, Text, List, ListIcon, ListItem, Button } from "@chakra-ui/react"
 
-
 import { GiSwordsEmblem, GiShieldReflect } from 'react-icons/gi'
 import { BsCalculator } from 'react-icons/bs'
-import { AiTwotoneCalendar } from 'react-icons/ai'
 import { FiDivideCircle } from 'react-icons/fi'
 
 
