@@ -1,4 +1,4 @@
-export function color(dados: number) {
+export function color(dados:number) {
 
     var percentColors = [{
         pct: 0.0,
@@ -28,7 +28,7 @@ export function color(dados: number) {
     var taxaCor = dados
 
 
-    var getColorForPercentage = function (pct) {
+    var getColorForPercentage = function (pct:number) {
         for (var i = 1; i < percentColors.length - 1; i++) {
             if (pct < percentColors[i].pct) {
                 break;
