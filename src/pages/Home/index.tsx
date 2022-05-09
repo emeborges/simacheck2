@@ -8,12 +8,12 @@ import { IoTimerOutline, IoLibraryOutline } from 'react-icons/io5'
 
 import Header from '../../components/Header'
 import { Container } from "../../styles/pages/home"
+
 import HomeSimaBossesText from 'components/HomeSimaBossesText/SimaBosses';
 import HomeSimaCalcText from 'components/HomeSimaBossesText/SimaCalc';
 import HomeSimaTimer from 'components/HomeSimaBossesText/SimaTimer';
 import HomeSimaLibrary from 'components/HomeSimaBossesText/SimaLibrary';
-import useWindowDimensions from 'utils/useWindowDimension';
-import HeaderMobile from 'components/HeaderMobile';
+
 
 
 export function Home() {
@@ -24,7 +24,7 @@ export function Home() {
         setConteinerNum(num)
     }
 
-    const { width } = useWindowDimensions();
+
 
 
     return (
@@ -33,8 +33,8 @@ export function Home() {
                 <title>SimaCheck</title>
                 <meta name="description" content="" />
             </Head>
-            {width > 800 ? <Header /> : <HeaderMobile />}
 
+        <Header />
 
 
 
