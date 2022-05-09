@@ -2,7 +2,7 @@ import Container from '../components/Container';
 import { Home } from '../pages/Home';
 
 const Index = () => (
-  <Container height="100%" bg={'#000'}>
+  <Container maxW={'100vw'} bg={'#F5F6FA'} overflowX={'hidden'}>
     <Home />
   </Container>
 )
