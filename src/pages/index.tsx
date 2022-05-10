@@ -1,5 +1,5 @@
 import Container from '../components/Container';
-import { Home } from '../pages/Home';
+import { Home } from '../components/Home';
 
 const Index = () => (
   <Container maxW={'100vw'} bg={'#F5F6FA'} overflowX={'hidden'}>

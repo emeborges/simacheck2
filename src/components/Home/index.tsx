@@ -1,4 +1,4 @@
-import { Box, Button } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import Head from 'next/head'
 import { useState } from 'react';
 import { Chamada, ChamadaWhrite } from 'styles/geral'
@@ -6,13 +6,14 @@ import { Chamada, ChamadaWhrite } from 'styles/geral'
 import { GiRadarSweep, GiCalculator } from 'react-icons/gi'
 import { IoTimerOutline, IoLibraryOutline } from 'react-icons/io5'
 
-import Header from '../../components/Header'
+
 import { Container } from "../../styles/pages/home"
 
 import HomeSimaBossesText from 'components/HomeSimaBossesText/SimaBosses';
 import HomeSimaCalcText from 'components/HomeSimaBossesText/SimaCalc';
 import HomeSimaTimer from 'components/HomeSimaBossesText/SimaTimer';
 import HomeSimaLibrary from 'components/HomeSimaBossesText/SimaLibrary';
+import { Header } from 'components/Header';
 
 
 
@@ -34,21 +35,21 @@ export function Home() {
                 <meta name="description" content="" />
             </Head>
 
-        <Header />
-        <div className='conteinerUm'>
+            <Header page={'home'}/>
+            <Flex h={'30rem'} justify={'center'} align={'center'} >
                 <Box maxW={'1300px'} margin={'0 auto'}>
-                    <div className='conteinerTxt'>
-                        <Chamada>SUA JORNADA NUNCA MAIS SERÁ A MESMA</Chamada>
-                        <p>As melhores ferramentas para o seu jogo você encontra aqui!</p>
-                        <p>Conheça-as agora!</p>
+                    <Box maxW={'90%'} textAlign={'center'} margin={'0 auto'}>
+                        <Heading as='h1'>SUA JORNADA NUNCA MAIS SERÁ A MESMA</Heading>
+                        <Text>As melhores ferramentas para o seu jogo você encontra aqui!</Text>
+                        <Text>Conheça-as agora!</Text>
 
-                        <div className='conteinerBtns'>
+                        <Flex pt={'1rem'} justify={'space-between'} flexWrap={'wrap'} className='conteinerBtns'>
                             <Button
                                 mt={'0.5rem'}
                                 bg={'#e1e1e6'}
                                 w={'10rem'}
                                 h={'5rem'}
-                                p={'0.5rem'}
+                                p={'0.5rem 0rem'}
                                 display={'flex'}
                                 flexDir={'column'}
                                 justifyContent={'space-around'}
@@ -99,10 +100,10 @@ export function Home() {
                                 <IoLibraryOutline style={{ height: '2rem', width: '2rem' }} />
                                 SimaLibrary
                             </Button>
-                        </div>
-                    </div>
+                        </Flex>
+                    </Box>
                 </Box>
-            </div>
+            </Flex>
             <div className='conteinerDois'>
                 <Box maxW={'1300px'} margin={'0 auto'}>
                     <div className="conteinerImg">
@@ -115,11 +116,15 @@ export function Home() {
             <div className='conteinerTres'>
                 <Box maxW={'1300px'} margin={'0 auto'}>
                     <div className='conteinerTxt'>
-                        <ChamadaWhrite>CONHEÇA NOSSAS FERRAMENTAS</ChamadaWhrite>
-                        <p>As melhores ferramentas para o seu jogo você encontra aqui!</p>
-                        <p>Conheça-as agora!</p>
+                        <Heading as='h1' color={'#FEFEFE'} fontWeight={'900'}>CONHEÇA NOSSAS FERRAMENTAS</Heading>
+                        <Text>As melhores ferramentas para o seu jogo você encontra aqui!</Text>
+                        <Text>Conheça-as agora!</Text>
                     </div>
-                    <div className='contentTools'>
+                    <Flex
+                        direction={'column'}
+                        alignItems={'center'}
+                        className={'contentTools'}
+                    >
                         <div className='conteinerDivs'>
                             <button onClick={() => selectConteiner(1)} className={conteinerNum == 1 ? 'btns ativo' : 'btns'}>
                                 SimaBosses
@@ -140,7 +145,7 @@ export function Home() {
                             {conteinerNum == 3 ? <HomeSimaTimer /> : null}
                             {conteinerNum == 4 ? <HomeSimaLibrary /> : null}
                         </div>
-                    </div>
+                    </Flex>
                 </Box>
             </div>
 
@@ -148,7 +153,7 @@ export function Home() {
                 <Box maxW={'1300px'} margin={'0 auto'}>
                     <div className='conteinerInLine'>
                         <div className='conteinerTxt'>
-                            <Chamada>Quem somos?</Chamada>
+                            <Heading as='h1'>Quem somos?</Heading>
                             <h2>SimaGuild ou SimaEquipe?!</h2>
                             <p>Chegamos aqui não tão só, tudo aqui foi na base da raça e do KS em hunt!</p>
 
@@ -158,7 +163,7 @@ export function Home() {
                         </div>
                         <div className='line' />
                         <div className='conteinerTxt'>
-                            <Chamada>Tá com dúvida?</Chamada>
+                            <Heading as='h1' >Tá com dúvida?</Heading>
                             <h2>Como funciona, o que é DLD, quando aparece?!</h2>
                             <p>Já que as informações não são poucas, fizemos um guia ideal para você entender todos os relatórios</p>
 
@@ -169,9 +174,6 @@ export function Home() {
                     </div>
                 </Box>
             </div>
-
-
-
 
 
 

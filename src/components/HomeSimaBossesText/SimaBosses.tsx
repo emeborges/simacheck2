@@ -11,7 +11,7 @@ const HomeSimaBossesText: React.FC = () => {
     return (
         <Flex justify={'space-around'} width={{ base: '100%', md: '100%' }}>
 
-            <Flex direction={'column'} p={'1rem'} width={'70%'}>
+            <Flex direction={'column'} p={'1rem'} width={{base:'100%',md:'70%'}}>
                 <Heading as='h2' textAlign={'center'} >
                     Rastrear, mensurar e planejar..
                 </Heading>
@@ -50,7 +50,7 @@ const HomeSimaBossesText: React.FC = () => {
                 </Flex>
 
                 <Flex justifyContent={'center'} direction={{ base: 'column', md: 'row' }}>
-                    <Button mt={'1rem'} w={{ base: '100%', md: '20rem' }} border={'1px solid #fff'} bg={'#121214'} color={'#fff'} _hover={{ color: '#121214', bg: '#fff', border: '1px solid #121214' }}>
+                    <Button mt={'1rem'} w={{ base: '100%', md: '20rem' }} border={'1px solid #fff'} fontSize={{base:'90%', md:'100%'}} bg={'#121214'} wordBreak={'break-all'} color={'#fff'} _hover={{ color: '#121214', bg: '#fff', border: '1px solid #121214' }}>
                         Conheça nossa sessão de bosses!
                     </Button>
 

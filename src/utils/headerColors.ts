@@ -1,5 +1,5 @@
 export const headerColors = {
-  mobileMenuBackgroundColor: '#0D2538',
+  mobileMenuBackgroundColor: '#f4f4f4',
   hoverColor: '#5FBA3E',
-  fontColor: '#FFFFFF'
+  fontColor: '#f4f4f4'
 }

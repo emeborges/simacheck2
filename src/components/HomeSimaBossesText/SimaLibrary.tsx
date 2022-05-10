@@ -11,7 +11,7 @@ const HomeSimaLibrary: React.FC = () => {
         <>
             <Flex justify={'space-around'}>
 
-                <Flex direction={'column'} p={'1rem'} width={'70%'}>
+                <Flex direction={'column'} p={'1rem'} width={{base:'100%',md:'70%'}}>
                     <Heading as='h2' textAlign={'center'} >
                         Dados, dados e mais dados..
                     </Heading>
@@ -45,15 +45,15 @@ const HomeSimaLibrary: React.FC = () => {
 
                     </Flex>
 
-                    <Flex justifyContent={'center'}>
-                        <Button mt={'1rem'} w={'20rem'} border={'1px solid #fff'} bg={'#121214'} color={'#fff'} _hover={{ color: '#121214', bg: '#fff', border: '1px solid #121214' }}>
-                            Conheça nossa biblioteca
-                        </Button>
+                    <Flex justifyContent={'center'} direction={{ base: 'column', md: 'row' }}>
+                    <Button mt={'1rem'} w={{ base: '100%', md: '20rem' }} border={'1px solid #fff'} fontSize={{base:'90%', md:'100%'}} bg={'#121214'} wordBreak={'break-all'} color={'#fff'} _hover={{ color: '#121214', bg: '#fff', border: '1px solid #121214' }}>
+                        Conheça nossa biblioteca!
+                    </Button>
 
-                        <Button mt={'1rem'} w={'20rem'} ml={'1rem'} color={'#121214'} _hover={{ border: '1px solid #fff', bg: '#121214', color: '#fff' }}>
-                            Conheça os benefícios do premium!
-                        </Button>
-                    </Flex>
+                    <Button mt={'1rem'} w={{ base: '100%', md: '20rem' }} ml={{ base: '0rem', md: '1rem' }} color={'#121214'} _hover={{ border: '1px solid #fff', bg: '#121214', color: '#fff' }}>
+                        Conheça os benefícios do premium!
+                    </Button>
+                </Flex>
 
                 </Flex>
 

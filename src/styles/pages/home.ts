@@ -4,7 +4,7 @@ import styled from "styled-components"
 export const Container = styled.div`
 
     .conteinerUm {
-        height:60vh;
+        height:30rem;
         display:flex;
         justify-content:center;
         align-items:center;
@@ -130,6 +130,7 @@ export const Container = styled.div`
                 @media only screen and (max-width: 600px) {
                     width:97%;
                     margin:0 auto;
+                    max-width:97%;
                 }
             }
 
@@ -142,6 +143,10 @@ export const Container = styled.div`
                 background-color:transparent;
                 color: #F5F6FA;
                 cursor:pointer;
+
+                @media only screen and (max-width: 600px) {
+                    font-size: 90%;
+                }
 
 
                 :first-child{
