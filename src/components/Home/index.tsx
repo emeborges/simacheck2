@@ -1,7 +1,6 @@
 import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import Head from 'next/head'
 import { useState } from 'react';
-import { Chamada, ChamadaWhrite } from 'styles/geral'
 
 import { GiRadarSweep, GiCalculator } from 'react-icons/gi'
 import { IoTimerOutline, IoLibraryOutline } from 'react-icons/io5'
