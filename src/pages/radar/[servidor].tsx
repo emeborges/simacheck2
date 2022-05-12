@@ -49,7 +49,7 @@ const Index = () => {
         setBossesOrganizado(bossesOrganizado?.sort((a, b) => { return b.colour_frame! - a.colour_frame! }))
     }
 
-
+    console.log(load)
     return (
         <Container>
             <Head>
@@ -58,66 +58,72 @@ const Index = () => {
             </Head>
             <Header page={'none'} />
             <Box w={'100%'} maxW={'1300px'} margin={'0 auto'}>
-                <div className='infos'>
-                    <div className="infosServer lateral">
-                        <div className="dadosServidor">
-                            <h5>Servidor:</h5>
-                            <h3>
-                                {pid}
-                            </h3>
+                {load === true ?
+                null
+                :
+                <>
+                    <div className='infos'>
+                        <div className="infosServer lateral">
+                            <div className="dadosServidor">
+                                <h5>Servidor:</h5>
+                                <h3>
+                                    {pid}
+                                </h3>
+                            </div>
+                            <div className="traco" />
+                            <div className="dadosServidor">
+                                <h5>Data de Referência:</h5>
+                                <h3>
+                                    {pid}
+                                </h3>
+                            </div>
                         </div>
-                        <div className="traco" />
-                        <div className="dadosServidor">
-                            <h5>Data de Referência:</h5>
-                            <h3>
-                                {pid}
-                            </h3>
+                        <div className="infosServer central">
+                            <h5>Bosses mortos ontem:</h5>
+                        </div>
+                        <div className="infosServer lateral">
+                            <h5>Conteiner ultimo</h5>
                         </div>
                     </div>
-                    <div className="infosServer central">
-                        <h5>Bosses mortos ontem:</h5>
-                    </div>
-                    <div className="infosServer lateral">
-                        <h5>Conteiner ultimo</h5>
-                    </div>
-                </div>
-                <div className="title">
-                    <div className="line">
-                        <h1>Radar</h1>
-                        <div className="traco" />
-                    </div>
-                    <div className="selec">
-                        <div className="view">
-                            <p>
-                                Tipo de visualização:
-                            </p>
-                            <ul>
-                                <li className={view === 'status' ? "selecionado" : ""} onClick={() => setView('status')}>
-                                    Status
-                                    <div className={view === 'status' ?
-                                        "line selected" : "line"} />
-                                </li>
-                                <li className={view === 'lore' ? "selecionado" : ""} onClick={() => setView('lore')}>
-                                    Lores
-                                    <div className={view === 'lore' ?
-                                        "line selected" : "line"} />
-                                </li>
-                                <li className={view === 'city' ? "selecionado" : ""} onClick={() => setView('city')}>
-                                    Cidade
-                                    <div className={view === 'city' ?
-                                        "line selected" : "line"} />
-                                </li>
+                    <div className="title">
+                        <div className="line">
+                            <h1>Radar</h1>
+                            <div className="traco" />
+                        </div>
+                        <div className="selec">
+                            <div className="view">
+                                <p>
+                                    Tipo de visualização:
+                                </p>
+                                <ul>
+                                    <li className={view === 'status' ? "selecionado" : ""} onClick={() => setView('status')}>
+                                        Status
+                                        <div className={view === 'status' ?
+                                            "line selected" : "line"} />
+                                    </li>
+                                    <li className={view === 'lore' ? "selecionado" : ""} onClick={() => setView('lore')}>
+                                        Lores
+                                        <div className={view === 'lore' ?
+                                            "line selected" : "line"} />
+                                    </li>
+                                    <li className={view === 'city' ? "selecionado" : ""} onClick={() => setView('city')}>
+                                        Cidade
+                                        <div className={view === 'city' ?
+                                            "line selected" : "line"} />
+                                    </li>
 
-                            </ul>
+                                </ul>
+                            </div>
+                            <div className="filters">
+                                <Filters sortName={sortName} sortDrop={sortDrop} filterOn={dadoFiltrado} />
+                            </div>
                         </div>
-                        <div className="filters">
-                            <Filters sortName={sortName} sortDrop={sortDrop} filterOn={dadoFiltrado} />
-                        </div>
+                        <div className="bossesConteiner">
+                            {view === 'status' ? <ConteinerBosses bosses={bossesOrganizado} /> : null}
+                            </div>
                     </div>
-                    <div className="bossesConteiner">
-                        {view === 'status' ? <ConteinerBosses bosses={bossesOrganizado} /> : null}
-                        </div>
-                </div>
+                </>
+                }
 
 
             </Box>
