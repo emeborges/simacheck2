@@ -1,10 +1,9 @@
-import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Text, useDisclosure } from '@chakra-ui/react';
 import Head from 'next/head'
 import { useState } from 'react';
 
 import { GiRadarSweep, GiCalculator } from 'react-icons/gi'
 import { IoTimerOutline, IoLibraryOutline } from 'react-icons/io5'
-
 
 import { Container } from "../../styles/pages/home"
 
@@ -13,19 +12,17 @@ import HomeSimaCalcText from 'components/HomeSimaBossesText/SimaCalc';
 import HomeSimaTimer from 'components/HomeSimaBossesText/SimaTimer';
 import HomeSimaLibrary from 'components/HomeSimaBossesText/SimaLibrary';
 import { Header } from 'components/Header';
+import ModalSelectServer from 'components/ModalServerSelect';
 
 
 
 export function Home() {
-
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const [conteinerNum, setConteinerNum] = useState<number>(2)
 
     function selectConteiner(num:number) {
         setConteinerNum(num)
     }
-
-
-
 
     return (
         <Container>
@@ -53,6 +50,7 @@ export function Home() {
                                 flexDir={'column'}
                                 justifyContent={'space-around'}
                                 _hover={{ bg: '#737380' }}
+                                onClick={onOpen}
                             >
                                 <GiRadarSweep style={{ height: '2rem', width: '2rem' }} />
                                 SimaBosses
@@ -172,10 +170,10 @@ export function Home() {
                         </div>
                     </div>
                 </Box>
+
             </div>
 
-
-
+            <ModalSelectServer isOpen={isOpen} onClose={onClose}/>
         </Container>
   );
 }

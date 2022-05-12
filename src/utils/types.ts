@@ -1,6 +1,6 @@
 export interface BossesDetailsProps {
     boss: string
-    colour_frame?: number
+    colour_frame?: number | null | undefined
     current_prob?: number
     days_since_last_view?: number
     display_name?: string

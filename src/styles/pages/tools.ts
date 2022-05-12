@@ -2,14 +2,9 @@ import styled from "styled-components"
 
 export const Container = styled.div`
     width: 100%;
+    height: 100vh;
 
     .conteudo{
-        height:85.3vh;
-
-        @media only screen and (max-width: 600px) {
-            height:86vh;
-                }
-
 
         .title{
             padding:5rem 0rem 4rem 0rem;
@@ -34,6 +29,10 @@ export const Container = styled.div`
                 box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
                 border-radius:5px;
                 padding:1rem 0.5rem;
+                display:flex;
+                flex-direction: column;
+                align-items:center;
+                text-align:center;
 
                 @media only screen and (max-width: 600px) {
                     margin-top:1rem;

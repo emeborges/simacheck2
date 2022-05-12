@@ -3,6 +3,7 @@ import { Text, Flex, Button } from '@chakra-ui/react';
 
 
 import { Ul } from './styles';
+import Link from 'next/link';
 
 export function RightNav({ open, setOpen, page }) {
   useEffect(() => {
@@ -17,27 +18,27 @@ export function RightNav({ open, setOpen, page }) {
         {
             'link': 'home',
             'escrita': 'Home',
-            'endereço':'/'
+            'referencia':'/'
         },
         {
             'link': 'tools',
             'escrita': 'SimaTools',
-            'endereço':'/'
+            'referencia':'/tools'
         },
         {
             'link': 'blog',
             'escrita': 'SimaJournal',
-            'endereço':'/'
+            'referencia':'/'
         },
         {
             'link': 'blog',
             'escrita': 'SimaJournal',
-            'endereço':'/'
+            'referencia':'/'
         },
         {
             'link': 'faq',
             'escrita': 'FAQ',
-            'endereço':'/'
+            'referencia':'/'
         }
   ]
 
@@ -46,35 +47,37 @@ export function RightNav({ open, setOpen, page }) {
         {
             links.map( (link, key) => {
                 return(
-                    <Flex
-                        key={key}
-                        align={'center'}
-                        justifyContent={'center'}
-                        cursor={'pointer'}
-                        borderWidth={{base: '80%', md: '100%'}}
-                        borderBottom={{ md:page === link.link ? '4px solid #BA1813' : 'none'}}
-                        _hover={{
-                            borderBottom: page !== link.link ? '2px solid #BA1813' : '4px solid #BA1813',
-                        }}
-                        m={{base:'1rem 0rem' , md:'0rem 0.5rem 0rem'}}
-                    >
-
-                        <Text
-                            width={'100%'}
-                            minW={'6rem'}
-                            textAlign={'center'}
-                            fontSize={'1rem'}
-                            color={page === link.link ? '#FEFEFE' : '#4E4E52'}
-                            _hover={{
-                                color:'#eae9e9',
-                                textDecoration: 'none',
-                            }}
-                            onClick={() => setOpen(false)}
+                    <Link href={link.referencia}>
+                        <Flex
+                            key={key}
+                            align={'center'}
+                            justifyContent={'center'}
                             cursor={'pointer'}
-                        >
-                            {link.escrita}
-                        </Text>
-                    </Flex>
+                            borderWidth={{base: '80%', md: '100%'}}
+                            borderBottom={{ md:page === link.link ? '4px solid #BA1813' : 'none'}}
+                            _hover={{
+                                borderBottom: page !== link.link ? '2px solid #BA1813' : '4px solid #BA1813',
+                            }}
+                            m={{base:'1rem 0rem' , md:'0rem 0.5rem 0rem'}}
+                            >
+
+                            <Text
+                                width={'100%'}
+                                minW={'6rem'}
+                                textAlign={'center'}
+                                fontSize={'1rem'}
+                                color={page === link.link ? '#FEFEFE' : '#4E4E52'}
+                                _hover={{
+                                    color:'#eae9e9',
+                                    textDecoration: 'none',
+                                }}
+                                onClick={() => setOpen(false)}
+                                cursor={'pointer'}
+                                >
+                                {link.escrita}
+                            </Text>
+                        </Flex>
+                    </Link>
                 )})
         }
 

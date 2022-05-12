@@ -15,7 +15,6 @@ export function Header(prop: { page:string } ) {
   return (
     <Flex
         w={'100vw'}
-
         px={'1rem'}
         bg={'black'}
         align={'center'}

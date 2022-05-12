@@ -1,11 +1,8 @@
 import styled from "styled-components"
 
 export const Container = styled.div`
-    width: 100%;
-    min-height:100%;
-
-    .conteudo{
-        min-height:85.3vh;
+    width: 100vw;
+    min-height:100vw;
 
         .infos{
             width:100%;
@@ -162,9 +159,5 @@ export const Container = styled.div`
             }
         }
 
-
-
-
-    }
 
 `
