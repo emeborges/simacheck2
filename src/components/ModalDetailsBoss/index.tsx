@@ -1,14 +1,12 @@
-import { BossesDetailsProps } from '../../utils/types'
-import BossStatus from "../BossesStatus"
-import { PluralOuSing, Porcentagem } from "../../utils/gerals"
+
+import { PluralOuSing } from "../../utils/gerals"
 import { GiPocketBow } from 'react-icons/gi'
-import { Badge, Button, Flex, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stat, StatArrow, StatHelpText, StatLabel, StatNumber, Text, useDisclosure } from "@chakra-ui/react"
+import { Button, Flex, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, } from "@chakra-ui/react"
 import { Chart } from "react-google-charts";
 import Link from 'next/link'
 
 
 const ModalDetailsBoss: React.FC<{ boss: any, isOpen: any, onClose: any }> = ({ boss, isOpen, onClose }) => {
-    console.log(boss)
 
     const data = [
         [

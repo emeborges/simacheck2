@@ -1,7 +1,7 @@
 import { BossesDetailsProps } from '../../utils/types'
 import BossStatus from "../BossesStatus"
 import { Porcentagem } from "../../utils/gerals"
-import { Button, Flex, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stat, StatArrow, StatHelpText, StatLabel, StatNumber, Text, useDisclosure } from "@chakra-ui/react"
+import { Flex, Stat, StatArrow, StatHelpText, StatLabel, Text, useDisclosure } from "@chakra-ui/react"
 import ModalDetailsBoss from '../ModalDetailsBoss'
 import { useState } from 'react'
 
