@@ -8,6 +8,7 @@ import { BossesDetailsProps } from 'utils/types';
 import { useRouter } from 'next/router';
 import { api } from 'utils/services';
 import Filters from '../../components/Filters';
+import ConteinerBosses from 'components/BoxBosses';
 
 
 const Index = () => {
@@ -30,7 +31,7 @@ const Index = () => {
     async function getBossesInfos(server:string) {
         try {
             const { data } = await api.get(`server/${server}`)
-            setBossesOrganizado(data.sort((a: { [x: string]: number; }, b: { [x: string]: number; }) => { return b[dadoFiltrado] - a[dadoFiltrado] }))
+            setBossesOrganizado(data.sort((a:number | any, b:number | any) => { return b[dadoFiltrado] - a[dadoFiltrado] }))
             setLoad(false)
 
         } catch (e) {
@@ -40,12 +41,12 @@ const Index = () => {
 
     function sortName() {
         setDadoFiltrado('boss')
-        setBossesOrganizado(bossesOrganizado.sort((a, b) => { return a.boss.localeCompare(b.boss) }))
+        setBossesOrganizado(bossesOrganizado?.sort((a, b) => { return a.boss.localeCompare(b.boss) }))
     }
 
     function sortDrop() {
         setDadoFiltrado('colour_frame')
-        setBossesOrganizado(bossesOrganizado.sort((a, b) => { return Number(b.colour_frame) - Number(a?.colour_frame) }))
+        setBossesOrganizado(bossesOrganizado?.sort((a, b) => { return b.colour_frame! - a.colour_frame! }))
     }
 
 
@@ -112,12 +113,10 @@ const Index = () => {
                         <div className="filters">
                             <Filters sortName={sortName} sortDrop={sortDrop} filterOn={dadoFiltrado} />
                         </div>
-                        <div className="bossesConteiner">
-                                {load === true ? null  : null}
-                        </div>
-
-
                     </div>
+                    <div className="bossesConteiner">
+                        {view === 'status' ? <ConteinerBosses bosses={bossesOrganizado} /> : null}
+                        </div>
                 </div>
 
 
