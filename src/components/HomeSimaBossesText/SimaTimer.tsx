@@ -46,11 +46,21 @@ const HomeSimaTimer: React.FC = () => {
                     </Flex>
 
                     <Flex justifyContent={'center'} direction={{ base: 'column', md: 'row' }}>
-                    <Button mt={'1rem'} w={{ base: '100%', md: '20rem' }} border={'1px solid #fff'} fontSize={{base:'90%', md:'100%'}} bg={'#121214'} wordBreak={'break-all'} color={'#fff'} _hover={{ color: '#121214', bg: '#fff', border: '1px solid #121214' }}>
+                    <Button mt={'1rem'}
+                        w={{ base: '100%', md: '30rem' }}
+                        border={'1px solid #fff'}
+                        fontSize={{base:'90%', md:'90%'}}
+                        bg={'#121214'} wordBreak={'break-all'}
+                        color={'#fff'}
+                        _hover={{ color: '#121214', bg: '#fff', border: '1px solid #121214' }}>
                         Conheça nosso timer!
                     </Button>
 
-                    <Button mt={'1rem'} w={{ base: '100%', md: '20rem' }} ml={{ base: '0rem', md: '1rem' }} color={'#121214'} _hover={{ border: '1px solid #fff', bg: '#121214', color: '#fff' }}>
+                    <Button mt={'1rem'}
+                        w={{ base: '100%', md: '30rem' }}
+                        ml={{ md: '0rem', lg: '1rem' }}
+                        color={'#121214'}
+                        _hover={{ border: '1px solid #fff', bg: '#121214', color: '#fff' }}>
                         Conheça os benefícios do premium!
                     </Button>
                     </Flex>
