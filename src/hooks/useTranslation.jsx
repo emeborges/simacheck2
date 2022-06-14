@@ -4,18 +4,10 @@ import { LangStrings } from '../intl'
 export const defaultLocale = "pt";
 export const locales = ["pt", "en"];
 
-interface providerProps {
-    children: ReactNode
-}
 
-interface contextProps {
-    locale: any;
-    setLocale: Dispatch<SetStateAction<string>>;
-}
+const LanguageContext = createContext({});
 
-const LanguageContext = createContext<contextProps>({ } as contextProps);
-
-export function LenguageProvider({ children }: providerProps) {
+export function LenguageProvider({ children }) {
     const [locale, setLocale] = useState("pt");
 
 
@@ -29,7 +21,7 @@ export function LenguageProvider({ children }: providerProps) {
 export function useTranslation() {
    const { locale, setLocale } = useContext(LanguageContext);
 
-    function t(key: string | any) {
+    function t(key) {
         if (LangStrings[locale][key] === undefined){
             return LangStrings[defaultLocale][key];
 
