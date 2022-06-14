@@ -29,6 +29,5 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "src/utils/gerals.js", "src/components/Filters/index.jsx"  ]
+    "**/*.tsx",  ]
 }

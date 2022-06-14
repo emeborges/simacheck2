@@ -15,3 +15,4 @@ export const LangStrings = {
         Home_TollsDescription: "The best tools for your game you",
     },
 };
+
