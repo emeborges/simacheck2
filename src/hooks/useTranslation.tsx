@@ -9,7 +9,7 @@ interface providerProps {
 }
 
 interface contextProps {
-    locale: string;
+    locale: any;
     setLocale: Dispatch<SetStateAction<string>>;
 }
 
@@ -29,7 +29,7 @@ export function LenguageProvider({ children }: providerProps) {
 export function useTranslation() {
    const { locale, setLocale } = useContext(LanguageContext);
 
-    function t(key: string) {
+    function t(key: string | any) {
         if (LangStrings[locale][key] === undefined){
             return LangStrings[defaultLocale][key];
 
