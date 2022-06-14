@@ -36,16 +36,19 @@ const ModalSelectServer = ({isOpen, onClose}:any) => {
     }
 
     function altPages(){
+        onClose()
+
         if(value === undefined ){
             console.log('nulo')
         }else{
             router.push(`/radar/${value}`)
+
         }
     }
 
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <Modal isOpen={isOpen} onClose={onClose} isCentered blockScrollOnMount={false} >
             <ModalOverlay />
             <ModalContent>
             <ModalHeader>Selecionar Servidor</ModalHeader>
@@ -61,8 +64,16 @@ const ModalSelectServer = ({isOpen, onClose}:any) => {
             </ModalBody>
 
             <ModalFooter>
-                <Button colorScheme='blue' mr={3} onClick={altPages}>
-                    Close
+                <Button
+                    bg={'#e1e1e6'}
+                    p={'0.5rem 2rem'}
+                    display={'flex'}
+                    flexDir={'column'}
+                    justifyContent={'space-around'}
+                    _hover={{ bg: '#737380', color:'#fff' }}
+                    onClick={altPages}
+                >
+                    Ir!
                 </Button>
             </ModalFooter>
             </ModalContent>

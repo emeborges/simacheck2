@@ -39,6 +39,7 @@ const ModalDetailsBoss: React.FC<{ boss: any, isOpen: any, onClose: any }> = ({ 
             isOpen={isOpen}
             onClose={onClose}
             size={'xl'}
+            blockScrollOnMount={false}
         >
             <ModalOverlay />
             <ModalContent>

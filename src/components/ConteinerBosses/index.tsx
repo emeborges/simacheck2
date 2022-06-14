@@ -7,6 +7,7 @@ import { useState } from 'react'
 
 
 
+
 const ConteinerBosses: React.FC<{ bosses: BossesDetailsProps[] }> = ({ bosses }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [clickedBoss, setClickedBoss] = useState({})
@@ -22,7 +23,7 @@ const ConteinerBosses: React.FC<{ bosses: BossesDetailsProps[] }> = ({ bosses })
                 <>
                     <Flex
                         shadow={'0 1px 5px 0 rgb(0 0 0 / 10%), 0 1px 5px 0 rgb(0 0 0 / 6%)'}
-                        m={'0.25rem'}
+                        m={'0.25rem 0rem'}
                         w={{ base: '100%', md: '48%', lg: '18rem' }}
                         h={'6rem'}
                         align={'center'}

@@ -4,6 +4,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 
 import Fonts from 'fonts';
 import theme from 'theme'
+import { LenguageProvider } from 'hooks/useTranslation';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -15,10 +16,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="manifest" href="/manifest.json" />
         <meta name="description" content="Netfly Frontend Boilerplate" />
       </Head>
+      <LenguageProvider>
+
 
       <Fonts />
 
       <Component {...pageProps} />
+      </LenguageProvider>
     </ChakraProvider>
   )
 }

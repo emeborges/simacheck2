@@ -45,7 +45,7 @@ const HomeSimaLibrary: React.FC = () => {
 
                     </Flex>
 
-                    <Flex justifyContent={'center'} direction={{ base: 'column', md: 'row' }}>
+                    <Flex justifyContent={'center'} align={'center'} direction={{ base: 'column', md: 'row' }}>
                     <Button mt={'1rem'}
                         w={{ base: '100%', md: '30rem' }}
                         border={'1px solid #fff'}
@@ -56,7 +56,8 @@ const HomeSimaLibrary: React.FC = () => {
                         Conheça nossa biblioteca!
                     </Button>
 
-                    <Button mt={'1rem'}
+                    <Button
+                        mt={'1rem'}
                         w={{ base: '100%', md: '30rem' }}
                         ml={{ md: '0rem', lg: '1rem' }}
                         color={'#121214'}

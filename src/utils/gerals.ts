@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+
 export function color(dados:number) {
 
     var percentColors = [{
@@ -71,4 +73,11 @@ export function PluralOuSing(dados: number, txtSing: string, txtPlur: string) {
     } else {
         return null
     }
+}
+
+
+export function goBack() {
+    const router = useRouter()
+
+    return router.back()
 }

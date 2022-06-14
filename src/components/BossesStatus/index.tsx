@@ -5,7 +5,7 @@ import { Image } from "@chakra-ui/react"
 
 
 
-const BossStatus: React.FC<{ image: string | undefined, status: any, width: string, height: string }> = ({ image, status, width, height }) => {
+const BossStatus: React.FC<{ image: string | undefined, status?: any,width: string, height: string }> = ({ image, status, width, height }) => {
 
     function Chance(status: number) {
         if (status > 0.7) {
@@ -24,9 +24,11 @@ const BossStatus: React.FC<{ image: string | undefined, status: any, width: stri
                     <Image src={image} />
                 </div>
             </div>
+            {status &&
             <div className="legenda">
                 <h5>{Chance(status)}</h5>
             </div>
+            }
         </Container>
     )
 }
