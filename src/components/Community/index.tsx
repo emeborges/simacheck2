@@ -2,9 +2,13 @@ import {
     Flex,
     Button,
     Box,
+    Text,
     ButtonGroup,
+    Link,
 } from "@chakra-ui/react";
 import { useTranslation } from "hooks/useTranslation";
+import Marquee from "react-fast-marquee";
+import { BsInstagram, BsTwitch, BsYoutube } from "react-icons/bs";
 
 export const Community = () => {
     const { locale, setLocale } = useTranslation();
@@ -20,7 +24,7 @@ export const Community = () => {
                 p={"0.5rem"}
             >
                 <Flex w={"80%"} maxW={"80%"} pr={"0.5rem"}>
-                    {/**<Marquee
+                    <Marquee
                         gradient={false}
                         speed={40}
                         pauseOnClick={true}
@@ -42,7 +46,7 @@ export const Community = () => {
                         </Link>
                         <Link
                             display={"flex"}
-                            href={"www.twitch.tv/bttzera"}
+                            href={"https://www.youtube.com/c/TibiaFerumbrinha"}
                             cursor={"pointer"}
                             alignItems={"center"}
                             flex={"none"}
@@ -56,7 +60,7 @@ export const Community = () => {
                         </Link>
                         <Link
                             display={"flex"}
-                            href={"www.twitch.tv/bttzera"}
+                            href={"https://www.instagram.com/tibiahome/"}
                             cursor={"pointer"}
                             alignItems={"center"}
                             flex={"none"}
@@ -68,7 +72,7 @@ export const Community = () => {
                                 .com/tibiahome
                             </Text>
                         </Link>
-                    </Marquee>*/}
+                    </Marquee>
                 </Flex>
 
                 <ButtonGroup position={"relative"}>
