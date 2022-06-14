@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Button, useDisclosure } from '@chakra-ui/react';
+import { Box, Text, } from '@chakra-ui/react';
 import Head from 'next/head'
 
 import { Header } from 'components/Header';
