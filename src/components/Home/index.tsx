@@ -12,20 +12,16 @@ import HomeSimaLibrary from 'components/HomeSimaBossesText/SimaLibrary';
 import { Header } from 'components/Header';
 import ModalSelectServer from 'components/ModalServerSelect';
 import { Footer } from 'components/Footer'
-import { Community } from 'components/Community';
 import { useTranslation } from 'hooks/useTranslation';
 
 export function Home() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [conteinerNum, setConteinerNum] = useState<number>(2)
-    const { t, locale } = useTranslation();
+    const { t } = useTranslation();
 
     function selectConteiner(num:number) {
         setConteinerNum(num)
     }
-
-    const textos = t("home");
-
 
     /*const imagensPatro = ['https://s3.sa-east-1.amazonaws.com/simacheck.staticimages.prod/Imagens+simacheck2.0/SimaCapa.png',
     'https://s3.sa-east-1.amazonaws.com/simacheck.staticimages.prod/Imagens+simacheck2.0/CyfCapa.png',

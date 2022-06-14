@@ -24,8 +24,6 @@ const Radar = () => {
     const [bossesOrganizado, setBossesOrganizado] = useState<
         BossesDetailsProps[]
     >([]);
-    const [lastView, setLastView] = useState<BossesDetailsProps[]>([]);
-    const lastViewQtde = lastView.length;
     const { bosses, pid, bossesLastView, load } = useRadarBosses();
 
 

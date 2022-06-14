@@ -19,7 +19,7 @@ export interface BossesDetailsProps {
     world_drop?: string;
 }
 
-export interface testeProps {
+export interface props { // api.simacheck.com.br/${sevidor}/bosses
     boss: string //Nome de procura/calculo
     colour_frame?: number | null | undefined //Cor, de 0, vermelho, a 1, verde.
     current_prob?: number //** Probabilidade do boss aparecer.. Talvez, para não ter problema dele estar em 20% com alta chance de aparecer, porq não colocarmos tudo no colour frame? e manter um indicador de procura? */

@@ -1,13 +1,9 @@
 import {
-    Text,
     Flex,
     Button,
     Box,
     ButtonGroup,
-    Link,
 } from "@chakra-ui/react";
-import { BsTwitch, BsYoutube, BsInstagram } from "react-icons/bs";
-import Marquee from "react-fast-marquee";
 import { useTranslation } from "hooks/useTranslation";
 
 export const Community = () => {
