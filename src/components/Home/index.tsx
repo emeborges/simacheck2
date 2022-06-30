@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { useState } from 'react';
 
 import { GiRadarSweep, GiCalculator } from 'react-icons/gi'
-import { IoTimerOutline, IoLibraryOutline } from 'react-icons/io5'
+import { IoLibraryOutline } from 'react-icons/io5'
 
 import HomeSimaBossesText from 'components/HomeSimaBossesText/SimaBosses';
 import HomeSimaCalcText from 'components/HomeSimaBossesText/SimaCalc';
@@ -86,22 +86,7 @@ export function Home() {
                                 />
                                 SimaCalculadora
                             </Button>
-                            <Button
-                                mt={"0.5rem"}
-                                bg={"#e1e1e6"}
-                                w={"10rem"}
-                                h={"5rem"}
-                                p={"0.5rem"}
-                                display={"flex"}
-                                flexDir={"column"}
-                                justifyContent={"space-around"}
-                                _hover={{ bg: "#737380" }}
-                            >
-                                <IoTimerOutline
-                                    style={{ height: "2rem", width: "2rem" }}
-                                />
-                                SimaTimer
-                            </Button>
+
                             <Button
                                 mt={"0.5rem"}
                                 bg={"#e1e1e6"}
@@ -160,7 +145,7 @@ export function Home() {
                             w={{ base: "98%", md: "80%" }}
                             margin={"0 auto"}
                             display={"grid"}
-                            gridTemplateColumns={"repeat(4,1fr)"}
+                            gridTemplateColumns={"repeat(3,1fr)"}
                         >
                             <Box
                                 fontSize={{ base: "90%", md: "18px" }}
@@ -201,29 +186,6 @@ export function Home() {
                                 onClick={() => selectConteiner(2)}
                             >
                                 SimaCalc
-                            </Box>
-                            <Box
-                                fontSize={{ base: "90%", md: "18px" }}
-                                p={"1rem 0"}
-                                border={"1px solid #323238"}
-                                background={
-                                    conteinerNum === 3
-                                        ? "rgba(245,246,250,0.1)"
-                                        : "none"
-                                }
-                                textAlign={"center"}
-                                cursor={"pointer"}
-                                textDecoration={
-                                    conteinerNum === 3 ? "underline" : "none"
-                                }
-                                textDecorationColor={"#BA1813"}
-                                fontWeight={conteinerNum === 3 ? "700" : "400"}
-                                onClick={() => selectConteiner(3)}
-                                className={
-                                    conteinerNum == 3 ? "btns ativo" : "btns"
-                                }
-                            >
-                                SimaTimer
                             </Box>
                             <Box
                                 fontSize={{ base: "90%", md: "18px" }}

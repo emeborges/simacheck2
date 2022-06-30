@@ -6,20 +6,28 @@ import {
   IconButton,
   Image,
   Box,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Badge,
 } from '@chakra-ui/react'
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
 import { Community } from 'components/Community'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { useCan } from 'hooks/useCan'
+import { FaUserShield } from 'react-icons/fa'
+import { GiAxeSword } from 'react-icons/gi'
+import { Can } from 'components/Can'
+import { signOut } from 'hooks/useSignin'
 
 
 export const Header = ({ page }:any) => {
-  const [display, setChangeDisplay] = useState('none')
-  const router = useRouter()
-
-
-
+    const [display, setChangeDisplay] = useState('none')
+    const router = useRouter()
+    const userIsAuthenticated = useCan();
 
     const links = [
         {
@@ -41,21 +49,15 @@ export const Header = ({ page }:any) => {
         {
             'link': 'faq',
             'escrita': 'FAQ',
-            'referencia':'/'
+            'referencia':'/faq'
         }
     ]
 
     return (
         <>
             <Community />
-            <Box>
-                <Flex
-                    right="0"
-                    bg={"#18181B"}
-                    w={"100vw"}
-                    h={"5.5rem"}
-                    align={"center"}
-                >
+            <Box bg={"#18181B"} w={"100%"}>
+                <Flex right="0" h={"5.5rem"} align={"center"}>
                     {/* Desktop */}
                     <Flex
                         display={["none", "none", "flex", "flex"]}
@@ -117,25 +119,119 @@ export const Header = ({ page }:any) => {
                             );
                         })}
 
-                        <Flex
-                            align={"center"}
-                            justifyContent={"center"}
-                            mr={"1rem"}
-                        >
-                            <Link href={"/signup"}>
-                                <Text
-                                    fontSize={"0.8rem"}
-                                    color={"#FEFEFE"}
-                                    mr={"0.5rem"}
-                                    cursor={"pointer"}
-                                >
-                                    Cadastrar-se
-                                </Text>
-                            </Link>
-                            <Button onClick={() => router.push("/signin")}>
-                                Entrar
-                            </Button>
-                        </Flex>
+                        {userIsAuthenticated == true ? (
+                            <Flex
+                                align={"center"}
+                                justifyContent={"center"}
+                                mr={"1rem"}
+                            >
+                                <Menu>
+                                    <MenuButton
+                                        as={IconButton}
+                                        aria-label="Options"
+                                        icon={<GiAxeSword />}
+                                        color={"#4E4E52"}
+                                        bg={"none"}
+                                        borderRadius={"none"}
+                                        borderWidth={"50%"}
+                                        _hover={{
+                                            color: "#eae9e9",
+                                            borderBottom: "2px solid red",
+                                        }}
+                                        mr={"0.5rem"}
+                                        fontSize={"1.5rem"}
+                                    />
+                                    <MenuList>
+                                        <Text
+                                            fontSize={"0.7rem"}
+                                            textAlign={"center"}
+                                        >
+                                            Acesso Rápido
+                                            <Badge
+                                                colorScheme="green"
+                                                fontSize={"0.7rem"}
+                                                ml={"0.5rem"}
+                                            >
+                                                PREMIUM
+                                            </Badge>
+                                        </Text>
+                                        <MenuItem fontSize={"0.8rem"}>
+                                            Radar
+                                        </MenuItem>
+                                        <MenuItem fontSize={"0.8rem"}>
+                                            Calculadoras
+                                        </MenuItem>
+                                    </MenuList>
+                                </Menu>
+                                <Menu>
+                                    <MenuButton
+                                        as={IconButton}
+                                        aria-label="Options"
+                                        icon={<FaUserShield />}
+                                        color={"#4E4E52"}
+                                        bg={"none"}
+                                        borderRadius={"none"}
+                                        borderWidth={"50%"}
+                                        _hover={{
+                                            color: "#eae9e9",
+                                            borderBottom: "2px solid red",
+                                        }}
+                                        fontSize={"1.2rem"}
+                                    />
+                                    <MenuList>
+                                        <MenuItem
+                                            fontSize={"0.8rem"}
+                                            onClick={() =>
+                                                router.push("/account")
+                                            }
+                                        >
+                                            Perfil
+                                        </MenuItem>
+                                        <MenuItem
+                                            fontSize={"0.8rem"}
+                                            onClick={() =>
+                                                router.push("/account/requests")
+                                            }
+                                        >
+                                            Pedidos e Pagamentos
+                                        </MenuItem>
+                                        <MenuItem
+                                            fontSize={"0.8rem"}
+                                            fontWeight={'700'}
+
+                                        >
+                                            Assinar Premium
+                                        </MenuItem>
+                                        <MenuItem
+                                            fontSize={"0.8rem"}
+                                            onClick={() => signOut()}
+                                        >
+                                            Sair
+                                        </MenuItem>
+                                    </MenuList>
+                                </Menu>
+                            </Flex>
+                        ) : (
+                            <Flex
+                                align={"center"}
+                                justifyContent={"center"}
+                                mr={"1rem"}
+                            >
+                                <Link href={"/signup"}>
+                                    <Text
+                                        fontSize={"0.8rem"}
+                                        color={"#FEFEFE"}
+                                        mr={"0.5rem"}
+                                        cursor={"pointer"}
+                                    >
+                                        Cadastrar-se
+                                    </Text>
+                                </Link>
+                                <Button onClick={() => router.push("/signin")}>
+                                    Entrar
+                                </Button>
+                            </Flex>
+                        )}
                     </Flex>
 
                     {/* Mobile */}
@@ -247,21 +343,87 @@ export const Header = ({ page }:any) => {
                                 </NextLink>
                             );
                         })}
-                        <Flex
-                            align={"center"}
-                            justifyContent={"space-around"}
-                            mr={"1rem"}
-                        >
-                            <Text
-                                fontSize={"0.8rem"}
-                                color={"#FEFEFE"}
-                                mr={"0.5rem"}
-                                cursor={"pointer"}
+                        {userIsAuthenticated == true ? (
+                            <Flex
+                                align={"center"}
+                                justifyContent={"space-evenly"}
+                                w={"100%"}
+                                mt={"3rem"}
                             >
-                                Cadastrar-se
-                            </Text>
-                            <Button>Entrar</Button>
-                        </Flex>
+                                <Can>
+                                    <Menu>
+                                        <MenuButton
+                                            as={IconButton}
+                                            aria-label="Options"
+                                            icon={<GiAxeSword />}
+                                            color={"#fff"}
+                                            bg={"none"}
+                                            borderRadius={"none"}
+                                            borderWidth={"50%"}
+                                            _hover={{
+                                                color: "#eae9e9",
+                                                borderBottom: "2px solid red",
+                                            }}
+                                            p={"2rem 1rem"}
+                                            fontSize={"2.5rem"}
+                                        />
+                                        <MenuList>
+                                            <MenuItem command="⌘T">
+                                                New Tab
+                                            </MenuItem>
+                                            <MenuItem command="⌘N">
+                                                New Window
+                                            </MenuItem>
+                                        </MenuList>
+                                    </Menu>
+                                </Can>
+                                <Menu>
+                                    <MenuButton
+                                        as={IconButton}
+                                        aria-label="Options"
+                                        icon={<FaUserShield />}
+                                        color={"#fff"}
+                                        bg={"none"}
+                                        borderRadius={"none"}
+                                        borderWidth={"50%"}
+                                        _hover={{
+                                            color: "#eae9e9",
+                                            borderBottom: "2px solid red",
+                                        }}
+                                        p={"2rem 1rem"}
+                                        fontSize={"2.5rem"}
+                                    />
+                                    <MenuList>
+                                        <MenuItem command="⌘T">
+                                            New Tab
+                                        </MenuItem>
+                                        <MenuItem command="⌘N">
+                                            New Window
+                                        </MenuItem>
+                                    </MenuList>
+                                </Menu>
+                            </Flex>
+                        ) : (
+                            <Flex
+                                align={"center"}
+                                justifyContent={"center"}
+                                mr={"1rem"}
+                            >
+                                <Link href={"/signup"}>
+                                    <Text
+                                        fontSize={"0.8rem"}
+                                        color={"#FEFEFE"}
+                                        mr={"0.5rem"}
+                                        cursor={"pointer"}
+                                    >
+                                        Cadastrar-se
+                                    </Text>
+                                </Link>
+                                <Button onClick={() => router.push("/signin")}>
+                                    Entrar
+                                </Button>
+                            </Flex>
+                        )}
                     </Flex>
                 </Flex>
             </Box>

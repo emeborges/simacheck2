@@ -6,6 +6,7 @@ import {
     Text
 
 } from "@chakra-ui/react";
+import { Footer } from "components/Footer";
 import { Header } from "components/Header";
 import { Input } from "components/Input";
 import Head from "next/head";
@@ -16,7 +17,8 @@ const Signup = () => {
     const router = useRouter()
 
     return (
-        <Flex maxW={"100vw"} h={"100vh"} align={"center"} flexDir={"column"}>
+        <>
+        <Flex maxW={"100vw"} h={"98vh"} align={"center"} flexDir={"column"}>
             <Head>
                 <title> Entrar - SimaCheck</title>
                 <meta name="description" content="" />
@@ -27,6 +29,7 @@ const Signup = () => {
                     flexDir={"column"}
                     boxShadow={"0px 4px 10px rgba(0,0,0,0.2)"}
                     p={"2rem 2rem"}
+                    maxW={"100%"}
                     borderRadius={"8px"}
                     transition={"all 0.2s"}
                     _hover={{ boxShadow: "0px 4px 20px rgba(0,0,0,0.2)" }}
@@ -55,7 +58,6 @@ const Signup = () => {
                     </Text>
                     <Input
                         name={"login"}
-                        minW={"330px"}
                         placeholder={"Endereço de e-mail"}
                     />
 
@@ -71,6 +73,8 @@ const Signup = () => {
                 </Flex>
             </Flex>
         </Flex>
+        <Footer />
+        </>
     );
 };
 

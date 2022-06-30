@@ -15,7 +15,7 @@ export const Community = () => {
 
 
     return (
-        <Box w={"100vw"} bg={"#424244"}>
+        <Box w={"100%"} bg={"#424244"}>
             <Flex
                 justify={"space-between"}
                 maxWidth={"1300px"}

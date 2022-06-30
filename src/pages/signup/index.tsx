@@ -1,17 +1,50 @@
-import { Flex, Heading, Link, Button, Checkbox, Text } from "@chakra-ui/react";
+import { Flex, Heading, Link, Button, Checkbox, Text} from "@chakra-ui/react";
 import { Header } from "components/Header";
 import { Input } from "components/Input";
 import Head from 'next/head'
-import { useRouter } from "next/router";
-import { useState } from "react";
+import {  useState } from "react";
+import * as yup from 'yup';
+import { yupResolver } from "@hookform/resolvers/yup";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useSignup } from "hooks/useSignup";
+import { withSSTGuest } from "utils/withsSSRGuest";
 
+type SignUpProps = {
+    email: string;
+    password: string;
+    confirmationPassword: string;
+};
+
+const signUpFormSchema = yup.object().shape({
+    email: yup
+        .string()
+        .required("E-mail obrigatório")
+        .email("E-mail inválido."),
+    password: yup
+        .string()
+
+        .matches(
+            /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[-+_!@#$%^&*.,?])[0-9a-zA-Z-+_!@#$%^&*.,?]{8,}$/,
+            "A senha deve ser composta de letras minusculas e maiusculas, números e caracteres especiais."
+        )
+        .required("Senha obrigatória."),
+    confirmationPassword: yup
+        .string()
+        .oneOf([yup.ref("password"), null], "As senhas devem ser iguais"),
+});
 
 const Signup = () => {
-    const router = useRouter()
+    const { signUp, Router, loading } = useSignup();
+    const { register, handleSubmit, formState } = useForm<SignUpProps>({
+        resolver: yupResolver(signUpFormSchema),
+    });
     const [valueCheck, setValeuCheck ] = useState(false)
+    const { errors } = formState
 
-    console.log(valueCheck)
-
+    const onSubmit: SubmitHandler<SignUpProps> = async ({ email, password}) => {
+        const data = {email, password}
+        signUp(data);
+    };
 
     return (
         <Flex maxW={"100vw"} h={"100vh"} align={"center"} flexDir={"column"}>
@@ -23,11 +56,13 @@ const Signup = () => {
             <Flex maxW={"330px"} h={"100%"} align={"center"} justify={"center"}>
                 <Flex
                     flexDir={"column"}
+                    as={"form"}
                     boxShadow={"0px 4px 10px rgba(0,0,0,0.2)"}
                     p={"2rem 2rem"}
                     borderRadius={"8px"}
                     transition={"all 0.2s"}
                     _hover={{ boxShadow: "0px 4px 20px rgba(0,0,0,0.2)" }}
+                    onSubmit={handleSubmit(onSubmit)}
                 >
                     <Heading
                         fontSize={"1.5rem"}
@@ -48,30 +83,32 @@ const Signup = () => {
                     </Heading>
                     <Input
                         label={"login"}
-                        name={"login"}
-                        minW={"330px"}
                         placeholder={"Endereço de e-mail"}
                         mb={"1rem"}
+                        error={errors.email}
+                        {...register("email")}
                     />
                     <Input
                         label={"senha"}
-                        name={"password"}
-                        minW={"330px"}
                         type={"password"}
                         placeholder={"Senha"}
                         mb={"1rem"}
+                        error={errors.password}
+                        {...register("password")}
+                        autoComplete={"on"}
                     />
                     <Input
                         label={"repita a senha"}
-                        name={"password"}
-                        minW={"330px"}
                         type={"password"}
+                        minW={{ base: "200px", md: "330px" }}
+                        error={errors.confirmationPassword}
                         placeholder={"Senha"}
+                        {...register("confirmationPassword")}
                     />
                     <Checkbox
                         colorScheme={"gray"}
                         onChange={() => setValeuCheck(!valueCheck)}
-                        pt={'1rem'}
+                        pt={"1rem"}
                     >
                         <Text fontSize={"0.8rem"}>
                             Concordo com os <Link href={""}>Termos de Uso</Link>{" "}
@@ -85,13 +122,21 @@ const Signup = () => {
                         color={"#FEFEFE"}
                         _hover={{ bg: "#4E4E52" }}
                         isDisabled={valueCheck === false ? true : false}
+                        isLoading={loading === true ? true : false}
+                        type={"submit"}
                     >
-                        Entrar
+                        Cadastrar
                     </Button>
-                    <Link onClick={() => router.back()}>Voltar</Link>
+                    <Link onClick={() => Router.back()}>Voltar</Link>
                 </Flex>
             </Flex>
         </Flex>
     );}
 
 export default Signup
+
+export const getServerSideProps = withSSTGuest(async () => {
+    return {
+        props: {},
+    };
+});

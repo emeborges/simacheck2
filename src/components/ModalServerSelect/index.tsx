@@ -26,7 +26,7 @@ const ModalSelectServer = ({isOpen, onClose}:any) => {
 
     async function getServers() {
         try {
-            const { data } = await api.get(`worlds`)
+            const { data } = await api.get(`/worlds`)
             setServers(data)
             setLoading(false)
 
