@@ -35,8 +35,7 @@ api.interceptors.response.use(
         if(error.response?.status == 401){
 
             if (error.response.data.message == "The incoming token has expired") {
-                let cookies = parseCookies();
-                cookies = parseCookies();
+                /*let cookies = parseCookies();*/
 
                 const { "simacheck.accessToken": acessToken } = parseCookies();
                 const { "simacheck.refreshToken": refreshToken } = parseCookies();
