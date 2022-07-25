@@ -14,7 +14,7 @@ const ModalDetailsBoss: React.FC<{
     isOpen: any;
     onClose: any;
 }> = ({ boss, isOpen, onClose }) => {
-    const data = [
+   /* const data = [
         [
             {
                 type: "date",
@@ -38,7 +38,7 @@ const ModalDetailsBoss: React.FC<{
             minValue: 0,
             colors: ["#c83728", "#ebc832", "#3cc85a"],
         },
-    };
+    };*/
 
     function status(n: number) {
         if (n > 0.33) {
@@ -53,7 +53,6 @@ const ModalDetailsBoss: React.FC<{
             );
         }
     }
-    console.log(boss);
 
     return (
         <Modal
