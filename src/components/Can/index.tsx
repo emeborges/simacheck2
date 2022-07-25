@@ -6,7 +6,7 @@ interface CanProps {
     permissions?: string[];
 }
 
-export function Can({ children, permissions }: CanProps) {
+export function Can({ children }: CanProps) {
     const userCanSeeComponent = useCan();
 
     if(!userCanSeeComponent) {
