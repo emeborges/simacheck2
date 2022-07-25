@@ -13,9 +13,11 @@ import {
     Spinner
     } from '@chakra-ui/react'
 import { api } from 'utils/services';
+import { useTranslation } from 'hooks/useTranslation';
 
 const ModalSelectServer = ({isOpen, onClose}:any) => {
     const [servers, setServers] = useState([])
+    const { t } = useTranslation();
     const router = useRouter()
     const [loading, setLoading] = useState(true)
     const [value, setValue] = useState<any>()
@@ -48,37 +50,49 @@ const ModalSelectServer = ({isOpen, onClose}:any) => {
 
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose} isCentered blockScrollOnMount={false} >
+        <Modal
+            isOpen={isOpen}
+            onClose={onClose}
+            isCentered
+            blockScrollOnMount={false}
+        >
             <ModalOverlay />
             <ModalContent>
-            <ModalHeader>Selecionar Servidor</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-                {loading === true ? <Spinner size='xl' /> :
-                 <Select placeholder='Selecione o Servidor Desejado' onChange={e => setValue(e.target.value)}>
-                    { servers.map((server, key) =>  <option key={key} value={server}>{server}</option>)}
-                </Select>
-                }
+                <ModalHeader>{t("Modal_SelectServerTitle")}</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                    {loading === true ? (
+                        <Spinner size="xl" />
+                    ) : (
+                        <Select
+                            placeholder={t("Modal_SelectServerPlaceholder")}
+                            onChange={(e) => setValue(e.target.value)}
+                        >
+                            {servers.map((server, key) => (
+                                <option key={key} value={server}>
+                                    {server}
+                                </option>
+                            ))}
+                        </Select>
+                    )}
+                </ModalBody>
 
-
-            </ModalBody>
-
-            <ModalFooter>
-                <Button
-                    bg={'#e1e1e6'}
-                    p={'0.5rem 2rem'}
-                    display={'flex'}
-                    flexDir={'column'}
-                    justifyContent={'space-around'}
-                    _hover={{ bg: '#737380', color:'#fff' }}
-                    onClick={altPages}
-                >
-                    Ir!
-                </Button>
-            </ModalFooter>
+                <ModalFooter>
+                    <Button
+                        bg={"#e1e1e6"}
+                        p={"0.5rem 2rem"}
+                        display={"flex"}
+                        flexDir={"column"}
+                        justifyContent={"space-around"}
+                        _hover={{ bg: "#737380", color: "#fff" }}
+                        onClick={altPages}
+                    >
+                        {t("Modal_SelectServerGo")}
+                    </Button>
+                </ModalFooter>
             </ModalContent>
         </Modal>
-    )
+    );
 }
 
 export default ModalSelectServer

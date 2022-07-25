@@ -12,14 +12,21 @@ interface onSucessProps {
     IdToken:string
 }
 
-
-
 export const api = axios.create({
     baseURL: "https://dev.simacheck.com/",
-    headers: {
-        Authorization: `${cookies["simacheck.idToken"]}`,
-        AccessToken: `${cookies["simacheck.accessToken"]}`,
-    },
+
+   /* headers: {
+        Authorization: `${
+            cookies["simacheck.idToken"] == undefined
+                ? null
+                : cookies["simacheck.idToken"]
+        }`,
+        AccessToken: `${
+            cookies["simacheck.accessToken"] == undefined
+                ? null
+                : cookies["simacheck.accessToken"]
+        }`,
+    },*/
 });
 
 api.interceptors.response.use(
@@ -98,9 +105,7 @@ api.interceptors.response.use(
                 })
 
             } else {
-                if (process.browser) {
-                    signOut();
-                }
+                console.log(error)
             }
         }
 

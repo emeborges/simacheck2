@@ -66,11 +66,14 @@ export function Porcentagem(dados: number) {
 }
 
 export function PluralOuSing(dados: number, txtSing: string, txtPlur: string) {
-    if (dados = 1) {
+    if (dados == 1) {
         return `${dados} ${txtSing}`
     } else if (dados > 1) {
         return `${dados} ${txtPlur}`
-    } else {
+    } else if(dados == 0){
+        return `A qualquer momento`;
+    }
+    else {
         return null
     }
 }

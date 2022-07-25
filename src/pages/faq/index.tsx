@@ -8,11 +8,16 @@ import {
     AccordionIcon,
     AccordionPanel,
     Text,
+    Tabs,
+    TabList,
+    Tab,
+    TabPanels,
+    TabPanel,
+    Button
 } from "@chakra-ui/react";
 import Head from "next/head";
 
 import { Header } from "components/Header";
-import { useRouter } from "next/router";
 import { Footer } from "components/Footer";
 import Link from "next/link";
 
@@ -58,85 +63,216 @@ const Index = () => {
                         seleção de dúvidas que a gente fez para vocês!
                     </Heading>
                 </Flex>
-                <Flex justify={"space-between"}>
-                    <Flex width={"49%"}>
-                        <Accordion allowToggle width={"100%"}>
-                            <AccordionItem>
-                                <AccordionButton>
-                                    <Box flex="1" textAlign="left">
-                                        Quem criou o Simacheck?
-                                    </Box>
-                                    <AccordionIcon />
-                                </AccordionButton>
-
-                                <AccordionPanel pb={4}>
-                                    <Text mb={'1rem'}>
-                                        Nem tudo é resolvido na base do hunted, e também, nem tudo é construido sozinho. Por esse motivo, criamos uma página específica para contar um pouco dessa história.
-                                    </Text>
-                                    <Link href={'/faq/team'} >
-                                        Conhecer já!
-                                    </Link>
-
-                                </AccordionPanel>
-                            </AccordionItem>
-                            <AccordionItem>
-                                <AccordionButton>
-                                    <Box flex="1" textAlign="left">
-                                        Dúvida 1
-                                    </Box>
-                                    <AccordionIcon />
-                                </AccordionButton>
-
-                                <AccordionPanel pb={4}>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua.
-                                    Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip
-                                    ex ea commodo consequat.
-                                </AccordionPanel>
-                            </AccordionItem>
-                        </Accordion>
+                <Box>
+                    <Flex justify={"space-between"} m={"3rem 0"}>
+                        <Button
+                            bg={"#18181b"}
+                            color={"#fff"}
+                            w={"49%"}
+                            display={"flex"}
+                            justify-content={"center"}
+                            p={"2rem"}
+                            filter={"brightness(0.5)"}
+                            transition={"all 0.5s"}
+                            _hover={{ filter: "brightness(1)" }}
+                        >
+                            <Text>Conheça nosso premium</Text>
+                        </Button>
+                        <Button
+                            bg={"red"}
+                            color={"#fff"}
+                            w={"49%"}
+                            justify-content={"center"}
+                            p={"2rem"}
+                            filter={"brightness(0.5)"}
+                            transition={"all 0.5s"}
+                            _hover={{ filter: "brightness(1)" }}
+                        >
+                            <Text>Conheça nossa equipe</Text>
+                        </Button>
                     </Flex>
-                    <Flex width={"49%"}>
-                        <Accordion allowToggle width={"100%"}>
-                            <AccordionItem>
-                                <AccordionButton>
-                                    <Box flex="1" textAlign="left">
-                                        Dúvida 1
-                                    </Box>
-                                    <AccordionIcon />
-                                </AccordionButton>
+                    <Tabs isFitted variant="line" w={"100%"} align={"center"}>
+                        <TabList>
+                            <Tab _selected={{ borderColor: "red" }}>
+                                <Heading
+                                    fontSize={{ base: "0.8rem", md: "1rem" }}
+                                    position={"relative"}
+                                    _after={{
+                                        content: "''",
+                                        width: "15px",
+                                        height: "8%",
+                                        position: "absolute",
+                                        bottom: 0,
+                                        left: 0,
+                                        bg: "red.400",
+                                        zIndex: -1,
+                                    }}
+                                >
+                                    Dúvidas Gerais
+                                </Heading>
+                            </Tab>
+                            <Tab _selected={{ borderColor: "red" }}>
+                                <Heading
+                                    fontSize={{ base: "0.8rem", md: "1rem" }}
+                                    position={"relative"}
+                                    _after={{
+                                        content: "''",
+                                        width: "15px",
+                                        height: "8%",
+                                        position: "absolute",
+                                        bottom: 0,
+                                        left: 0,
+                                        bg: "red.400",
+                                        zIndex: -1,
+                                    }}
+                                >
+                                    Como usar
+                                </Heading>
+                            </Tab>
+                            <Tab _selected={{ borderColor: "red" }}>
+                                <Heading
+                                    fontSize={{ base: "0.8rem", md: "1rem" }}
+                                    position={"relative"}
+                                    _after={{
+                                        content: "''",
+                                        width: "15px",
+                                        height: "8%",
+                                        position: "absolute",
+                                        bottom: 0,
+                                        left: 0,
+                                        bg: "red.400",
+                                        zIndex: -1,
+                                    }}
+                                >
+                                    Dúvidas do premium
+                                </Heading>
+                            </Tab>
+                        </TabList>
 
-                                <AccordionPanel pb={4}>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua.
-                                    Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip
-                                    ex ea commodo consequat.
-                                </AccordionPanel>
-                            </AccordionItem>
-                            <AccordionItem>
-                                <AccordionButton>
-                                    <Box flex="1" textAlign="left">
-                                        Dúvida 1
-                                    </Box>
-                                    <AccordionIcon />
-                                </AccordionButton>
+                        <TabPanels>
+                            <TabPanel>
+                                <Accordion allowToggle width={"100%"}>
+                                    <AccordionItem>
+                                        <AccordionButton>
+                                            <Box
+                                                flex="1"
+                                                textAlign="left"
+                                                display={"flex"}
+                                            >
+                                                O que é o Simacheck?
+                                            </Box>
+                                            <AccordionIcon />
+                                        </AccordionButton>
 
-                                <AccordionPanel pb={4}>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua.
-                                    Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip
-                                    ex ea commodo consequat.
-                                </AccordionPanel>
-                            </AccordionItem>
-                        </Accordion>
-                    </Flex>
-                </Flex>
+                                        <AccordionPanel pb={4}>
+                                            <Text mb={"1rem"}>
+                                                Somos uma ferramenta de apoio ao
+                                                tibiano, trazendo desde
+                                                ferramentas para cálculos
+                                                estruturados de skill e
+                                                rastreamento de bosses. Com
+                                                nossa tecnologia, conseguimos
+                                                trazer, de modo rápido e
+                                                preciso, as melhores
+                                                experiências para o jogador.
+                                            </Text>
+                                            <Link href={"/tools/"}>
+                                                Conheça nossas ferramentas
+                                            </Link>
+                                        </AccordionPanel>
+                                    </AccordionItem>
+                                    <AccordionItem>
+                                        <AccordionButton>
+                                            <Box flex="1" textAlign="left">
+                                                Vocês são pagos?
+                                            </Box>
+                                            <AccordionIcon />
+                                        </AccordionButton>
+                                        <AccordionPanel pb={4}>
+                                            <Text mb={"1rem"}>
+                                                Nossas ferramentas são
+                                                desenvolvidas tanto para o uso
+                                                premium, quanto para usuários
+                                                não Premiuns, conheça nosso
+                                                sistema premium a seguir:
+                                            </Text>
+                                            <Link href={"/"}>
+                                                Conheça nosso premium
+                                            </Link>
+                                        </AccordionPanel>
+                                    </AccordionItem>
+                                    <AccordionItem>
+                                        <AccordionButton>
+                                            <Box flex="1" textAlign="left">
+                                                Como vocês funcionam?
+                                            </Box>
+                                            <AccordionIcon />
+                                        </AccordionButton>
+                                        <AccordionPanel pb={4}>
+                                            <Text mb={"1rem"}>
+                                                Nossas ferramentas são
+                                                desenvolvidas tanto para o uso
+                                                premium, quanto para usuários
+                                                não Premiuns, conheça nosso
+                                                sistema premium a seguir:
+                                            </Text>
+                                            <Link href={"/"}>
+                                                Conheça nosso premium
+                                            </Link>
+                                        </AccordionPanel>
+                                    </AccordionItem>
+                                </Accordion>
+                            </TabPanel>
+                            <TabPanel>
+                                <Flex width={"49%"}>
+                                    <Accordion allowToggle width={"100%"}>
+                                        <AccordionItem>
+                                            <AccordionButton>
+                                                <Box flex="1" textAlign="left">
+                                                    Dúvida 1
+                                                </Box>
+                                                <AccordionIcon />
+                                            </AccordionButton>
+
+                                            <AccordionPanel pb={4}>
+                                                Lorem ipsum dolor sit amet,
+                                                consectetur adipiscing elit, sed
+                                                do eiusmod tempor incididunt ut
+                                                labore et dolore magna aliqua.
+                                                Ut enim ad minim veniam, quis
+                                                nostrud exercitation ullamco
+                                                laboris nisi ut aliquip ex ea
+                                                commodo consequat.
+                                            </AccordionPanel>
+                                        </AccordionItem>
+                                        <AccordionItem>
+                                            <AccordionButton>
+                                                <Box flex="1" textAlign="left">
+                                                    Dúvida 1
+                                                </Box>
+                                                <AccordionIcon />
+                                            </AccordionButton>
+
+                                            <AccordionPanel pb={4}>
+                                                Lorem ipsum dolor sit amet,
+                                                consectetur adipiscing elit, sed
+                                                do eiusmod tempor incididunt ut
+                                                labore et dolore magna aliqua.
+                                                Ut enim ad minim veniam, quis
+                                                nostrud exercitation ullamco
+                                                laboris nisi ut aliquip ex ea
+                                                commodo consequat.
+                                            </AccordionPanel>
+                                        </AccordionItem>
+                                    </Accordion>
+                                </Flex>
+                            </TabPanel>
+                            <TabPanel>
+                                <p>three!</p>
+                            </TabPanel>
+                        </TabPanels>
+                    </Tabs>
+                </Box>
             </Box>
 
             <Footer />

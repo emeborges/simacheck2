@@ -11,6 +11,7 @@ import {
   MenuItem,
   MenuList,
   Badge,
+  useDisclosure,
 } from '@chakra-ui/react'
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
@@ -22,10 +23,12 @@ import { FaUserShield } from 'react-icons/fa'
 import { GiAxeSword } from 'react-icons/gi'
 import { Can } from 'components/Can'
 import { signOut } from 'hooks/useSignin'
+import ModalSelectServer from 'components/ModalServerSelect'
 
 
 export const Header = ({ page }:any) => {
     const [display, setChangeDisplay] = useState('none')
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const router = useRouter()
     const userIsAuthenticated = useCan();
 
@@ -60,7 +63,7 @@ export const Header = ({ page }:any) => {
                 <Flex right="0" h={"5.5rem"} align={"center"}>
                     {/* Desktop */}
                     <Flex
-                        display={["none", "none", "flex", "flex"]}
+                        display={["none", "none", "none", "flex"]}
                         justify={"space-around"}
                         maxW={"1300px"}
                         m={"0 auto"}
@@ -155,7 +158,10 @@ export const Header = ({ page }:any) => {
                                                 PREMIUM
                                             </Badge>
                                         </Text>
-                                        <MenuItem fontSize={"0.8rem"}>
+                                        <MenuItem
+                                            fontSize={"0.8rem"}
+                                            onClick={onOpen}
+                                        >
                                             Radar
                                         </MenuItem>
                                         <MenuItem fontSize={"0.8rem"}>
@@ -197,8 +203,7 @@ export const Header = ({ page }:any) => {
                                         </MenuItem>
                                         <MenuItem
                                             fontSize={"0.8rem"}
-                                            fontWeight={'700'}
-
+                                            fontWeight={"700"}
                                         >
                                             Assinar Premium
                                         </MenuItem>
@@ -239,7 +244,7 @@ export const Header = ({ page }:any) => {
                         w={"100vw"}
                         justify={"space-between"}
                         p={"0rem 0.5rem"}
-                        display={["flex", "flex", "none", "none"]}
+                        display={["flex", "flex", "flex", "none"]}
                     >
                         <Image src={"/img/logo.svg"} w={"60%"} />
                         <IconButton
@@ -257,7 +262,7 @@ export const Header = ({ page }:any) => {
                             display={
                                 display === "flex"
                                     ? "none"
-                                    : ["flex", "flex", "none", "none"]
+                                    : ["flex", "flex", "flex", "none"]
                             }
                         />
                     </Flex>
@@ -427,6 +432,7 @@ export const Header = ({ page }:any) => {
                     </Flex>
                 </Flex>
             </Box>
+            <ModalSelectServer isOpen={isOpen} onClose={onClose} />
         </>
     );
 }

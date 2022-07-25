@@ -34,13 +34,18 @@ const SigninContext = createContext({} as contextProps);
 export async function signOut() {
     const { "simacheck.refreshToken": refreshToken } = parseCookies();
 
-    await api.post("/auth/logout", {
-        RefreshToken: refreshToken,
-    });
-
-    destroyCookie(undefined, "simacheck.idToken");
-    destroyCookie(undefined, "simacheck.accessToken");
-    destroyCookie(undefined, "simacheck.refreshToken");
+    if(refreshToken != undefined){
+        await api
+            .post("/auth/logout", {
+                RefreshToken: refreshToken,
+            })
+            .then(() => {
+                destroyCookie(undefined, "simacheck.idToken");
+                destroyCookie(undefined, "simacheck.accessToken");
+                destroyCookie(undefined, "simacheck.refreshToken");
+            })
+            .catch(error => console.log(error));
+    }
 
     Router.push("/");
 }
@@ -68,7 +73,8 @@ export function SigninProvider({ children }: providerProps) {
 
     useEffect(()=> {
         const { 'simacheck.accessToken': token } = parseCookies();
-        if(token){
+        console.log('token',token)
+        if(token != undefined){
             api.get("/users/me").then( resp => {
                 const { email } = resp.data
                 setUser({ email })
@@ -124,6 +130,8 @@ export function SigninProvider({ children }: providerProps) {
             });
         setLoading(false);
     }
+
+    console.log('usuario', user)
 
     return (
         <SigninContext.Provider

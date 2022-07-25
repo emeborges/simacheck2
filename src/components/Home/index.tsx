@@ -7,7 +7,6 @@ import { IoLibraryOutline } from 'react-icons/io5'
 
 import HomeSimaBossesText from 'components/HomeSimaBossesText/SimaBosses';
 import HomeSimaCalcText from 'components/HomeSimaBossesText/SimaCalc';
-import HomeSimaTimer from 'components/HomeSimaBossesText/SimaTimer';
 import HomeSimaLibrary from 'components/HomeSimaBossesText/SimaLibrary';
 import { Header } from 'components/Header';
 import ModalSelectServer from 'components/ModalServerSelect';
@@ -192,7 +191,7 @@ export function Home() {
                                 p={"1rem 0"}
                                 border={"1px solid #323238"}
                                 background={
-                                    conteinerNum === 4
+                                    conteinerNum === 3
                                         ? "rgba(245,246,250,0.1)"
                                         : "none"
                                 }
@@ -200,13 +199,13 @@ export function Home() {
                                 cursor={"pointer"}
                                 borderTopRightRadius={"5px"}
                                 textDecoration={
-                                    conteinerNum === 4 ? "underline" : "none"
+                                    conteinerNum === 3 ? "underline" : "none"
                                 }
                                 textDecorationColor={"#BA1813"}
-                                fontWeight={conteinerNum === 4 ? "700" : "400"}
-                                onClick={() => selectConteiner(4)}
+                                fontWeight={conteinerNum === 3 ? "700" : "400"}
+                                onClick={() => selectConteiner(3)}
                                 className={
-                                    conteinerNum == 4 ? "btns ativo" : "btns"
+                                    conteinerNum == 3 ? "btns ativo" : "btns"
                                 }
                             >
                                 SimaLibrary
@@ -221,8 +220,7 @@ export function Home() {
                         >
                             {conteinerNum == 1 ? <HomeSimaBossesText /> : null}
                             {conteinerNum == 2 ? <HomeSimaCalcText /> : null}
-                            {conteinerNum == 3 ? <HomeSimaTimer /> : null}
-                            {conteinerNum == 4 ? <HomeSimaLibrary /> : null}
+                            {conteinerNum == 3 ? <HomeSimaLibrary /> : null}
                         </Box>
                     </Flex>
                 </Box>
@@ -243,14 +241,11 @@ export function Home() {
                     w={{ base: "100%", md: "45%" }}
                     p={"1rem 0.5rem"}
                 >
-                    <Heading as="h1">Quem somos?</Heading>
+                    <Heading as="h1">{t("Home_WeAre")}</Heading>
                     <Heading as="h2" fontSize={"140%"}>
-                        SimaGuild ou SimaEquipe?!
+                        {t("Home_WeAreGuild")}
                     </Heading>
-                    <Text p={"0.5rem 0rem"}>
-                        Chegamos aqui não tão só, tudo aqui foi na base da raça
-                        e do KS em hunt!
-                    </Text>
+                    <Text p={"0.5rem 0rem"}>{t("Home_WeAreDesc")}</Text>
 
                     <Button
                         mt={"1rem"}
@@ -263,7 +258,7 @@ export function Home() {
                             border: "1px solid #121214",
                         }}
                     >
-                        Conheça nossa equipe!
+                        {t("Home_WeAreMeet")}
                     </Button>
                 </Flex>
                 <Flex
@@ -273,14 +268,11 @@ export function Home() {
                     w={{ base: "100%", md: "45%" }}
                     p={"1rem 0.5rem"}
                 >
-                    <Heading as="h1">Tá com dúvida?</Heading>
+                    <Heading as="h1">{t("Home_Questions")}</Heading>
                     <Heading as="h2" fontSize={"140%"}>
-                        Como funciona, o que é DLD, quando aparece?!
+                        {t("Home_Questions2")}
                     </Heading>
-                    <Text p={"0.5rem 0rem"}>
-                        Já que as informações não são poucas, fizemos um guia
-                        ideal para você entender todos os relatórios
-                    </Text>
+                    <Text p={"0.5rem 0rem"}>{t("Home_QuestionsDescribe")}</Text>
 
                     <Button
                         mt={"1rem"}
@@ -293,7 +285,7 @@ export function Home() {
                             border: "1px solid #121214",
                         }}
                     >
-                        Saiba mais
+                        {t("Home_QuestionsButton")}
                     </Button>
                 </Flex>
             </Flex>

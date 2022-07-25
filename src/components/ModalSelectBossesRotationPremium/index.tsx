@@ -20,7 +20,7 @@ const ModalSelectBossesRotationPremium = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [servers, setServers] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [value, setValue] = useState<any>();
+   /* const [value, setValue] = useState<any>();*/
 
     useEffect(() => {
         getServers();
@@ -38,7 +38,7 @@ const ModalSelectBossesRotationPremium = () => {
 
     function ResetComponent() {
         setLoading(true);
-        setValue("");
+        /*setValue("");*/
         setTimeout(() => setLoading(false), 1000);
     }
 
@@ -77,7 +77,7 @@ const ModalSelectBossesRotationPremium = () => {
                                 />
                                 <Select
                                     placeholder="Selecione o Servidor Desejado"
-                                    onChange={(e) => setValue(e.target.value)}
+                                    /*onChange={(e) => setValue(e.target.value)}*/
                                 >
                                     {servers.map((server, key) => (
                                         <option key={key} value={server}>

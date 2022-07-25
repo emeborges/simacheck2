@@ -4,10 +4,9 @@ import {
     FormLabel,
     Input as InputChakra,
     InputProps as InputPropsChakra,
-    NumberInputField
 } from "@chakra-ui/react";
 import { forwardRef, ForwardRefRenderFunction } from "react";
-import { appendErrors, FieldError } from "react-hook-form";
+import {  FieldError } from "react-hook-form";
 
 interface InputProps extends InputPropsChakra {
     name: string;

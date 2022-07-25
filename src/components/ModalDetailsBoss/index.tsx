@@ -1,13 +1,19 @@
 
-import { PluralOuSing } from "../../utils/gerals"
-import { GiPocketBow } from 'react-icons/gi'
-import { Button, Flex, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, } from "@chakra-ui/react"
-import { Chart } from "react-google-charts";
-import Link from 'next/link'
+import { PluralOuSing, Porcentagem } from "../../utils/gerals"
+//* import { GiPocketBow } from 'react-icons/gi'
+import { Badge, Box, Button, Flex, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stat, StatArrow, StatHelpText,  Text, Tooltip, } from "@chakra-ui/react"
+//*import { Chart } from "react-google-charts"
+//*import Link from 'next/link'
+import { BossesDetailsProps } from "utils/types"
+import { FaSkull } from "react-icons/fa"
+import { BsStopwatchFill } from "react-icons/bs";
 
 
-const ModalDetailsBoss: React.FC<{ boss: any, isOpen: any, onClose: any }> = ({ boss, isOpen, onClose }) => {
-
+const ModalDetailsBoss: React.FC<{
+    boss: BossesDetailsProps | undefined;
+    isOpen: any;
+    onClose: any;
+}> = ({ boss, isOpen, onClose }) => {
     const data = [
         [
             {
@@ -21,7 +27,6 @@ const ModalDetailsBoss: React.FC<{ boss: any, isOpen: any, onClose: any }> = ({ 
         ],
         [new Date(2021, 6, 13), 1],
         [new Date(2020, 6, 13), 1],
-
     ];
 
     const options = {
@@ -30,156 +35,279 @@ const ModalDetailsBoss: React.FC<{ boss: any, isOpen: any, onClose: any }> = ({ 
             cellSize: 8,
         },
         colorAxis: {
-            minValue: 0, colors: ['#c83728', '#ebc832', '#3cc85a']
-        }
+            minValue: 0,
+            colors: ["#c83728", "#ebc832", "#3cc85a"],
+        },
     };
 
+    function status(n: number) {
+        if (n > 0.33) {
+            return <Badge colorScheme="purple">Baixa Procura</Badge>;
+        } else if (n > -0.33) {
+            return <Badge>Média Procura</Badge>;
+        } else {
+            return (
+                <Badge variant="outline" colorScheme="green">
+                    Muito Procurado
+                </Badge>
+            );
+        }
+    }
+    console.log(boss);
+
     return (
-        <Modal isCentered
+        <Modal
+            isCentered
             isOpen={isOpen}
             onClose={onClose}
-            size={'xl'}
+            size={"xl"}
             blockScrollOnMount={false}
         >
             <ModalOverlay />
             <ModalContent>
                 <ModalHeader
-                    display={'flex'}
-                    flexDirection={'row'}
-                    alignItems={'center'}
+                    display={"flex"}
+                    flexDirection={"row"}
+                    alignItems={"center"}
                 >
-                    <Image src={boss.image_url} />
-                    <Flex
-                        direction={'column'}
-                        pl={'1rem'}
-                    >
+                    <Image src={"/"} />
+                    <Flex direction={"column"} pl={"1rem"} w={"100%"}>
                         <Text
-                            fontSize='lg'
-                            minW={'100%'}
-                            as={'span'}
+                            fontSize="lg"
+                            minW={"100%"}
+                            as={"span"}
                             isTruncated
-                            position={'relative'}
+                            position={"relative"}
                             _after={{
                                 content: "''",
-                                width: '10%',
-                                height: '10%',
-                                position: 'absolute',
+                                width: "10%",
+                                height: "10%",
+                                position: "absolute",
                                 bottom: 0.5,
                                 left: 0,
-                                bg: '#BA1813',
+                                bg: "#BA1813",
                                 zIndex: -1,
                             }}
                         >
-                            {boss.display_name}
+                            {boss?.display_name}
                         </Text>
-                        <Text
-                            fontSize='xs'
+                        <Text fontSize="xs">{boss?.lore}</Text>
+                        <Flex
+                            w={"100%"}
+                            justifyContent={"space-between"}
+                            align={"center"}
+                            pt={"0.25rem"}
                         >
-                            {boss.lore}
-                        </Text>
-                        <Text
-                            fontSize='sm'
-                            pt={'0.25rem'}
-                        >
-                            Última aparição: a {PluralOuSing(boss.days_since_last_view, 'dia', 'dias')}
-                        </Text>
-
+                            <Text fontSize="sm">
+                                Última aparição:{" "}
+                                {PluralOuSing(
+                                    boss?.oa_days_since_last_view!,
+                                    "dia",
+                                    "dias"
+                                )}
+                            </Text>
+                            <Text fontSize="sm">Cidade: {boss?.city}</Text>
+                        </Flex>
                     </Flex>
-
                 </ModalHeader>
 
                 <ModalCloseButton />
 
-                <ModalBody >
-                    <Flex justify={'space-between'}>
-                        <Flex direction={'column'} maxW={'40%'} align={'center'}>
-                            <Text fontSize='sm' textAlign={'center'}>
-                                Hunting Status no Server:
-                            </Text>
-                            <Flex>
-                                {boss.world_drop === "Forgotten" ?
-                                    <GiPocketBow />
-                                    :
-                                    boss.world_drop === "Average" ?
-                                        <>
-                                            <GiPocketBow />
-                                            <GiPocketBow />
-                                        </>
-                                        :
-                                        <>
-                                            <GiPocketBow />
-                                            <GiPocketBow />
-                                            <GiPocketBow />
-                                        </>
-                                }
-                            </Flex>
+                <ModalBody>
+                    <Flex w={"100%"} justify={"space-between"} align={"center"}>
+                        <Flex
+                            w={"100%"}
+                            h={"100%"}
+                            justify={"space-between"}
+                            flexDir={"column"}
+                        >
+                            <Flex w={"100%"} justify={"space-around"}>
+                                <Flex direction={"column"} align={"center"}>
+                                    <Text fontSize={"12px"}>
+                                        Chance Geral Hoje:
+                                    </Text>
 
+                                    <Flex>
+                                        {Porcentagem(boss?.oa_current_prob!)}%
+                                    </Flex>
+                                </Flex>
+                                <Flex direction={"column"} align={"center"}>
+                                    <Text fontSize={"12px"}>
+                                        Possível aparecimento em:
+                                    </Text>
+
+                                    <Flex>
+                                        {PluralOuSing(
+                                            boss?.oa_expect_in!,
+                                            "dia",
+                                            "dias"
+                                        )}
+                                    </Flex>
+                                </Flex>
+                            </Flex>
+                            <Flex
+                                h={"100%"}
+                                flexWrap={"wrap"}
+                                justify={"space-around"}
+                            >
+                                {boss?.resp.map((respw, key) => (
+                                    <Box
+                                        fontSize={"14px"}
+                                        minW={"10rem"}
+                                        m={"0.5rem 0.5rem 0 0"}
+                                        borderBottom={"1px solid #f1f1f1"}
+                                    >
+                                        <Text
+                                            bg={"black"}
+                                            color={"#fff"}
+                                            textAlign={"center"}
+                                        >
+                                            Respawn {key + 1}
+                                        </Text>
+                                        <Flex
+                                            align={"center"}
+                                            justify={"space-around"}
+                                        >
+                                            <Tooltip label="Chance Hoje.">
+                                                <Stat
+                                                    display={"flex"}
+                                                    justifyContent={"center"}
+                                                    alignItems={"center"}
+                                                >
+                                                    <StatHelpText margin={"0"}>
+                                                        <StatArrow
+                                                            type={
+                                                                respw.colour_frame! >
+                                                                0.5
+                                                                    ? "increase"
+                                                                    : "decrease"
+                                                            }
+                                                        />
+                                                        {Porcentagem(
+                                                            respw.current_prob!
+                                                        )}
+                                                        %
+                                                    </StatHelpText>
+                                                </Stat>
+                                            </Tooltip>
+                                        </Flex>
+                                        <Flex
+                                            align={"center"}
+                                            justify={"space-between"}
+                                            bg={"#f1f1f1"}
+                                            p={"0 0.5rem"}
+                                        >
+                                            <Tooltip label="Possível aparecimento em:">
+                                                <Text fontSize={"14px"}>
+                                                    <BsStopwatchFill />
+                                                </Text>
+                                            </Tooltip>
+                                            <Text
+                                                fontSize={
+                                                    respw.expect_in == 0
+                                                        ? "12px"
+                                                        : "14px"
+                                                }
+                                            >
+                                                {respw.expect_in > 0 ? `Em ` : null}
+                                                {PluralOuSing(
+                                                    respw.expect_in,
+                                                    "dia",
+                                                    "dias"
+                                                )}
+                                            </Text>
+                                        </Flex>
+                                        <Flex
+                                            align={"center"}
+                                            justify={"space-between"}
+                                            p={"0 0.5rem"}
+                                        >
+                                            <Tooltip label="Quantos dias faz que ele apareceu.">
+                                                <Text fontSize={"14px"}>
+                                                    <FaSkull />
+                                                </Text>
+                                            </Tooltip>
+                                            <Text>
+                                                {PluralOuSing(
+                                                    respw.days_since_last_view,
+                                                    "dia",
+                                                    "dias"
+                                                )}
+                                            </Text>
+                                        </Flex>
+                                    </Box>
+                                ))}
+                            </Flex>
                         </Flex>
-                        <Flex direction={'column'} maxW={'40%'} align={'center'}>
-                            <Text fontSize='sm' textAlign={'center'}>
-                                Hunting Status Geral:
-                            </Text>
-                            <Flex >
-                                {boss.overall_drop === "Forgotten" ?
-                                    <GiPocketBow />
-                                    :
-                                    boss.overall_drop === "Average" ?
-                                        <>
-                                            <GiPocketBow />
-                                            <GiPocketBow />
-                                        </>
-                                        :
-                                        <>
-                                            <GiPocketBow />
-                                            <GiPocketBow />
-                                            <GiPocketBow />
-                                        </>
-                                }
+                        <Flex flexDir={"column"}>
+                            <Flex direction={"column"} align={"center"}>
+                                <Tooltip label="Status de procura dele no servidor.">
+                                    <Text fontSize={"12px"}>
+                                        Status Servidor:
+                                    </Text>
+                                </Tooltip>
+                                <Flex>{status(boss?.world_drop!)}</Flex>
                             </Flex>
-
+                            <Flex
+                                direction={"column"}
+                                align={"center"}
+                                pt={"0.5rem"}
+                            >
+                                <Tooltip label="Status de procura dele em todo o tibia.">
+                                    <Text fontSize={"12px"}>Status Geral:</Text>
+                                </Tooltip>
+                                <Flex>{status(boss?.overall_drop!)}</Flex>
+                            </Flex>
                         </Flex>
                     </Flex>
-                    <Flex justify={'space-between'} mt={'2rem'} align={'center'}>
-                        <Flex borderBottom={'1px solid #737380'} w={'80%'} />
-                        <Text fontSize='sm' textAlign={'center'} pl={'0.5rem'}>
+                    <Flex
+                        justify={"space-between"}
+                        mt={"2rem"}
+                        align={"center"}
+                    >
+                        <Flex borderBottom={"1px solid #737380"} w={"80%"} />
+                        <Text fontSize="sm" textAlign={"center"} pl={"0.5rem"}>
                             Área premium
                         </Text>
                     </Flex>
-                    <Flex h={'220px'}>
-                        <Flex margin={'0 auto'} overflowY={'hidden'} overflowX={{ base: 'auto', md: 'hidden' }} scrollSnapType={'x mandatory'}>
-                            <Chart
-                                chartType="Calendar"
-                                height={'500px'}
-                                width={'550px'}
-                                data={data}
-                                options={options}
-                            />
-                        </Flex>
-                    </Flex>
-                    <Flex justify={'space-around'} align={'center'}>
-                        <Flex direction={'column'} align={'center'}>
-                            <Text
-                                fontSize='sm'
-                                pt={'0.25rem'}
+
+                    {/*
+                        <Flex h={"220px"}>
+                            <Flex
+                                margin={"0 auto"}
+                                overflowY={"hidden"}
+                                overflowX={{ base: "auto", md: "hidden" }}
+                                scrollSnapType={"x mandatory"}
                             >
+                                <Chart
+                                    chartType="Calendar"
+                                    height={"500px"}
+                                    width={"550px"}
+                                    data={data}
+                                    options={options}
+                                />
+                            </Flex>
+                        </Flex>
+
+                    <Flex justify={"space-around"} align={"center"}>
+                        <Flex direction={"column"} align={"center"}>
+                            <Text fontSize="sm" pt={"0.25rem"}>
                                 Próxima aparição calculada:
                             </Text>
-                            <Text
-                                fontSize='md'
-                                pt={'0.25rem'}
-                            >
+                            <Text fontSize="md" pt={"0.25rem"}>
                                 15/12/2022
                             </Text>
                         </Flex>
-                        <Flex cursor={'pointer'}>
+                        <Flex cursor={"pointer"}>
                             <Link href={boss.wiki_url}>
-                                <Image src={'/img/fandom.svg'} style={{ width: '80px' }} />
-
+                                <Image
+                                    src={"/img/fandom.svg"}
+                                    style={{ width: "80px" }}
+                                />
                             </Link>
                         </Flex>
                     </Flex>
-
-
+                    */}
                 </ModalBody>
 
                 <ModalFooter>
@@ -189,7 +317,7 @@ const ModalDetailsBoss: React.FC<{ boss: any, isOpen: any, onClose: any }> = ({ 
                 </ModalFooter>
             </ModalContent>
         </Modal>
-    )
-}
+    );
+};
 
 export default ModalDetailsBoss

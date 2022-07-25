@@ -4,79 +4,100 @@ import { IoMapSharp } from 'react-icons/io5'
 import { MdOutlineGroups } from 'react-icons/md'
 import { AiTwotoneCalendar } from 'react-icons/ai'
 import { BsArrowDownUp } from 'react-icons/bs'
+import { useTranslation } from "hooks/useTranslation"
 
 
 
 const HomeSimaBossesText: React.FC = () => {
-    return (
-        <Flex justify={'space-around'} width={{ base: '100%', md: '100%' }}>
+    const { t } = useTranslation();
 
-            <Flex direction={'column'} p={'1rem'} width={{base:'100%',md:'70%'}}>
-                <Heading as='h2' textAlign={'center'} >
-                    Rastrear, mensurar e planejar..
+    return (
+        <Flex justify={"space-around"} width={{ base: "100%", md: "100%" }}>
+            <Flex
+                direction={"column"}
+                p={"1rem"}
+                width={{ base: "100%", md: "70%" }}
+            >
+                <Heading as="h2" textAlign={"center"}>
+                    {t("Home_RadarDefine")}
                 </Heading>
-                <Text fontSize='md' wordBreak={'break-word'} align={'center'} pt={'1rem'}>
-                    Esse é o objetivo do SimaBosses, mepear e demonstrar de maneira rápida e precisa todo o universo dos bosses tibiano. Nesta ferramenta, você encontra a forma mais visual, deixando seu BossCheck cada vez melhor.
+                <Text
+                    fontSize="md"
+                    wordBreak={"break-word"}
+                    align={"center"}
+                    pt={"1rem"}
+                >
+                    {t("Home_RadarObjetive")}
                 </Text>
-                <Flex direction={'column'}>
-                    <Text fontSize='md' wordBreak={'break-word'} align={'center'} pt={'0.5rem'}>
-                        Aqui você encontrará:
+                <Flex direction={"column"}>
+                    <Text
+                        fontSize="md"
+                        wordBreak={"break-word"}
+                        align={"center"}
+                        pt={"0.5rem"}
+                    >
+                        {t("Home_Find")}
                     </Text>
-                    <List spacing={3} fontSize={'90%'}>
+                    <List spacing={3} fontSize={"90%"}>
                         <ListItem>
                             <ListIcon as={BsArrowDownUp} />
-                            Chance de aparecimento;
+                            {t("Home_RadarChance")}
                         </ListItem>
                         <ListItem>
                             <ListIcon as={MdOutlineGroups} />
-                            Agrupamentos por Lores;
+                            {t("Home_RadarGroupingLores")}
                         </ListItem>
                         <ListItem>
                             <ListIcon as={IoMapSharp} />
-                            Agrupamentos por Cidade;
+                            {t("Home_RadarGroupingCities")}
                         </ListItem>
                         <ListItem>
                             <ListIcon as={AiTwotoneCalendar} />
-                            Agenda de Aparecimendo;
+                            {t("Home_RadarPreview")}
                         </ListItem>
-                        <ListItem>
-                            ...
-
-                        </ListItem>
-
-
+                        <ListItem>...</ListItem>
                     </List>
-
                 </Flex>
 
-                <Flex justifyContent={'center'} direction={{md: 'column', lg: 'row' }}>
+                <Flex
+                    justifyContent={"center"}
+                    direction={{ md: "column", lg: "row" }}
+                >
                     <Button
-                        mt={'1rem'}
-                        w={{ base: '100%', md: '30rem' }}
-                        border={'1px solid #fff'}
-                        fontSize={{base:'90%', md:'90%'}}
-                        bg={'#121214'} wordBreak={'break-all'}
-                        color={'#fff'}
-                        _hover={{ color: '#121214', bg: '#fff', border: '1px solid #121214' }}
+                        mt={"1rem"}
+                        w={{ base: "100%", md: "30rem" }}
+                        border={"1px solid #fff"}
+                        fontSize={{ base: "90%", md: "90%" }}
+                        bg={"#121214"}
+                        wordBreak={"break-all"}
+                        color={"#fff"}
+                        whiteSpace={"normal"}
+                        _hover={{
+                            color: "#121214",
+                            bg: "#fff",
+                            border: "1px solid #121214",
+                        }}
                     >
-                        Conheça nossa sessão de bosses!
+                        {t("Home_RadarButton")}
                     </Button>
-
                     <Button
-                        mt={'1rem'}
-                        w={{ base: '100%', md: '30rem' }}
-                        ml={{ md: '0rem', lg: '1rem' }}
-                        color={'#121214'}
-                        _hover={{ border: '1px solid #fff', bg: '#121214', color: '#fff' }}
+                        mt={"1rem"}
+                        w={{ base: "100%", md: "30rem" }}
+                        ml={{ md: "0rem", lg: "1rem" }}
+                        color={"#121214"}
+                        whiteSpace={"normal"}
+                        _hover={{
+                            border: "1px solid #fff",
+                            bg: "#121214",
+                            color: "#fff",
+                        }}
                     >
-                        Conheça os benefícios do premium!
+                        {t("Home_TollsButtonPremium")}
                     </Button>
                 </Flex>
-
             </Flex>
-
         </Flex>
-    )
+    );
 }
 
 export default HomeSimaBossesText

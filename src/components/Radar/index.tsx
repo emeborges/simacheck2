@@ -16,6 +16,8 @@ import { FaExchangeAlt } from "react-icons/fa";
 import ModalSelectServer from "components/ModalServerSelect";
 import BossStatus from "components/BossesStatus";
 import { useRadarBosses } from "hooks/useRadarBosses";
+import ConteinerLores from "components/ConteinerLores";
+import ConteinerCitys from "components/ConteinerCitys";
 
 const Radar = () => {
     const [view, setView] = useState("status");
@@ -46,7 +48,7 @@ const Radar = () => {
         setDadoFiltrado("colour_frame");
         setBossesOrganizado(
             bossesOrganizado?.sort((a, b) => {
-                return b.colour_frame! - a.colour_frame!;
+                return b.oa_colour_frame! - a.oa_colour_frame!;
             })
         );
     }
@@ -166,14 +168,16 @@ const Radar = () => {
                                         },
                                     }}
                                     overflow={
-                                        bossesLastView.length > 7 ? "hidden" : "auto"
+                                        bossesLastView.length > 7
+                                            ? "hidden"
+                                            : "auto"
                                     }
                                 >
-                                    {bossesLastView.map((boss) => (
+                                    {bossesLastView.map(() => (
                                         <BossStatus
                                             width="4rem"
                                             height="4rem"
-                                            image={boss?.image_url}
+                                            image={"/"}
                                         />
                                     ))}
                                 </Flex>
@@ -295,6 +299,12 @@ const Radar = () => {
                                     <ConteinerBosses
                                         bosses={bossesOrganizado}
                                     />
+                                ) : null}
+                                {view === "lore" ? (
+                                    <ConteinerLores bosses={bossesOrganizado} />
+                                ) : null}
+                                {view === "city" ? (
+                                    <ConteinerCitys bosses={bossesOrganizado} />
                                 ) : null}
                             </Box>
                         </Box>

@@ -16,7 +16,6 @@ import { Footer } from "components/Footer";
 import { Header } from "components/Header";
 import ModalSelectBossesRotationPremium from "components/ModalSelectBossesRotationPremium";
 import ModalSelectServerPremiumProfile from "components/ModalSelectServerPremiumProfile";
-import { useCan } from "hooks/useCan";
 import { useSignin } from "hooks/useSignin";
 import Head from 'next/head'
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";

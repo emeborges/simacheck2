@@ -17,9 +17,7 @@ const BossesContext = createContext<contextProps>({} as contextProps);
 
 export function BossesProvider({ children }: providerProps) {
     const [bosses, setBosses] = useState<BossesDetailsProps[]>([]);
-    const [bossesLastView, setBossesLastView] = useState<BossesDetailsProps[]>(
-        []
-    );
+    const [bossesLastView, setBossesLastView] = useState<BossesDetailsProps[]>([]);
     const [load, setLoad] = useState(true);
     const route = useRouter();
     const pid: any = route.query.servidor
@@ -27,9 +25,14 @@ export function BossesProvider({ children }: providerProps) {
     useEffect(() => {
         setLoad(true);
         async function getBosses() {
-            const { data } = await api.get(`server/${pid}`);
+            const { data } = await api.get(`worlds/${pid}`);
             setBosses(data);
-            setBossesLastView(data.filter((boss:BossesDetailsProps) => boss.days_since_last_view == 1 ));
+            setBossesLastView(
+                data.filter(
+                    (boss: BossesDetailsProps) =>
+                        boss.oa_days_since_last_view == 1
+                )
+            );
             setLoad(false)
 
         }

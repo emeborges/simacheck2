@@ -1,22 +1,20 @@
 export interface BossesDetailsProps {
     boss: string;
-    colour_frame?: number | null | undefined;
-    current_prob?: number;
-    days_since_last_view?: number;
-    display_name?: string;
-    drop_rate?: number;
-    expect_in?: number;
-    image_url?: string;
-    is_premium_show?: boolean;
-    last_view?: string;
-    lore?: string;
-    overall_drop?: string;
-    resp?: number;
-    server?: string;
-    valid_from?: string | null | undefined;
-    valid_to?: string;
-    wiki_url?: string;
-    world_drop?: string;
+    city: string;
+    display_name: string;
+    lore: string;
+    oa_colour_frame: number | null | undefined;
+    oa_current_prob: number | null | undefined;
+    oa_days_since_last_view: number | null | undefined;
+    oa_expect_in: number | null | undefined;
+    overall_drop: number | null | undefined;
+    resp: Resps[];
+    server: string;
+    updated_at: string;
+    valid_from: string;
+    valid_to: string;
+    wiki_url: string;
+    world_drop: number | null | undefined;
 }
 
 export interface props { // api.simacheck.com.br/${sevidor}/bosses
@@ -41,8 +39,14 @@ export interface props { // api.simacheck.com.br/${sevidor}/bosses
     prediction_frame?: Previews[]
 }
 
-interface Resps{
-    resp: number
+interface Resps {
+    colour_frame: number;
+    current_prob: number;
+    days_since_last_view: number;
+    drop_rate: number;
+    expect_in: number;
+    last_view: string;
+    prediction_frame: null;
 }
 
 interface Previews{
