@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios"
 import { signOut } from "hooks/useSignin";
 
 
-let cookies = parseCookies()
+
 let isRefreshing = false
 let failedRequestQueue: { onSucess: ({ AccessToken, IdToken }: onSucessProps) => void; onFail: (err: AxiosError<unknown, any>) => void; }[] = []
 
@@ -35,6 +35,7 @@ api.interceptors.response.use(
         if(error.response?.status == 401){
 
             if (error.response.data.message == "The incoming token has expired") {
+                let cookies = parseCookies();
                 cookies = parseCookies();
 
                 const { "simacheck.accessToken": acessToken } = parseCookies();
