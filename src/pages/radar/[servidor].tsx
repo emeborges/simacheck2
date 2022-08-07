@@ -6,7 +6,6 @@ import { Header } from 'components/Header';
 import Radar from 'components/Radar';
 import { BossesProvider } from "hooks/useRadarBosses";
 import { useRouter } from 'next/router';
-import { title } from 'node:process';
 
 const Index = () => {
     const route = useRouter();
