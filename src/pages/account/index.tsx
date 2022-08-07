@@ -25,6 +25,7 @@ import { withsSSRAuth } from "utils/withsSSRAuth";
 
 const Account = () => {
     const { user, signOut, globalSignOut } = useSignin();
+    const dataVenc = new Date(user?.premium_until!);
 
 
     return (
@@ -55,7 +56,7 @@ const Account = () => {
                             <Link
                                 fontSize={"1.5rem"}
                                 position={"relative"}
-                                fontWeight={'700'}
+                                fontWeight={"700"}
                                 _after={{
                                     content: "''",
                                     width: "20px",
@@ -66,7 +67,7 @@ const Account = () => {
                                     bg: "red.400",
                                     zIndex: -1,
                                 }}
-                                href={'/account'}
+                                href={"/account"}
                             >
                                 Perfil
                             </Link>
@@ -86,7 +87,9 @@ const Account = () => {
                             </Text>
                             <Text>
                                 Sua premium time expira em:
-                                <Text fontWeight={"600"}>24 anos.</Text>
+                                <Text fontWeight={"600"}>
+                                    {dataVenc.toLocaleDateString()}
+                                </Text>
                             </Text>
                         </Flex>
                         <Flex flexDirection={"column"} pt={"1rem"}>
@@ -115,7 +118,7 @@ const Account = () => {
                                 fontSize={"0.9rem"}
                                 h={"2rem"}
                                 _hover={{ bg: "#4E4E52" }}
-                                href={'/account/changepass'}
+                                href={"/account/changepass"}
                             >
                                 Trocar senha
                             </Link>
@@ -132,7 +135,7 @@ const Account = () => {
                                 fontSize={"0.9rem"}
                                 h={"2rem"}
                                 _hover={{ bg: "#4E4E52" }}
-                                href={'/account/requests'}
+                                href={"/account/requests"}
                             >
                                 Pedidos e pagamentos
                             </Link>

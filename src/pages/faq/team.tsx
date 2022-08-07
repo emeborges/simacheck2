@@ -56,11 +56,12 @@ const Team = () => {
                         melhor! Esse projeto foi criado e gerenciado por:
                     </Heading>
                 </Flex>
-                <Flex justify={"center"} pb={"1rem"}>
+                <Flex justify={"center"} flexDir={{base: 'column', md: 'row'}} pb={"1rem"} maxW={'100vw'}>
                     <Box
                         as={"button"}
                         p={"7.5rem"}
                         bgPos={"top"}
+
                         bgRepeat={"no-repeat"}
                         bgImage={"/img/uri.png"}
                         borderRadius={"8px 0 0 8px"}
@@ -71,6 +72,7 @@ const Team = () => {
                     <Box
                         as={"button"}
                         p={"7.5rem"}
+
                         bgRepeat={"no-repeat"}
                         bgPos={"top"}
                         bgImage={"/img/mar.png"}
@@ -80,11 +82,17 @@ const Team = () => {
                         onClick={() => setSelected(2)}
                     />
                 </Flex>
-                <Flex justify={"space-between"} pb={"1rem"}>
+                <Flex
+                    justify={"space-between"}
+                    p={"1rem"}
+                    flexDir={{ base: "column", md: "row" }}
+                >
                     <Box
-                        maxW={{ base: "100%", md: "50%" }}
+                        maxW={{ base: "100%", md: "40%" }}
                         textAlign={"center"}
                         color={selected == 1 ? "#000" : "#d3d3d3"}
+                        fontSize={selected == 1 ? "100%" : "80%"}
+                        transition={"all 0.2s"}
                     >
                         <Heading>Pedro "Uriel" Šimáček</Heading>
                         <Text>
@@ -111,13 +119,18 @@ const Team = () => {
                         </Box>
                     </Box>
                     <Box
-                        maxW={{ base: "100%", md: "50%" }}
+                        maxW={{ base: "100%", md: "40%" }}
                         textAlign={"center"}
                         color={selected == 2 ? "#000" : "#d3d3d3"}
+                        fontSize={selected == 2 ? "100%" : "80%"}
+                        transition={"all 0.2s"}
                     >
                         <Heading>Marcelo "Mar Sio" Borges</Heading>
                         <Text>
-                            Desenvolvedor front end, Mar Sio, deve uma grande parte da sua vida a isso aqui, foi o responsável pela primeira e por toda a parte web que temos por aqui hoje.
+                            Desenvolvedor front end, Mar Sio, deve uma grande
+                            parte da sua vida a isso aqui, foi o responsável
+                            pela primeira e por toda a parte web que temos por
+                            aqui hoje.
                         </Text>
                         <Box p={"1rem"}>
                             <Link

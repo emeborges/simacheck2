@@ -3,11 +3,12 @@ import { ReactNode } from "react";
 
 interface CanProps {
     children: ReactNode;
-    permissions?: string[];
+    permissions?: Date;
+    roles?:string[]
 }
 
-export function Can({ children }: CanProps) {
-    const userCanSeeComponent = useCan();
+export function Can({ children, permissions }: CanProps) {
+    const userCanSeeComponent = useCan({ permissions })
 
     if(!userCanSeeComponent) {
         return null

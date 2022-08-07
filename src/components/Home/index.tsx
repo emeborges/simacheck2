@@ -12,6 +12,7 @@ import { Header } from 'components/Header';
 import ModalSelectServer from 'components/ModalServerSelect';
 import { Footer } from 'components/Footer'
 import { useTranslation } from 'hooks/useTranslation';
+import Link from 'next/link';
 
 export function Home() {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -247,19 +248,21 @@ export function Home() {
                     </Heading>
                     <Text p={"0.5rem 0rem"}>{t("Home_WeAreDesc")}</Text>
 
-                    <Button
-                        mt={"1rem"}
-                        w={"20rem"}
-                        bg={"#121214"}
-                        color={"#F5F6FA"}
-                        _hover={{
-                            color: "#121214",
-                            bg: "#F5F6FA",
-                            border: "1px solid #121214",
-                        }}
-                    >
-                        {t("Home_WeAreMeet")}
-                    </Button>
+                    <Link href={"/faq/team"}>
+                        <Button
+                            mt={"1rem"}
+                            w={"20rem"}
+                            bg={"#121214"}
+                            color={"#F5F6FA"}
+                            _hover={{
+                                color: "#121214",
+                                bg: "#F5F6FA",
+                                border: "1px solid #121214",
+                            }}
+                        >
+                            {t("Home_WeAreMeet")}
+                        </Button>
+                    </Link>
                 </Flex>
                 <Flex
                     textAlign={"center"}
@@ -274,19 +277,21 @@ export function Home() {
                     </Heading>
                     <Text p={"0.5rem 0rem"}>{t("Home_QuestionsDescribe")}</Text>
 
-                    <Button
-                        mt={"1rem"}
-                        w={"20rem"}
-                        bg={"#121214"}
-                        color={"#F5F6FA"}
-                        _hover={{
-                            color: "#121214",
-                            bg: "#F5F6FA",
-                            border: "1px solid #121214",
-                        }}
-                    >
-                        {t("Home_QuestionsButton")}
-                    </Button>
+                    <Link href={"/faq/"}>
+                        <Button
+                            mt={"1rem"}
+                            w={"20rem"}
+                            bg={"#121214"}
+                            color={"#F5F6FA"}
+                            _hover={{
+                                color: "#121214",
+                                bg: "#F5F6FA",
+                                border: "1px solid #121214",
+                            }}
+                        >
+                            {t("Home_QuestionsButton")}
+                        </Button>
+                    </Link>
                 </Flex>
             </Flex>
             <Footer />

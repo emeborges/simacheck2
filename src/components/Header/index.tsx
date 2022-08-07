@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Text,
   Flex,
@@ -18,19 +18,25 @@ import NextLink from 'next/link'
 import { Community } from 'components/Community'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { useCan } from 'hooks/useCan'
+
 import { FaUserShield } from 'react-icons/fa'
 import { GiAxeSword } from 'react-icons/gi'
 import { Can } from 'components/Can'
-import { signOut } from 'hooks/useSignin'
+import { signOut, useSignin } from 'hooks/useSignin'
 import ModalSelectServer from 'components/ModalServerSelect'
 
 
 export const Header = ({ page }:any) => {
     const [display, setChangeDisplay] = useState('none')
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const [autent, setAutent] = useState(false)
+    const { isAthenticated } = useSignin();
     const router = useRouter()
-    const userIsAuthenticated = useCan();
+
+    useEffect(() => {
+        setAutent(isAthenticated)
+    }, [])
+
 
     const links = [
         {
@@ -122,53 +128,55 @@ export const Header = ({ page }:any) => {
                             );
                         })}
 
-                        {userIsAuthenticated == true ? (
+                        {autent == true ? (
                             <Flex
                                 align={"center"}
                                 justifyContent={"center"}
                                 mr={"1rem"}
                             >
-                                <Menu>
-                                    <MenuButton
-                                        as={IconButton}
-                                        aria-label="Options"
-                                        icon={<GiAxeSword />}
-                                        color={"#4E4E52"}
-                                        bg={"none"}
-                                        borderRadius={"none"}
-                                        borderWidth={"50%"}
-                                        _hover={{
-                                            color: "#eae9e9",
-                                            borderBottom: "2px solid red",
-                                        }}
-                                        mr={"0.5rem"}
-                                        fontSize={"1.5rem"}
-                                    />
-                                    <MenuList>
-                                        <Text
-                                            fontSize={"0.7rem"}
-                                            textAlign={"center"}
-                                        >
-                                            Acesso Rápido
-                                            <Badge
-                                                colorScheme="green"
+                                <Can permissions={new Date()}>
+                                    <Menu>
+                                        <MenuButton
+                                            as={IconButton}
+                                            aria-label="Options"
+                                            icon={<GiAxeSword />}
+                                            color={"#4E4E52"}
+                                            bg={"none"}
+                                            borderRadius={"none"}
+                                            borderWidth={"50%"}
+                                            _hover={{
+                                                color: "#eae9e9",
+                                                borderBottom: "2px solid red",
+                                            }}
+                                            mr={"0.5rem"}
+                                            fontSize={"1.5rem"}
+                                        />
+                                        <MenuList>
+                                            <Text
                                                 fontSize={"0.7rem"}
-                                                ml={"0.5rem"}
+                                                textAlign={"center"}
                                             >
-                                                PREMIUM
-                                            </Badge>
-                                        </Text>
-                                        <MenuItem
-                                            fontSize={"0.8rem"}
-                                            onClick={onOpen}
-                                        >
-                                            Radar
-                                        </MenuItem>
-                                        <MenuItem fontSize={"0.8rem"}>
-                                            Calculadoras
-                                        </MenuItem>
-                                    </MenuList>
-                                </Menu>
+                                                Acesso Rápido
+                                                <Badge
+                                                    colorScheme="green"
+                                                    fontSize={"0.7rem"}
+                                                    ml={"0.5rem"}
+                                                >
+                                                    PREMIUM
+                                                </Badge>
+                                            </Text>
+                                            <MenuItem
+                                                fontSize={"0.8rem"}
+                                                onClick={onOpen}
+                                            >
+                                                Radar
+                                            </MenuItem>
+                                            <MenuItem fontSize={"0.8rem"}>
+                                                Calculadoras
+                                            </MenuItem>
+                                        </MenuList>
+                                    </Menu>
+                                </Can>
                                 <Menu>
                                     <MenuButton
                                         as={IconButton}
@@ -348,14 +356,14 @@ export const Header = ({ page }:any) => {
                                 </NextLink>
                             );
                         })}
-                        {userIsAuthenticated == true ? (
+                        {autent == true ? (
                             <Flex
                                 align={"center"}
                                 justifyContent={"space-evenly"}
                                 w={"100%"}
                                 mt={"3rem"}
                             >
-                                <Can>
+                                <Can permissions={new Date()}>
                                     <Menu>
                                         <MenuButton
                                             as={IconButton}

@@ -1,25 +1,23 @@
 import { useSignin } from "./useSignin";
 
-/*type useCanParams = {
-    permissions?: string[];
+type useCanParams = {
+    permissions?: Date;
     roles?: string[];
-}*/
+};
 
-/*export function useCan({ permissions, roles} : useCanParams) {*/
-export function useCan() {
-    const { isAthenticated } = useSignin();
+
+export function useCan({ permissions }: useCanParams) {
+    const { user, isAthenticated } = useSignin();
+
+    const dataVenc = new Date(user?.premium_until!);
 
     if (!isAthenticated) {
         return false;
-    } else{
-        return true
     }
 
-    /*
-    **** COLOCAR AQUI A VERIFICAÇÃO SE SERÁ PERMITIDO OU NÃO ****
-    if( permissions?.length > 0) {
-        const hassAllPermissions = permissions?.every(permission => {
-            return user.permissions?.includes(permission);
-        })
-    }*/
+    if (permissions! > dataVenc) {
+        return false;
+    }
+
+    return true;
 }

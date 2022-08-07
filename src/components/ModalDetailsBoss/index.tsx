@@ -1,12 +1,12 @@
 
 import { PluralOuSing, Porcentagem } from "../../utils/gerals"
-//* import { GiPocketBow } from 'react-icons/gi'
 import { Badge, Box, Button, Flex, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stat, StatArrow, StatHelpText,  Text, Tooltip, } from "@chakra-ui/react"
-//*import { Chart } from "react-google-charts"
-//*import Link from 'next/link'
-import { BossesDetailsProps } from "utils/types"
+import { Chart } from "react-google-charts"
+import Link from 'next/link'
+import { BossesDetailsProps, Previews } from "utils/types"
 import { FaSkull } from "react-icons/fa"
 import { BsStopwatchFill } from "react-icons/bs";
+import { Can } from "components/Can"
 
 
 const ModalDetailsBoss: React.FC<{
@@ -14,31 +14,36 @@ const ModalDetailsBoss: React.FC<{
     isOpen: any;
     onClose: any;
 }> = ({ boss, isOpen, onClose }) => {
-   /* const data = [
-        [
-            {
-                type: "date",
-                id: "Date",
-            },
-            {
-                type: "number",
-                id: "Won/Loss",
-            },
-        ],
-        [new Date(2021, 6, 13), 1],
-        [new Date(2020, 6, 13), 1],
-    ];
 
-    const options = {
-        title: "Preview",
-        calendar: {
-            cellSize: 8,
-        },
-        colorAxis: {
-            minValue: 0,
-            colors: ["#c83728", "#ebc832", "#3cc85a"],
-        },
-    };*/
+
+    function dataChart(prediction_frame?: Previews[] | null) {
+        if(prediction_frame){
+            let final = [];
+            let detalhes = [
+                {
+                    type: "date",
+                    id: "Date",
+                },
+                {
+                    type: "number",
+                    id: "Won/Loss",
+                },
+            ];
+
+            final.push(detalhes);
+
+            for (let ele of prediction_frame!) {
+                let cem = ele.colour_frame * 100;
+                let arred = cem.toFixed(1);
+                final.push([new Date(ele.date), arred]);
+            }
+
+            return final;
+        }
+
+
+    };
+
 
     function status(n: number) {
         if (n > 0.33) {
@@ -69,7 +74,13 @@ const ModalDetailsBoss: React.FC<{
                     flexDirection={"row"}
                     alignItems={"center"}
                 >
-                    <Image src={"/"} />
+                    <Image
+                        src={
+                            boss?.oa_current_prob! > 0
+                                ? boss?.gif_url
+                                : boss?.dead_url
+                        }
+                    />
                     <Flex direction={"column"} pl={"1rem"} w={"100%"}>
                         <Text
                             fontSize="lg"
@@ -208,7 +219,9 @@ const ModalDetailsBoss: React.FC<{
                                                         : "14px"
                                                 }
                                             >
-                                                {respw.expect_in > 0 ? `Em ` : null}
+                                                {respw.expect_in > 0
+                                                    ? `Em `
+                                                    : null}
                                                 {PluralOuSing(
                                                     respw.expect_in,
                                                     "dia",
@@ -270,23 +283,51 @@ const ModalDetailsBoss: React.FC<{
                         </Text>
                     </Flex>
 
-                    {/*
-                        <Flex h={"220px"}>
-                            <Flex
-                                margin={"0 auto"}
-                                overflowY={"hidden"}
-                                overflowX={{ base: "auto", md: "hidden" }}
-                                scrollSnapType={"x mandatory"}
-                            >
-                                <Chart
-                                    chartType="Calendar"
-                                    height={"500px"}
-                                    width={"550px"}
-                                    data={data}
-                                    options={options}
-                                />
-                            </Flex>
-                        </Flex>
+                    <Can permissions={new Date()}>
+                        <Box
+                            maxH={"200px"}
+                            overflowY={"auto"}
+                            css={{
+                                "&::-webkit-scrollbar": {
+                                    width: "4px",
+                                },
+                                "&::-webkit-scrollbar-track": {
+                                    width: "6px",
+                                },
+                                "&::-webkit-scrollbar-thumb": {
+                                    background: "#000",
+                                    borderRadius: "24px",
+                                },
+                            }}
+                        >
+                            {boss?.resp.map((resp, key) => (
+                                <Box h={"150px"} w={"100%"}>
+                                    <Chart
+                                        chartType="Calendar"
+                                        width={500}
+                                        loader={<Text>Continuand</Text>}
+                                        data={dataChart(
+                                            resp?.prediction_frame!
+                                        )}
+                                        options={{
+                                            title: `Review ${key + 1}`,
+                                            calendar: {
+                                                cellSize: 8,
+                                            },
+                                            colorAxis: {
+                                                minValue: 0,
+                                                colors: [
+                                                    "#c83728",
+                                                    "#ebc832",
+                                                    "#3cc85a",
+                                                ],
+                                            },
+                                        }}
+                                    />
+                                </Box>
+                            ))}
+                        </Box>
+                    </Can>
 
                     <Flex justify={"space-around"} align={"center"}>
                         <Flex direction={"column"} align={"center"}>
@@ -298,7 +339,7 @@ const ModalDetailsBoss: React.FC<{
                             </Text>
                         </Flex>
                         <Flex cursor={"pointer"}>
-                            <Link href={boss.wiki_url}>
+                            <Link href={`${boss?.wiki_url}`}>
                                 <Image
                                     src={"/img/fandom.svg"}
                                     style={{ width: "80px" }}
@@ -306,7 +347,6 @@ const ModalDetailsBoss: React.FC<{
                             </Link>
                         </Flex>
                     </Flex>
-                    */}
                 </ModalBody>
 
                 <ModalFooter>

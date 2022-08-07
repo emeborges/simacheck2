@@ -16,7 +16,8 @@ interface credentialProps {
 }
 
 interface userProps {
-    email:string;
+    email: string;
+    premium_until?: string;
 }
 
 interface contextProps {
@@ -39,15 +40,13 @@ export async function signOut() {
             .post("/auth/logout", {
                 RefreshToken: refreshToken,
             })
-            .then(() => {
-                destroyCookie(undefined, "simacheck.idToken");
-                destroyCookie(undefined, "simacheck.accessToken");
-                destroyCookie(undefined, "simacheck.refreshToken");
-            })
-            .catch(error => console.log(error));
+        destroyCookie(undefined, "simacheck.idToken");
+        destroyCookie(undefined, "simacheck.accessToken");
+        destroyCookie(undefined, "simacheck.refreshToken");
     }
 
     Router.push("/");
+    setTimeout(() => Router.reload(), 2000)
 }
 
 export async function globalSignOut() {
@@ -58,6 +57,7 @@ export async function globalSignOut() {
         destroyCookie(undefined, "simacheck.refreshToken");
 
         Router.push("/");
+        setTimeout(() => Router.reload(), 2000)
     }).catch(error => console.log(error));
 
 
@@ -73,11 +73,11 @@ export function SigninProvider({ children }: providerProps) {
 
     useEffect(()=> {
         const { 'simacheck.accessToken': token } = parseCookies();
-        console.log('token',token)
         if(token != undefined){
             api.get("/users/me").then( resp => {
-                const { email } = resp.data
-                setUser({ email })
+                console.log(resp.data)
+                const { email, premium_until } = resp.data;
+                setUser({ email, premium_until });
 
             }).catch(() => {
                 signOut();
@@ -96,7 +96,7 @@ export function SigninProvider({ children }: providerProps) {
             })
             .then((resp) => {
                 const { AccessToken, IdToken, RefreshToken } = resp.data;
-
+                console.log('alo',resp.data)
                 setCookie(undefined, "simacheck.idToken", IdToken, {
                     maxAge: 60*60*24 *30, // 30days
                     path: '/'
@@ -114,7 +114,10 @@ export function SigninProvider({ children }: providerProps) {
                 api.defaults.headers.common["Authorization"] = IdToken;
                 api.defaults.headers.common["AccessToken"] = AccessToken;
 
-                return Router.push("/account");
+                return (
+                    Router.push("/account"),
+                    setTimeout(() => Router.reload(), 2000))
+
             })
             .catch(() => {
 
@@ -130,8 +133,6 @@ export function SigninProvider({ children }: providerProps) {
             });
         setLoading(false);
     }
-
-    console.log('usuario', user)
 
     return (
         <SigninContext.Provider

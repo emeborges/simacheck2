@@ -30,7 +30,7 @@ const Index = () => {
                 <meta name="description" content="" />
             </Head>
             <Header page={"faq"} />
-            <Box w={"100%"} maxW={"1300px"} margin={"0 auto"}>
+            <Box w={"100%"} maxW={"1300px"} minH={'81.5vh'} margin={"0 auto"}>
                 <Flex
                     align={"center"}
                     direction={"column"}

@@ -28,6 +28,8 @@ const Radar = () => {
     >([]);
     const { bosses, pid, bossesLastView, load } = useRadarBosses();
 
+    console.log(bossesOrganizado);
+
 
     useEffect(() => {
         if (bosses) {
@@ -173,11 +175,20 @@ const Radar = () => {
                                             : "auto"
                                     }
                                 >
-                                    {bossesLastView.map(() => (
+                                    {bossesLastView.map((boss) => (
                                         <BossStatus
                                             width="4rem"
                                             height="4rem"
-                                            image={"/"}
+                                            image={
+                                                boss?.oa_current_prob! > 0
+                                                    ? boss.gif_url
+                                                    : boss.dead_url
+                                            }
+                                            scaleGray={
+                                                boss?.oa_current_prob! > 0
+                                                    ? 0
+                                                    : 1
+                                            }
                                         />
                                     ))}
                                 </Flex>
