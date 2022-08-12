@@ -26,7 +26,12 @@ export function BossesProvider({ children }: providerProps) {
         setLoad(true);
         async function getBosses() {
             const { data } = await api.get(`worlds/${pid}`);
-            setBosses(data);
+
+            setBosses(
+                data?.sort((a: BossesDetailsProps, b: BossesDetailsProps) => {
+                    return a.boss.localeCompare(b.boss);
+                })
+            );
             setBossesLastView(
                 data.filter(
                     (boss: BossesDetailsProps) =>

@@ -39,32 +39,35 @@ const ConteinerLores: React.FC<{ bosses: BossesDetailsProps[] }> = ({
     )
 
     const lores = loresGroup("lore", bosses);
+    const loresABC = lores["items"].sort(
+        (a:string, b: string ) => {
+            return a.localeCompare(b);
+        }
+    );
     const bossesPorLore = groupBy("lore", bosses);
 
     return (
-        <Accordion  allowMultiple>
+        <Accordion allowMultiple>
+            {loresABC.map((lore: string) => {
+                return (
+                    <Box mb={"0.5rem"}>
+                        <AccordionItem>
+                            <AccordionButton
+                                _expanded={{ bg: "#131313", color: "white" }}
+                            >
+                                <Box flex="1" textAlign="center">
+                                    {lore}
+                                </Box>
+                                <AccordionIcon />
+                            </AccordionButton>
 
-                {lores.items.map((lore:string) =>{
-                    return (
-                        <Box mb={'0.5rem'} >
-                            <AccordionItem>
-                                <AccordionButton
-                                    _expanded={{ bg: "#131313", color: "white" }}
-                                    >
-                                    <Box flex="1" textAlign="center">
-                                        {lore}
-                                    </Box>
-                                    <AccordionIcon />
-                                </AccordionButton>
-
-                                <AccordionPanel pb={4}>
-                                    <ConteinerBosses bosses={bossesPorLore[lore]} />
-                                </AccordionPanel>
-                            </AccordionItem>
-                        </Box>
-                    );
-                })}
-
+                            <AccordionPanel pb={4}>
+                                <ConteinerBosses bosses={bossesPorLore[lore]} />
+                            </AccordionPanel>
+                        </AccordionItem>
+                    </Box>
+                );
+            })}
         </Accordion>
     );
 };

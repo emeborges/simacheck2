@@ -1,6 +1,6 @@
 import { Container } from "./style"
 import { color } from "../../utils/gerals"
-import { Image } from "@chakra-ui/react"
+import { Image, Tooltip } from "@chakra-ui/react"
 
 
 
@@ -11,18 +11,21 @@ const BossStatus: React.FC<{
     width: string;
     height: string;
     scaleGray: number | null | undefined;
-}> = ({ image, status, width, height, scaleGray }) => {
+    display?: string;
+}> = ({ image, status, width, height, scaleGray, display }) => {
     return (
-        <Container style={{ width: `${width}`, height: `${height}` }}>
-            <div
-                className="alo"
-                style={{ background: `${color(status)}`, color: "#fff" }}
-            >
-                <div className="fundo">
-                    <Image src={image} filter={`grayscale(${scaleGray})`} />
+        <Tooltip label={display}>
+            <Container style={{ width: `${width}`, height: `${height}` }}>
+                <div
+                    className="alo"
+                    style={{ background: `${color(status)}`, color: "#fff" }}
+                >
+                    <div className="fundo">
+                        <Image src={image} filter={`grayscale(${scaleGray})`} />
+                    </div>
                 </div>
-            </div>
-        </Container>
+            </Container>
+        </Tooltip>
     );
 };
 

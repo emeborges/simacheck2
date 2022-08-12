@@ -3,10 +3,13 @@ import {
     Flex,
     ListItem,
     Text,
+    Tooltip,
     UnorderedList,
     useDisclosure,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+
+import { HiLockClosed } from "react-icons/hi";
 
 
 import { BossesDetailsProps } from "utils/types";
@@ -18,17 +21,19 @@ import BossStatus from "components/BossesStatus";
 import { useRadarBosses } from "hooks/useRadarBosses";
 import ConteinerLores from "components/ConteinerLores";
 import ConteinerCitys from "components/ConteinerCitys";
+import { useCan } from "hooks/useCan";
 
 const Radar = () => {
     const [view, setView] = useState("status");
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [dadoFiltrado, setDadoFiltrado] = useState<string>("colour_frame");
+    const [dadoFiltrado, setDadoFiltrado] = useState<string>("boss");
     const [bossesOrganizado, setBossesOrganizado] = useState<
         BossesDetailsProps[]
     >([]);
     const { bosses, pid, bossesLastView, load } = useRadarBosses();
+    const userCanSeeComponent = useCan({permissions: new Date()});
 
-    console.log(bossesOrganizado);
+    console.log(userCanSeeComponent);
 
 
     useEffect(() => {
@@ -50,7 +55,7 @@ const Radar = () => {
         setDadoFiltrado("colour_frame");
         setBossesOrganizado(
             bossesOrganizado?.sort((a, b) => {
-                return b.oa_colour_frame! - a.oa_colour_frame!;
+                return b.oa_current_prob! - a.oa_current_prob!;
             })
         );
     }
@@ -179,6 +184,7 @@ const Radar = () => {
                                         <BossStatus
                                             width="4rem"
                                             height="4rem"
+                                            display={boss?.display_name}
                                             image={
                                                 boss?.oa_current_prob! > 0
                                                     ? boss.gif_url
@@ -275,27 +281,51 @@ const Radar = () => {
                                                 }
                                             />
                                         </ListItem>
-                                        <ListItem
-                                            cursor={"pointer"}
-                                            margin={"5px"}
-                                            textDecoration={"none"}
-                                            color={"#121214"}
-                                            fontWeight={
-                                                view === "city"
-                                                    ? "600"
-                                                    : "regular"
-                                            }
-                                            _hover={{ fontWeight: "600" }}
-                                            onClick={() => setView("city")}
-                                        >
-                                            Cidade
-                                            <Box
-                                                width={"0.5rem"}
-                                                borderBottom={
-                                                    "2px solid #BA1813"
+                                        {userCanSeeComponent === true ? (
+                                            <ListItem
+                                                cursor={"pointer"}
+                                                margin={"5px"}
+                                                textDecoration={"none"}
+                                                color={"#121214"}
+                                                fontWeight={
+                                                    view === "city"
+                                                        ? "600"
+                                                        : "regular"
                                                 }
-                                            />
-                                        </ListItem>
+                                                _hover={{ fontWeight: "600" }}
+                                                onClick={() => setView("city")}
+                                            >
+                                                Cidade
+                                                <Box
+                                                    width={"0.5rem"}
+                                                    borderBottom={
+                                                        "2px solid #BA1813"
+                                                    }
+                                                />
+                                            </ListItem>
+                                        ) : (
+                                            <Tooltip label="Premium necessário">
+                                                <ListItem
+                                                    margin={"5px"}
+                                                    display={"flex"}
+                                                    alignItems={"center"}
+                                                    color={"#4d4d4f"}
+                                                    cursor={"not-allowed"}
+                                                    textDecor={"line-through"}
+                                                >
+                                                    <HiLockClosed />
+                                                    <Box>
+                                                        Cidade
+                                                        <Box
+                                                            width={"0.5rem"}
+                                                            borderBottom={
+                                                                "2px solid #BA1813"
+                                                            }
+                                                        />
+                                                    </Box>
+                                                </ListItem>
+                                            </Tooltip>
+                                        )}
                                     </UnorderedList>
                                 </Flex>
 
