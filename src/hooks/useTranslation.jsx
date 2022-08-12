@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from "react";
 import { LangStrings } from '../intl'
 
@@ -8,7 +9,9 @@ export const locales = ["pt", "en"];
 const LanguageContext = createContext({});
 
 export function LenguageProvider({ children }) {
+    const route = useRouter()
     const [locale, setLocale] = useState("pt");
+    console.log('rota', route.locale)
 
 
     return (
