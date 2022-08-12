@@ -4,16 +4,19 @@ import {
     Box,
     Text,
     ButtonGroup,
-    Link,
+    Link as LinkChakra,
 } from "@chakra-ui/react";
 import { useTranslation } from "hooks/useTranslation";
+import Link  from 'next/link'
+import { useRouter } from "next/router";
 import Marquee from "react-fast-marquee";
 import { BsInstagram, BsTwitch, BsYoutube } from "react-icons/bs";
 
 export const Community = () => {
     const { locale, setLocale } = useTranslation();
+    const route = useRouter()
 
-
+     console.log(locale)
     return (
         <Box w={"100%"} bg={"#424244"}>
             <Flex
@@ -30,7 +33,7 @@ export const Community = () => {
                         pauseOnClick={true}
                         pauseOnHover={true}
                     >
-                        <Link
+                        <LinkChakra
                             display={"flex"}
                             href={"www.twitch.tv/bttzera"}
                             cursor={"pointer"}
@@ -43,8 +46,8 @@ export const Community = () => {
                             <Text fontSize={"0.8rem"} pl={"0.1rem"}>
                                 .com/bttzera
                             </Text>
-                        </Link>
-                        <Link
+                        </LinkChakra>
+                        <LinkChakra
                             display={"flex"}
                             href={"https://www.youtube.com/c/TibiaFerumbrinha"}
                             cursor={"pointer"}
@@ -57,8 +60,8 @@ export const Community = () => {
                             <Text fontSize={"0.8rem"} pl={"0.1rem"}>
                                 .com/ferumbrinhas
                             </Text>
-                        </Link>
-                        <Link
+                        </LinkChakra>
+                        <LinkChakra
                             display={"flex"}
                             href={"https://www.instagram.com/tibiahome/"}
                             cursor={"pointer"}
@@ -71,27 +74,23 @@ export const Community = () => {
                             <Text fontSize={"0.8rem"} pl={"0.1rem"}>
                                 .com/tibiahome
                             </Text>
-                        </Link>
+                        </LinkChakra>
                     </Marquee>
                 </Flex>
 
                 <ButtonGroup position={"relative"}>
-                    <Button
-                        size={"xs"}
-                        bg={locale === "pt" ? "#fff" : "#424244"}
-                        color={locale === "pt" ? "#424244" : "#121212"}
-                        onClick={() => setLocale("pt")}
-                    >
-                        PT
-                    </Button>
-                    <Button
-                        size={"xs"}
-                        bg={locale === "en" ? "#fff" : "#424244"}
-                        color={locale === "en" ? "#424244" : "#121212"}
-                        onClick={() => setLocale("en")}
-                    >
-                        EN
-                    </Button>
+                    {route.locales?.map((loc) => (
+                        <Link href={route.asPath} locale={loc}>
+                            <Button
+                                size={"xs"}
+                                bg={loc === locale ? "#fff" : "#424244"}
+                                color={loc === locale ? "#424244" : "#121212"}
+                                onClick={() => setLocale(loc)}
+                            >
+                                {loc.toLocaleUpperCase()}
+                            </Button>
+                        </Link>
+                    ))}
                 </ButtonGroup>
             </Flex>
         </Box>

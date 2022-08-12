@@ -3,8 +3,12 @@ const withPWA = require('next-pwa')
 const isProduction = process.env.NODE_ENV === 'production'
 
 module.exports = withPWA({
-  pwa: {
-    dest: 'public',
-    disable: !isProduction
-  }
-})
+    pwa: {
+        dest: "public",
+        disable: !isProduction,
+    },
+    i18n: {
+        locales: ["en", "pt"],
+        defaultLocale: "en",
+    },
+});

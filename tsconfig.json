@@ -29,5 +29,5 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx", "src/hooks/useTranslation.jsx",  ]
+    "**/*.tsx", "src/hooks/useTranslation.jsx", "src/components/ModalDetailsBoss copy/index.jsx",  ]
 }

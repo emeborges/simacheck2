@@ -305,12 +305,12 @@ const ModalDetailsBoss: React.FC<{
                                     <Chart
                                         chartType="Calendar"
                                         width={500}
-                                        loader={<Text>Continuand</Text>}
+                                        loader={<Text>Carregando</Text>}
                                         data={dataChart(
                                             resp?.prediction_frame!
                                         )}
                                         options={{
-                                            title: `Review ${key + 1}`,
+                                            title: `Respawn ${key + 1}`,
                                             calendar: {
                                                 cellSize: 8,
                                             },
