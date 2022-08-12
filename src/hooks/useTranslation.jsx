@@ -11,7 +11,7 @@ const LanguageContext = createContext({});
 export function LenguageProvider({ children }) {
     const route = useRouter()
     const [locale, setLocale] = useState("pt");
-    console.log('rota', route.locale)
+    console.log('rota', route)
 
 
     return (
