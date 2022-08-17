@@ -12,8 +12,6 @@ export function LenguageProvider({ children }) {
     const route = useRouter()
     const [locale, setLocale] = useState(route.locale);
 
-
-
     return (
         <LanguageContext.Provider value={{locale, setLocale}}>
             {children}

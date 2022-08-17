@@ -50,9 +50,9 @@ export const Header = ({ page }:any) => {
             'referencia':'/tools'
         },
         {
-            'link': 'blog',
-            'escrita': 'SimaJournal',
-            'referencia':'/'
+            'link': 'library',
+            'escrita': 'SimaLibrary',
+            'referencia':'/library'
         },
 
         {

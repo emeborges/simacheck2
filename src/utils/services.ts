@@ -16,12 +16,9 @@ export const api = axios.create({
     baseURL: "https://dev.simacheck.com/",
 
     headers: {
-        Authorization: `${
-            cookies["simacheck.idToken"]
-        }`,
-        AccessToken: `${
-           cookies["simacheck.accessToken"]
-        }`,
+        Authorization: `${cookies["simacheck.idToken"]}`,
+        AccessToken: `${cookies["simacheck.accessToken"]}`,
+
     },
 });
 

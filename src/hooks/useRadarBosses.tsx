@@ -25,7 +25,7 @@ export function BossesProvider({ children }: providerProps) {
     useEffect(() => {
         setLoad(true);
         async function getBosses() {
-            const { data } = await api.get(`worlds/${pid}`);
+            const { data } = await api.get(`worlds/${pid}`, {'headers' : {'Locale': `${route.locale}`}});
 
             setBosses(
                 data?.sort((a: BossesDetailsProps, b: BossesDetailsProps) => {

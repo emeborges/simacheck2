@@ -6,7 +6,8 @@ import Link from 'next/link'
 import { BossesDetailsProps, Previews } from "utils/types"
 import { FaSkull } from "react-icons/fa"
 import { BsStopwatchFill } from "react-icons/bs";
-import { Can } from "components/Can"
+import { Can } from "components/Can";
+import { IoLibraryOutline } from "react-icons/io5";
 
 
 const ModalDetailsBoss: React.FC<{
@@ -330,20 +331,35 @@ const ModalDetailsBoss: React.FC<{
                     </Can>
 
                     <Flex justify={"space-around"} align={"center"}>
-                        <Flex direction={"column"} align={"center"}>
-                            <Text fontSize="sm" pt={"0.25rem"}>
-                                Próxima aparição calculada:
-                            </Text>
-                            <Text fontSize="md" pt={"0.25rem"}>
-                                15/12/2022
-                            </Text>
-                        </Flex>
                         <Flex cursor={"pointer"}>
                             <Link href={`${boss?.wiki_url}`}>
                                 <Image
                                     src={"/img/fandom.svg"}
                                     style={{ width: "80px" }}
                                 />
+                            </Link>
+                        </Flex>
+                        <Flex cursor={"pointer"}>
+                            <Link href={'/'}>
+                                <Button
+                                    mt={"0.5rem"}
+                                    bg={"transparent"}
+                                    w={"10rem"}
+                                    h={"5rem"}
+                                    p={"0.5rem"}
+                                    display={"flex"}
+                                    flexDir={"column"}
+                                    justifyContent={"space-around"}
+                                    _hover={{ bg: "#737380", color: "#fff" }}
+                                >
+                                    <IoLibraryOutline
+                                        style={{
+                                            height: "2rem",
+                                            width: "2rem",
+                                        }}
+                                    />
+                                    SimaLibrary
+                                </Button>
                             </Link>
                         </Flex>
                     </Flex>

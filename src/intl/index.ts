@@ -93,6 +93,9 @@ export const LangStrings = {
         Modal_SelectServerTitle: "Selecionar Servidor:",
         Modal_SelectServerPlaceholder: "Selecione o Servidor Desejado",
         Modal_SelectServerGo: "Ir!",
+        Modal_SelectBoss: "Selecionar Boss",
+        Modal_SelectBossPlaceholder: "Selecione o Boss desejado" ,
+        Modal_SelectBossGo: "Ir!",
     },
 };
 
