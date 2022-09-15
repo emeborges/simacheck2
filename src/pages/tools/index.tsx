@@ -5,6 +5,7 @@ import { Header } from 'components/Header';
 import { Container } from "../../styles/pages/tools"
 
 import ModalSelectServer from 'components/ModalServerSelect';
+import { Footer } from 'components/Footer';
 
 const Index = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -16,7 +17,7 @@ const Index = () => {
                 <meta name="description" content="" />
             </Head>
             <Header page={"tools"} />
-            <Box w={"100%"} maxW={"1300px"} margin={"0 auto"}>
+            <Box w={"100%"} maxW={"1300px"} minH={"79.5vh"} margin={"0 auto"}>
                 <Flex
                     align={"center"}
                     direction={"column"}
@@ -78,6 +79,7 @@ const Index = () => {
                     </Flex>
                 </Flex>
             </Box>
+            <Footer />
         </Container>
     );}
 

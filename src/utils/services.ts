@@ -102,7 +102,7 @@ api.interceptors.response.use(
                     });
                 });
             } else {
-                console.log(error);
+                signOut();
             }
         }
 

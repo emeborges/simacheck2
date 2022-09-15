@@ -31,7 +31,7 @@ const Radar = () => {
         BossesDetailsProps[]
     >([]);
     const { bosses, pid, bossesLastView, load } = useRadarBosses();
-    const userCanSeeComponent = useCan({permissions: new Date()});
+    const userCanSeeComponent = useCan({permissions: new Date(), roles: "premium"});
 
     console.log(userCanSeeComponent);
 

@@ -284,7 +284,7 @@ const ModalDetailsBoss: React.FC<{
                         </Text>
                     </Flex>
 
-                    <Can permissions={new Date()}>
+                    <Can permissions={new Date()} roles="premium">
                         <Box
                             maxH={"200px"}
                             overflowY={"auto"}
@@ -340,7 +340,7 @@ const ModalDetailsBoss: React.FC<{
                             </Link>
                         </Flex>
                         <Flex cursor={"pointer"}>
-                            <Link href={'/'}>
+                            <Link href={"/"}>
                                 <Button
                                     mt={"0.5rem"}
                                     bg={"transparent"}

@@ -134,7 +134,7 @@ export const Header = ({ page }:any) => {
                                 justifyContent={"center"}
                                 mr={"1rem"}
                             >
-                                <Can permissions={new Date()}>
+                                <Can permissions={new Date()} roles="premium">
                                     <Menu>
                                         <MenuButton
                                             as={IconButton}
@@ -363,7 +363,7 @@ export const Header = ({ page }:any) => {
                                 w={"100%"}
                                 mt={"3rem"}
                             >
-                                <Can permissions={new Date()}>
+                                <Can permissions={new Date()} roles="premium">
                                     <Menu>
                                         <MenuButton
                                             as={IconButton}

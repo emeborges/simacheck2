@@ -86,7 +86,11 @@ const Account = () => {
                                 <Text fontWeight={"600"}>{user?.email}</Text>
                             </Text>
                             <Text>
-                                Sua premium time expira em:
+                                Sua premium time{" "}
+                                {dataVenc > new Date()
+                                    ? " expira "
+                                    : " expirou "}{" "}
+                                em:
                                 <Text fontWeight={"600"}>
                                     {dataVenc.toLocaleDateString()}
                                 </Text>
