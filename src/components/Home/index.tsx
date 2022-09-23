@@ -1,9 +1,10 @@
-import { Box, Button, Flex, Heading, Text, useDisclosure, Image } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Text, useDisclosure, Image, Link as LinkChakra } from '@chakra-ui/react';
 import Head from 'next/head'
 import { useState } from 'react';
 
 import { GiRadarSweep, GiCalculator } from 'react-icons/gi'
 import { IoLibraryOutline } from 'react-icons/io5'
+import { FaWhatsappSquare } from "react-icons/fa";
 
 import HomeSimaBossesText from 'components/HomeSimaBossesText/SimaBosses';
 import HomeSimaCalcText from 'components/HomeSimaBossesText/SimaCalc';
@@ -13,6 +14,7 @@ import ModalSelectServer from 'components/ModalServerSelect';
 import { Footer } from 'components/Footer'
 import { useTranslation } from 'hooks/useTranslation';
 import Link from 'next/link';
+import HomeSimaBot from 'components/HomeSimaBossesText/SimaBot';
 
 export function Home() {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -37,7 +39,7 @@ export function Home() {
             <Header page={"home"} />
             <Flex
                 maxW={"100%"}
-                p={{ base: "5rem 0.5rem", lg: "10rem 0rem" }}
+                p={{ base: "3rem 0.5rem", lg: "7rem 0rem 4rem" }}
                 justify={"center"}
                 align={"center"}
             >
@@ -49,20 +51,23 @@ export function Home() {
 
                         <Flex
                             pt={"1rem"}
-                            justify={"space-between"}
+                            justify={{
+                                base: "space-evenly",
+                                md: "space-between",
+                            }}
                             flexWrap={"wrap"}
-                            className="conteinerBtns"
                         >
                             <Button
                                 mt={"0.5rem"}
                                 bg={"#e1e1e6"}
-                                w={"10rem"}
+                                w={{ base: "8rem", md: "10rem" }}
                                 h={"5rem"}
                                 p={"0.5rem 0rem"}
                                 display={"flex"}
                                 flexDir={"column"}
                                 justifyContent={"space-around"}
-                                _hover={{ bg: "#737380" }}
+                                transition={"all 0.4s"}
+                                _hover={{ bg: "#737380", color: "#fff" }}
                                 onClick={onOpen}
                             >
                                 <GiRadarSweep
@@ -70,39 +75,75 @@ export function Home() {
                                 />
                                 SimaBosses
                             </Button>
+
                             <Button
                                 mt={"0.5rem"}
                                 bg={"#e1e1e6"}
-                                w={"10rem"}
+                                w={{ base: "8rem", md: "10rem" }}
                                 h={"5rem"}
                                 p={"0.5rem"}
                                 display={"flex"}
                                 flexDir={"column"}
                                 justifyContent={"space-around"}
-                                _hover={{ bg: "#737380" }}
+                                transition={"all 0.4s"}
+                                _hover={{ bg: "#737380", color: "#fff" }}
                             >
-                                <GiCalculator
+                                <FaWhatsappSquare
                                     style={{ height: "2rem", width: "2rem" }}
                                 />
-                                SimaCalculadora
+                                SimaBot
                             </Button>
 
                             <Button
                                 mt={"0.5rem"}
                                 bg={"#e1e1e6"}
-                                w={"10rem"}
+                                w={{ base: "8rem", md: "10rem" }}
                                 h={"5rem"}
                                 p={"0.5rem"}
                                 display={"flex"}
                                 flexDir={"column"}
                                 justifyContent={"space-around"}
-                                _hover={{ bg: "#737380" }}
+                                transition={"all 0.4s"}
+                                _hover={{ bg: "#737380", color: "#fff" }}
+                            >
+                                <GiCalculator
+                                    style={{ height: "2rem", width: "2rem" }}
+                                />
+                                SimaCalc
+                            </Button>
+
+                            <Button
+                                mt={"0.5rem"}
+                                bg={"#e1e1e6"}
+                                w={{ base: "8rem", md: "10rem" }}
+                                h={"5rem"}
+                                p={"0.5rem"}
+                                display={"flex"}
+                                flexDir={"column"}
+                                justifyContent={"space-around"}
+                                transition={"all 0.4s"}
+                                _hover={{ bg: "#737380", color: "#fff" }}
                             >
                                 <IoLibraryOutline
                                     style={{ height: "2rem", width: "2rem" }}
                                 />
                                 SimaLibrary
                             </Button>
+                        </Flex>
+
+                        <Flex justify={"center"} pt={"3rem"}>
+                            <LinkChakra
+                                href={"/"}
+                                bg={"#121214"}
+                                p={"0.5rem 2rem"}
+                                borderRadius={"5px"}
+                                color={"#fff"}
+                                fontSize={"1.5rem"}
+                                transition={"all 0.2s"}
+                                textDecor={"none"}
+                            >
+                                {t("Home_CallRegister")}!
+                            </LinkChakra>
                         </Flex>
                     </Box>
                 </Box>
@@ -128,7 +169,12 @@ export function Home() {
 
             <Box p={"3rem 0rem"} bg={"#121214"} w={"100%"} color={"#F5F6FA"}>
                 <Box maxW={"1300px"} margin={"0 auto"}>
-                    <Box w={"60%"} m={"0 auto"} textAlign={"center"}>
+                    <Box
+                        w={"60%"}
+                        minW={"300px"}
+                        m={"0 auto"}
+                        textAlign={"center"}
+                    >
                         <Heading as="h1" color={"#FEFEFE"} fontWeight={"900"}>
                             {t("Home_Tolls")}
                         </Heading>
@@ -145,7 +191,7 @@ export function Home() {
                             w={{ base: "98%", md: "80%" }}
                             margin={"0 auto"}
                             display={"grid"}
-                            gridTemplateColumns={"repeat(3,1fr)"}
+                            gridTemplateColumns={"repeat(4,1fr)"}
                         >
                             <Box
                                 fontSize={{ base: "90%", md: "18px" }}
@@ -185,7 +231,7 @@ export function Home() {
                                 fontWeight={conteinerNum === 2 ? "700" : "400"}
                                 onClick={() => selectConteiner(2)}
                             >
-                                SimaCalc
+                                SimaBot
                             </Box>
                             <Box
                                 fontSize={{ base: "90%", md: "18px" }}
@@ -198,15 +244,35 @@ export function Home() {
                                 }
                                 textAlign={"center"}
                                 cursor={"pointer"}
-                                borderTopRightRadius={"5px"}
                                 textDecoration={
                                     conteinerNum === 3 ? "underline" : "none"
                                 }
                                 textDecorationColor={"#BA1813"}
                                 fontWeight={conteinerNum === 3 ? "700" : "400"}
                                 onClick={() => selectConteiner(3)}
+                            >
+                                SimaCalc
+                            </Box>
+                            <Box
+                                fontSize={{ base: "90%", md: "18px" }}
+                                p={"1rem 0"}
+                                border={"1px solid #323238"}
+                                background={
+                                    conteinerNum === 4
+                                        ? "rgba(245,246,250,0.1)"
+                                        : "none"
+                                }
+                                textAlign={"center"}
+                                cursor={"pointer"}
+                                borderTopRightRadius={"5px"}
+                                textDecoration={
+                                    conteinerNum === 4 ? "underline" : "none"
+                                }
+                                textDecorationColor={"#BA1813"}
+                                fontWeight={conteinerNum === 4 ? "700" : "400"}
+                                onClick={() => selectConteiner(4)}
                                 className={
-                                    conteinerNum == 3 ? "btns ativo" : "btns"
+                                    conteinerNum == 4 ? "btns ativo" : "btns"
                                 }
                             >
                                 SimaLibrary
@@ -220,8 +286,9 @@ export function Home() {
                             border={"1px solid #323238"}
                         >
                             {conteinerNum == 1 ? <HomeSimaBossesText /> : null}
-                            {conteinerNum == 2 ? <HomeSimaCalcText /> : null}
-                            {conteinerNum == 3 ? <HomeSimaLibrary /> : null}
+                            {conteinerNum == 2 ? <HomeSimaBot /> : null}
+                            {conteinerNum == 3 ? <HomeSimaCalcText /> : null}
+                            {conteinerNum == 4 ? <HomeSimaLibrary /> : null}
                         </Box>
                     </Flex>
                 </Box>
@@ -240,7 +307,8 @@ export function Home() {
                     flexDir={"column"}
                     align={"center"}
                     w={{ base: "100%", md: "45%" }}
-                    p={"1rem 0.5rem"}
+                    p={"1rem 0rem"}
+                    maxW={"320px"}
                 >
                     <Heading as="h1">{t("Home_WeAre")}</Heading>
                     <Heading as="h2" fontSize={"140%"}>
@@ -269,7 +337,8 @@ export function Home() {
                     flexDir={"column"}
                     align={"center"}
                     w={{ base: "100%", md: "45%" }}
-                    p={"1rem 0.5rem"}
+                    p={"1rem 0rem"}
+                    maxW={"320px"}
                 >
                     <Heading as="h1">{t("Home_Questions")}</Heading>
                     <Heading as="h2" fontSize={"140%"}>

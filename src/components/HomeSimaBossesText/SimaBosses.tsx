@@ -61,7 +61,8 @@ const HomeSimaBossesText: React.FC = () => {
 
                 <Flex
                     justifyContent={"center"}
-                    direction={{ md: "column", lg: "row" }}
+                    align={"center"}
+                    direction={{ base: "column", md: "row" }}
                 >
                     <Button
                         mt={"1rem"}

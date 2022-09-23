@@ -36,25 +36,66 @@ const Index = () => {
                     <Flex
                         borderRadius={"5px"}
                         boxShadow={"0px 4px 20px rgba(0,0,0,0.2)"}
-                        flexDir={'column'}
-                        align={'center'}
-                        textAlign={'center'}
-                        maxW={'24rem'}
-                        p={'1rem 0.5rem'}
-                        mt={{base:'1rem', md:'0'}}
+                        flexDir={"column"}
+                        align={"center"}
+                        textAlign={"center"}
+                        maxW={"24rem"}
+                        p={"1rem 0.5rem"}
+                        mt={{ base: "1rem", md: "0" }}
                     >
                         <Box>
-                            <Heading fontSize={"1.5rem"} as={"h2"} >
+                            <Heading fontSize={"1.5rem"} as={"h2"}>
                                 SimaBosses
                             </Heading>
-                            <Box w={'2rem'} borderBottom={'2px solid red'}/>
+                            <Box w={"2rem"} borderBottom={"2px solid red"} />
                         </Box>
 
                         <Text p={"0rem 1rem"} fontSize={"0.9rem"}>
                             {" "}
                             Aqui você será capaz de verificar todas as
-                            informações de bosses tibianos, filtrados desde
-                            a possibilidade de aparecimento, da cidade de
+                            informações de bosses tibianos, filtrados desde a
+                            possibilidade de aparecimento, da cidade de
+                            aparecimento ou separados por Lore..
+                        </Text>
+
+                        <Button
+                            mt={"0.5rem"}
+                            bg={"#e1e1e6"}
+                            w={"8rem"}
+                            h={"4rem"}
+                            p={"0.5rem 0rem"}
+                            display={"flex"}
+                            flexDir={"column"}
+                            justifyContent={"space-around"}
+                            _hover={{ bg: "#737380", color: "#fff" }}
+                            onClick={onOpen}
+                        >
+                           Cadastrar-se
+                        </Button>
+                        <ModalSelectServer isOpen={isOpen} onClose={onClose} />
+                    </Flex>
+                    <Flex
+                        borderRadius={"5px"}
+                        boxShadow={"0px 4px 20px rgba(0,0,0,0.2)"}
+                        flexDir={"column"}
+                        align={"center"}
+                        textAlign={"center"}
+                        maxW={"24rem"}
+                        p={"1rem 0.5rem"}
+                        mt={{ base: "1rem", md: "0" }}
+                    >
+                        <Box>
+                            <Heading fontSize={"1.5rem"} as={"h2"}>
+                                SimaBosses
+                            </Heading>
+                            <Box w={"2rem"} borderBottom={"2px solid red"} />
+                        </Box>
+
+                        <Text p={"0rem 1rem"} fontSize={"0.9rem"}>
+                            {" "}
+                            Aqui você será capaz de verificar todas as
+                            informações de bosses tibianos, filtrados desde a
+                            possibilidade de aparecimento, da cidade de
                             aparecimento ou separados por Lore..
                         </Text>
 
@@ -72,10 +113,7 @@ const Index = () => {
                         >
                             Entrar já!
                         </Button>
-                        <ModalSelectServer
-                            isOpen={isOpen}
-                            onClose={onClose}
-                        />
+                        <ModalSelectServer isOpen={isOpen} onClose={onClose} />
                     </Flex>
                 </Flex>
             </Box>

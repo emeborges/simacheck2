@@ -80,7 +80,7 @@ export const Community = () => {
 
                 <ButtonGroup position={"relative"}>
                     {route.locales?.map((loc) => (
-                        <Link href={route.asPath} locale={loc}>
+                        <Link href={route.asPath} key={loc} locale={loc}>
                             <Button
                                 size={"xs"}
                                 bg={loc === locale ? "#fff" : "#424244"}

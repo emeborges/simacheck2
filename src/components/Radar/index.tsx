@@ -184,6 +184,7 @@ const Radar = () => {
                                         <BossStatus
                                             width="4rem"
                                             height="4rem"
+                                            key={boss.boss}
                                             display={boss?.display_name}
                                             image={
                                                 boss?.oa_current_prob! > 0

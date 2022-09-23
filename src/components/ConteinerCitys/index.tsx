@@ -48,7 +48,7 @@ const ConteinerCitys: React.FC<{ bosses: BossesDetailsProps[] }> = ({
         <Accordion allowMultiple>
             {citysABC.map((lore: string) => {
                 return (
-                    <Box mb={"0.5rem"}>
+                    <Box mb={"0.5rem"} key={lore}>
                         <AccordionItem>
                             <AccordionButton
                                 _expanded={{ bg: "#131313", color: "white" }}

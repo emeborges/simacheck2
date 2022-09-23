@@ -3,6 +3,7 @@ export const LangStrings = {
         Home_MainCall: "YOUR JOURNEY WILL NEVER BE THE SAME",
         Home_SecoundCall: "The best tools for your game you find here!",
         Home_Call: "Meet them now!",
+        Home_CallRegister: "Register now",
         Home_Tolls: "KNOW OUR TOOLS",
         Home_TollsDescription: "The best tools for your game you",
         Home_TollsButtonPremium: "Discover the benefits of premium!",
@@ -23,6 +24,14 @@ export const LangStrings = {
         Home_CalcHunts: "Hunts Calculator",
         Home_CalcImbui: "Building Calculator",
         Home_CalcButton: "Meet our calculator",
+        Home_BotDefine: "Receive, verify and wish..",
+        Home_BotObjetive:
+            "Through our Bot, you will receive, in a call, the radar summary of the desired server!",
+        Home_BotCall: "Straight and straight, sent, arrived!",
+        Home_BotRotes: "Radar and Routes directly on your WhatsApp;",
+        Home_BotCalcs: "Your calculator in your hands;",
+        Home_BotEnd: "And much more!",
+        Home_BotButton: "Meet Simabot",
         Home_LibraryDefine: "Data, data and more data..",
         Home_LibraryObjetive:
             "Easy for some, complex for others. With that in mind, we centralized the information in a single field, bringing all our conclusions and information in an environment in a unique and direct way.",
@@ -51,6 +60,7 @@ export const LangStrings = {
         Home_SecoundCall:
             "As melhores ferramentas para o seu jogo você encontra aqui!",
         Home_Call: "Conheça-as agora!",
+        Home_CallRegister: "Cadastre-se já",
         Home_Tolls: "CONHEÇA NOSSAS FERRAMENTAS",
         Home_TollsDescription: "As melhores ferramentas para seu jogo",
         Home_RadarDefine: "Rastrear, mensurar e planejar..",
@@ -67,10 +77,19 @@ export const LangStrings = {
         Home_CalcObjetive:
             "A SimaCalc veio com o objetivo de facilitar a sua vida tibiana, trazendo a maior confiabilidade e desempenho já visto!",
         Home_CalcLoot: "Divisão de Loot",
+
         Home_CalcTraining: "Calculadora de Treino",
         Home_CalcHunts: "Calculadora de Hunts",
         Home_CalcImbui: "Calculadora de Imbuiements",
         Home_CalcButton: "Conheça nossa calculadora!",
+        Home_BotDefine: "Receber, verificar e desejar..",
+        Home_BotObjetive:
+            "Através do nosso Bot, você recebera, em uma chamada, o resumo do radar do server desejado!",
+        Home_BotCall: "Direto e reto, mandou, chegou!",
+        Home_BotRotes: "Radar e Rotas diretamente no seu WhatsApp;",
+        Home_BotCalcs: "Sua calculadora em suas mãos;",
+        Home_BotEnd: "E muito mais!",
+        Home_BotButton: "Conheça o SimaBot",
         Home_LibraryDefine: "Dados, dados e mais dados..",
         Home_LibraryObjetive:
             "Fácil para alguns, complexo para outros.. Pensando nisso, centralizamos as informações em um só campo, trazendo todas as nossas conclusões e informações em um ambiente de forma única e diretamente.",
@@ -94,7 +113,7 @@ export const LangStrings = {
         Modal_SelectServerPlaceholder: "Selecione o Servidor Desejado",
         Modal_SelectServerGo: "Ir!",
         Modal_SelectBoss: "Selecionar Boss",
-        Modal_SelectBossPlaceholder: "Selecione o Boss desejado" ,
+        Modal_SelectBossPlaceholder: "Selecione o Boss desejado",
         Modal_SelectBossGo: "Ir!",
     },
 };

@@ -31,6 +31,7 @@ const ConteinerBosses: React.FC<{ bosses: BossesDetailsProps[] }> = ({ bosses })
                         align={"center"}
                         cursor={"pointer"}
                         onClick={() => openModal(boss)}
+                        key={boss.boss}
                     >
                         <BossStatus
                             width="5rem"
@@ -69,7 +70,7 @@ const ConteinerBosses: React.FC<{ bosses: BossesDetailsProps[] }> = ({ bosses })
                             <Flex></Flex>
                             <Flex justify={"s"} width={"100%"}>
                                 {boss?.resp.map((resp) => (
-                                    <Stat>
+                                    <Stat key={resp.colour_frame}>
                                         <StatLabel fontSize={"80%"}>
                                             Resp:
                                         </StatLabel>
