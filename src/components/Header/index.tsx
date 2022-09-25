@@ -281,30 +281,30 @@ export const Header = ({ page }:any) => {
                 <Flex
                     w="100vw"
                     display={display}
-                    bgColor="gray.50"
+                    bgColor="#121214"
                     zIndex={20}
                     h="100vh"
                     pos="fixed"
                     top="0"
                     left="0"
-                    bg={"black"}
+
                     overflowY="auto"
                     flexDir="column"
                 >
-                    <Flex justify="flex-end">
+                    <Flex justify="flex-end" bg={"#121214"}>
                         <IconButton
                             mt={2}
                             mr={2}
                             aria-label="Open Menu"
                             size="lg"
-                            bg={"black"}
+                            bg={"#121214"}
                             color={"#fff"}
                             icon={<CloseIcon />}
                             onClick={() => setChangeDisplay("none")}
                         />
                     </Flex>
 
-                    <Flex flexDir="column" align="center" bg={"black"}>
+                    <Flex flexDir="column" align="center" bg={"#121214"}>
                         {links.map((link, key) => {
                             return (
                                 <NextLink href={link.referencia}>

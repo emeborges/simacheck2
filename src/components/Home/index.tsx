@@ -295,12 +295,14 @@ export function Home() {
             </Box>
 
             <Flex
-                maxW={"1300px"}
+                maxW={"1000px"}
                 margin={"0 auto"}
                 justifyContent={"space-between"}
                 alignContent={"center"}
                 p={"1rem 0rem"}
                 flexWrap={"wrap"}
+                w={'100%'}
+
             >
                 <Flex
                     textAlign={"center"}
