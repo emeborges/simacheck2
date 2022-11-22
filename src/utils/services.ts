@@ -47,7 +47,7 @@ api.interceptors.response.use(
                     })
                         .then((response) => {
                             const { AccessToken, IdToken } = response.data;
-
+                            console.log("refresh deu certo");
                             setCookie(undefined, "simacheck.idToken", IdToken, {
                                 maxAge: 60 * 60 * 24 * 30, // 30days
                                 path: "/",
@@ -81,6 +81,7 @@ api.interceptors.response.use(
 
                             if (process.browser) {
                                 signOut();
+                                console.log('refresh deu errado')
                             }
                         })
                         .finally(() => {

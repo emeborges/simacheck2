@@ -34,8 +34,8 @@ export const Header = ({ page }:any) => {
     const router = useRouter()
 
     useEffect(() => {
-        setAutent(isAthenticated)
-    }, [])
+        setAutent(isAthenticated);
+    }, [isAthenticated]);
 
 
     const links = [

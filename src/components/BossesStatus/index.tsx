@@ -10,7 +10,7 @@ const BossStatus: React.FC<{
     status?: any;
     width: string;
     height: string;
-    scaleGray: number | null | undefined;
+    scaleGray?: number | null | undefined;
     display?: string;
 }> = ({ image, status, width, height, scaleGray, display }) => {
     return (

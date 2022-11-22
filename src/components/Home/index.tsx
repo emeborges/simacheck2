@@ -42,18 +42,18 @@ export function Home() {
                 p={{ base: "3rem 0.5rem", lg: "7rem 0rem 4rem" }}
                 justify={"center"}
                 align={"center"}
+
             >
                 <Box maxW={"1300px"} margin={"0 auto"}>
                     <Box textAlign={"center"} margin={"0 auto"}>
                         <Heading as="h1">{t("Home_MainCall")}</Heading>
                         <Text>{t("Home_SecoundCall")}</Text>
-                        <Text>{t("Home_Call")}</Text>
 
                         <Flex
                             pt={"1rem"}
                             justify={{
                                 base: "space-evenly",
-                                md: "space-between",
+                                md: "space-evenly",
                             }}
                             flexWrap={"wrap"}
                         >
@@ -74,24 +74,6 @@ export function Home() {
                                     style={{ height: "2rem", width: "2rem" }}
                                 />
                                 SimaBosses
-                            </Button>
-
-                            <Button
-                                mt={"0.5rem"}
-                                bg={"#e1e1e6"}
-                                w={{ base: "8rem", md: "10rem" }}
-                                h={"5rem"}
-                                p={"0.5rem"}
-                                display={"flex"}
-                                flexDir={"column"}
-                                justifyContent={"space-around"}
-                                transition={"all 0.4s"}
-                                _hover={{ bg: "#737380", color: "#fff" }}
-                            >
-                                <FaWhatsappSquare
-                                    style={{ height: "2rem", width: "2rem" }}
-                                />
-                                SimaBot
                             </Button>
 
                             <Button
@@ -131,7 +113,23 @@ export function Home() {
                             </Button>
                         </Flex>
 
-                        <Flex justify={"center"} pt={"3rem"}>
+                        <Flex justify={"space-evenly"} pt={"3rem"}>
+                            <LinkChakra
+                                href={"#HomeTolls"}
+                                bg={"transparent"}
+                                p={"0.5rem 2rem"}
+                                borderRadius={"5px"}
+                                color={"#121214"}
+                                fontSize={"1.3rem"}
+                                transition={"all 0.2s"}
+                                border={"1px solid #121214"}
+                                textDecor={"none"}
+                                maxW={"20rem"}
+                                w={"100%"}
+                            >
+                                {t("Home_Call")}
+                            </LinkChakra>
+
                             <LinkChakra
                                 href={"/"}
                                 bg={"#121214"}
@@ -141,6 +139,8 @@ export function Home() {
                                 fontSize={"1.5rem"}
                                 transition={"all 0.2s"}
                                 textDecor={"none"}
+                                maxW={"20rem"}
+                                w={"100%"}
                             >
                                 {t("Home_CallRegister")}!
                             </LinkChakra>
@@ -174,12 +174,12 @@ export function Home() {
                         minW={"300px"}
                         m={"0 auto"}
                         textAlign={"center"}
+                        id={"HomeTolls"}
                     >
                         <Heading as="h1" color={"#FEFEFE"} fontWeight={"900"}>
                             {t("Home_Tolls")}
                         </Heading>
-                        <Text p={"0.5rem"}>{t("Home_TollsDescription")}</Text>
-                        <Text>{t("Home_Call")}</Text>
+                        <Text p={"0.5rem"}>{t("Home_TollsDescription")}:</Text>
                     </Box>
                     <Flex
                         direction={"column"}
@@ -301,8 +301,7 @@ export function Home() {
                 alignContent={"center"}
                 p={"1rem 0rem"}
                 flexWrap={"wrap"}
-                w={'100%'}
-
+                w={"100%"}
             >
                 <Flex
                     textAlign={"center"}

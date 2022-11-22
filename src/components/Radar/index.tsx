@@ -186,16 +186,8 @@ const Radar = () => {
                                             height="4rem"
                                             key={boss.boss}
                                             display={boss?.display_name}
-                                            image={
-                                                boss?.oa_current_prob! > 0
-                                                    ? boss.gif_url
-                                                    : boss.dead_url
-                                            }
-                                            scaleGray={
-                                                boss?.oa_current_prob! > 0
-                                                    ? 0
-                                                    : 1
-                                            }
+                                            image={boss.dead_url}
+                                            scaleGray={1}
                                         />
                                     ))}
                                 </Flex>

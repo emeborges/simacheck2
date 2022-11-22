@@ -36,13 +36,8 @@ const ConteinerBosses: React.FC<{ bosses: BossesDetailsProps[] }> = ({ bosses })
                         <BossStatus
                             width="5rem"
                             height="5rem"
-                            image={
-                                boss?.oa_current_prob! > 0
-                                    ? boss.gif_url
-                                    : boss.dead_url
-                            }
+                            image={boss.gif_url}
                             status={boss?.oa_colour_frame}
-                            scaleGray={boss?.oa_current_prob! > 0 ? 0 : 1}
                         />
                         <Flex minW={"70%"} maxW={"70%"} direction={"column"}>
                             <Flex direction={"column"}>

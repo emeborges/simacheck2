@@ -8,6 +8,7 @@ import {
     VStack,
     ListItem,
     ListIcon,
+    Link as LinkChakra,
     Button,
 } from "@chakra-ui/react";
 import Head from "next/head";
@@ -122,9 +123,20 @@ const Index = () => {
                                 </ListItem>
                             </List>
                             <Box w="80%" pt={7}>
-                                <Button w="full" colorScheme="red">
+                                <LinkChakra
+                                    href={"/signup"}
+                                    bg={"#121214"}
+                                    p={"0.5rem 2rem"}
+                                    borderRadius={"5px"}
+                                    color={"#fff"}
+                                    fontSize={"1rem"}
+                                    textDecor={"none"}
+                                    maxW={"320px"}
+                                    w={"100%"}
+                                    textAlign={"center"}
+                                >
                                     Cadastre-se já!
-                                </Button>
+                                </LinkChakra>
                             </Box>
                         </VStack>
                     </Box>
