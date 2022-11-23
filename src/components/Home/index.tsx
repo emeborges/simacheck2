@@ -4,7 +4,6 @@ import { useState } from 'react';
 
 import { GiRadarSweep, GiCalculator } from 'react-icons/gi'
 import { IoLibraryOutline } from 'react-icons/io5'
-import { FaWhatsappSquare } from "react-icons/fa";
 
 import HomeSimaBossesText from 'components/HomeSimaBossesText/SimaBosses';
 import HomeSimaCalcText from 'components/HomeSimaBossesText/SimaCalc';
