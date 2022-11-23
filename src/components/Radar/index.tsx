@@ -6,6 +6,7 @@ import {
     Tooltip,
     UnorderedList,
     useDisclosure,
+    Image
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
@@ -17,11 +18,11 @@ import Filters from "../../components/Filters";
 import ConteinerBosses from "components/ConteinerBosses";
 import { FaExchangeAlt } from "react-icons/fa";
 import ModalSelectServer from "components/ModalServerSelect";
-import BossStatus from "components/BossesStatus";
 import { useRadarBosses } from "hooks/useRadarBosses";
 import ConteinerLores from "components/ConteinerLores";
 import ConteinerCitys from "components/ConteinerCitys";
 import { useCan } from "hooks/useCan";
+
 
 const Radar = () => {
     const [view, setView] = useState("status");
@@ -32,9 +33,6 @@ const Radar = () => {
     >([]);
     const { bosses, pid, bossesLastView, load } = useRadarBosses();
     const userCanSeeComponent = useCan({permissions: new Date(), roles: "premium"});
-
-    console.log(userCanSeeComponent);
-
 
     useEffect(() => {
         if (bosses) {
@@ -88,6 +86,7 @@ const Radar = () => {
                                 borderRadius={"5px"}
                                 boxShadow={"0px 0px 5px #323238"}
                                 p={"0.5rem"}
+                                h={'6rem'}
                                 w={{ base: "99%", md: "30%" }}
                                 align={"center"}
                                 justify={"space-around"}
@@ -146,8 +145,8 @@ const Radar = () => {
                                 m={{ base: "0.25rem 0rem", md: "none" }}
                                 borderRadius={"5px"}
                                 boxShadow={"0px 0px 5px #323238"}
-                                h={"5rem"}
-                                minH={"5rem"}
+                                h={"6rem"}
+                                minH={"6rem"}
                                 w={{ base: "99%", md: "39%" }}
                                 align={"center"}
                                 justify={"space-around"}
@@ -170,25 +169,26 @@ const Radar = () => {
                                         },
                                         "&::-webkit-scrollbar-thumb": {
                                             background: "#323238",
-                                            borderRadius: "10px",
                                             border: "3px solid #ffffff",
                                         },
                                     }}
-                                    overflow={
-                                        bossesLastView.length > 7
-                                            ? "hidden"
-                                            : "auto"
-                                    }
+                                    overflowY={"auto"}
+                                    overflowX={"hidden"}
                                 >
                                     {bossesLastView.map((boss) => (
-                                        <BossStatus
-                                            width="4rem"
-                                            height="4rem"
-                                            key={boss.boss}
-                                            display={boss?.display_name}
-                                            image={boss.dead_url}
-                                            scaleGray={1}
-                                        />
+                                        <Box m={"0.125rem"}>
+                                            <Text
+                                                fontSize={"0.6rem"}
+                                                isTruncated
+                                                maxW={"4rem"}
+                                            >
+                                                {boss.display_name}
+                                            </Text>
+                                            <Image
+                                                src={boss?.gif_url}
+                                                maxH={"3rem"}
+                                            />
+                                        </Box>
                                     ))}
                                 </Flex>
                             </Flex>

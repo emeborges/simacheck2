@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-export function color(dados:number) {
+export function color(dados:number, porcentagemColor?: number) {
 
     var percentColors = [{
         pct: 0.0,
@@ -47,7 +47,15 @@ export function color(dados:number) {
             g: Math.floor(lower.color.g * pctLower + upper.color.g * pctUpper),
             b: Math.floor(lower.color.b * pctLower + upper.color.b * pctUpper)
         };
-        const result = 'rgb(' + [color.r, color.g, color.b].join(',') + ')'
+        const valor = porcentagemColor;
+        const result =
+            porcentagemColor === undefined
+                ? "rgb(" + [color.r, color.g, color.b].join(",") + ")"
+                : "rgba(" +
+                  [color.r, color.g, color.b].join(",") +
+                  "," +
+                  valor +
+                  ")";
 
         return result
 
@@ -56,7 +64,6 @@ export function color(dados:number) {
     const gerando = getColorForPercentage(taxaCor)
 
     return gerando
-
 }
 
 
