@@ -52,7 +52,6 @@ const ConteinerBosses: React.FC<{ bosses: BossesDetailsProps[] }> = ({ bosses })
                                 fontSize="lg"
                                 minW={"100%"}
                                 as={"span"}
-                                isTruncated
                                 position={"relative"}
                                 p={"0.5rem 0.5rem 0rem"}
                                 _after={{
