@@ -179,7 +179,6 @@ const Radar = () => {
                                         <Box m={"0.125rem"}>
                                             <Text
                                                 fontSize={"0.6rem"}
-                                                isTruncated
                                                 maxW={"4rem"}
                                             >
                                                 {boss.display_name}

@@ -87,7 +87,6 @@ const ModalDetailsBoss: React.FC<{
                             fontSize="lg"
                             minW={"100%"}
                             as={"span"}
-                            isTruncated
                             position={"relative"}
                             _after={{
                                 content: "''",
