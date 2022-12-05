@@ -229,7 +229,7 @@ const Radar = () => {
                                     <Text>Tipo de visualização:</Text>
                                     <UnorderedList
                                         listStyleType={"none"}
-                                        d={"flex"}
+                                        display={"flex"}
                                     >
                                         <ListItem
                                             cursor={"pointer"}
