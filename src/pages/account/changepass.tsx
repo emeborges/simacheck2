@@ -198,6 +198,7 @@ const Account = () => {
                         </Flex>
                     </Flex>
                 </Flex>
+
             </Flex>
             <Footer />
         </>

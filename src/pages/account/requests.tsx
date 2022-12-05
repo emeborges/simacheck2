@@ -77,11 +77,15 @@ const Requests = () => {
                         >
                             <Text pb={"0.5rem"}>
                                 Olá,
-                                <Text fontWeight={"600"}>{user?.email}</Text>
+                                <span style={{ fontWeight: "600" }}>
+                                    {user?.email}
+                                </span>
                             </Text>
                             <Text>
                                 Sua premium time expira em:
-                                <Text fontWeight={"600"}>24 anos.</Text>
+                                <span style={{ fontWeight: "600" }}>
+                                    24 anos.
+                                </span>
                             </Text>
                         </Flex>
                         <Flex flexDirection={"column"} pt={"1rem"}>

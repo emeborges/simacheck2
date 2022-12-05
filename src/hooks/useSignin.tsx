@@ -18,6 +18,7 @@ interface credentialProps {
 interface userProps {
     email: string;
     premium_until?: string;
+    phone_number?: string | null;
 }
 
 interface contextProps {
@@ -75,9 +76,9 @@ export function SigninProvider({ children }: providerProps) {
         const { 'simacheck.accessToken': token } = parseCookies();
         if(token != undefined){
             api.get("/users/me").then( resp => {
-                console.log(resp.data)
-                const { email, premium_until } = resp.data;
-                setUser({ email, premium_until });
+
+                const { email, premium_until, phone_number } = resp.data;
+                setUser({ email, premium_until, phone_number });
 
             }).catch(() => {
                 signOut();
@@ -96,7 +97,6 @@ export function SigninProvider({ children }: providerProps) {
             })
             .then((resp) => {
                 const { AccessToken, IdToken, RefreshToken } = resp.data;
-                console.log('alo',resp.data)
                 setCookie(undefined, "simacheck.idToken", IdToken, {
                     maxAge: 60*60*24 *30, // 30days
                     path: '/'

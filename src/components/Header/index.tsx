@@ -78,7 +78,7 @@ export const Header = ({ page }:any) => {
                         <Image src={"/img/logo.svg"} w={"30%"} />
                         {links.map((link, key) => {
                             return (
-                                <NextLink href={link.referencia}>
+                                <NextLink href={link.referencia} style={{display: 'flex', alignItems: 'center'}}>
                                     <Flex
                                         key={key}
                                         align={"center"}
