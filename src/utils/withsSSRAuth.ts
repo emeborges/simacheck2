@@ -1,7 +1,7 @@
 import { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { parseCookies } from "nookies";
 
-export function withsSSRAuth<P>(fn: GetServerSideProps<P>) {
+export function withsSSRAuth<P extends { [key: string]: any; }>(fn: GetServerSideProps<P>) {
     return async (
         ctx: GetServerSidePropsContext
     ): Promise<GetServerSidePropsResult<P>> => {
