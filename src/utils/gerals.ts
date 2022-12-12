@@ -91,3 +91,92 @@ export function goBack() {
 
     return router.back()
 }
+
+export const UFS = [
+    {
+        uf: "br",
+        namePT: "Brasil",
+        nameEG: "Brazil",
+        language: "pt",
+        codeTel: "+55",
+        maskTel: "+55 ** *****-****",
+    },
+    {
+        uf: "eua",
+        namePT: "Estados Unidos",
+        nameEG: "United States of América",
+        language: "en",
+        codeTel: "+1",
+        maskTel: "+1 *** *** ***",
+    },
+    {
+        uf: "pl",
+        namePT: "Polônia",
+        nameEG: "Poland",
+        language: "en",
+        codeTel: "+48",
+        maskTel: "+48 ** *** ** **",
+    },
+    {
+        uf: "en",
+        namePT: "Inglaterra",
+        nameEG: "United Kingdom",
+        language: "en",
+        codeTel: "+44",
+        maskTel: "+48 *** **** ****",
+    },
+    {
+        uf: "arg",
+        namePT: "Boludo",
+        nameEG: "Argentina",
+        language: "pt",
+        codeTel: "+54",
+        maskTel: "+48 *** ****-****",
+    },
+    {
+        uf: "pt",
+        namePT: "Portugal",
+        nameEG: "Portugal",
+        language: "pt",
+        codeTel: "+351",
+        maskTel: "+351 *** ****-****",
+    },
+    {
+        uf: "de",
+        namePT: "Alemanha",
+        nameEG: "Germany",
+        language: "en",
+        codeTel: "+49",
+        maskTel: "+49 *** *******",
+    },
+    {
+        uf: "mx",
+        namePT: "Mexico",
+        nameEG: "Mexico",
+        language: "en",
+        codeTel: "+52",
+        maskTel: "+52 ** ** **** ****",
+    },
+    {
+        uf: "se",
+        namePT: "Suecia",
+        nameEG: "Sweden",
+        language: "en",
+        codeTel: "+46",
+        maskTel: "+46 ** *** *** **",
+    },
+];
+
+
+export const languages = [
+    {
+        namePT: "Portugues",
+        nameEG: "Portuguese",
+        code: "pt",
+    },
+    {
+        namePT: "Inglês",
+        nameEG: "English",
+        code: "en",
+    },
+];

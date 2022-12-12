@@ -76,7 +76,7 @@ export function SigninProvider({ children }: providerProps) {
         const { 'simacheck.accessToken': token } = parseCookies();
         if(token != undefined){
             api.get("/users/me").then( resp => {
-
+                console.log(resp.data)
                 const { email, premium_until, phone_number } = resp.data;
                 setUser({ email, premium_until, phone_number });
 

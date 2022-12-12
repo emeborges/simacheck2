@@ -253,7 +253,7 @@ const Account = () => {
                                         bg: "#4E4E52",
                                         fontWeight: "400",
                                     }}
-                                    href={"/account/changepass"}
+                                    href={"/account/changeprofile"}
                                 >
                                     Atualizar Perfil
                                 </Link>
