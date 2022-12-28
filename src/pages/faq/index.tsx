@@ -25,17 +25,26 @@ const Index = () => {
 
 
     return (
-        <Box maxW={"100vw"} h={"100vh"}>
+        <Flex
+            minH={"100vh"}
+            align={"space-between"}
+            flexDir={"column"}
+            justify={"space-between"}
+        >
             <Head>
+                <title>Dúvidas - SimaCheck</title>
                 <meta name="description" content="" />
             </Head>
-            <Header page={"faq"} />
-            <Box w={"100%"} maxW={"1300px"} minH={'81.5vh'} margin={"0 auto"}>
+            <Box>
+                <Header page={"faq"} />
+            </Box>
+
+            <Box w={"100%"} maxW={"1300px"} margin={"0 auto"}>
                 <Flex
                     align={"center"}
                     direction={"column"}
                     textAlign={"center"}
-                    p={"5rem 0 4rem 0"}
+                    p={{ base: "2rem 0 4rem 0", md: "0rem 0 4rem 0" }}
                 >
                     <Heading
                         as={"h1"}
@@ -276,7 +285,7 @@ const Index = () => {
             </Box>
 
             <Footer />
-        </Box>
+        </Flex>
     );
 };
 

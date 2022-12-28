@@ -10,6 +10,7 @@ import {
     ListIcon,
     Link as LinkChakra,
     Button,
+    useDisclosure,
 } from "@chakra-ui/react";
 import Head from "next/head";
 
@@ -20,23 +21,43 @@ import { Footer } from "components/Footer";
 
 import { FaCheckCircle } from "react-icons/fa";
 import { FiXCircle } from "react-icons/fi";
+import { useSignin, userProps } from "hooks/useSignin";
+import ModalPremiumConfirm from "components/ModalPremiumConfirm";
+import { useState } from "react";
 /* import { useTranslation } from "hooks/useTranslation"; */
+
+export interface PlanProps {
+    user: userProps;
+    plan: string;
+    value: string;
+}
 
 const Index = () => {
     /*const { t } = useTranslation();*/
+    const { user } = useSignin()
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [plan, setPlan] = useState<PlanProps>()
 
     return (
-        <Box maxW={"100vw"} h={"100vh"}>
+        <Flex
+            minH={"100vh"}
+            align={"space-between"}
+            flexDir={"column"}
+            justify={"space-between"}
+        >
             <Head>
+                <title> Seja Premium - Simacheck</title>
                 <meta name="description" content="" />
             </Head>
-            <Header page={"faq"} />
+            <Box>
+                <Header page={"faq"} />
+            </Box>
             <Box w={"100%"} maxW={"1300px"} margin={"0 auto"}>
                 <Flex
                     align={"center"}
                     direction={"column"}
                     textAlign={"center"}
-                    p={"3rem 0 3rem 0"}
+                    p={"1rem 0 2rem 0"}
                 >
                     <Heading
                         as={"h1"}
@@ -81,7 +102,7 @@ const Index = () => {
                         maxW={"300px"}
                     >
                         <Box py={4} px={12}>
-                            <Text fontWeight="500" fontSize="2xl">
+                            <Text fontWeight="500" fontSize="1.25rem">
                                 Free
                             </Text>
                             <HStack justifyContent="center">
@@ -122,7 +143,7 @@ const Index = () => {
                                     Boletim diário personalizado
                                 </ListItem>
                             </List>
-                            <Box w="80%" pt={7}>
+                            {user ? null : (
                                 <LinkChakra
                                     href={"/signup"}
                                     bg={"#121214"}
@@ -132,12 +153,12 @@ const Index = () => {
                                     fontSize={"1rem"}
                                     textDecor={"none"}
                                     maxW={"320px"}
-                                    w={"100%"}
+                                    w={"80%"}
                                     textAlign={"center"}
                                 >
                                     Cadastre-se já!
                                 </LinkChakra>
-                            </Box>
+                            )}
                         </VStack>
                     </Box>
                     <Box
@@ -235,11 +256,40 @@ const Index = () => {
                                         Boletim diário personalizado
                                     </ListItem>
                                 </List>
-                                <Box w="80%" pt={7}>
-                                    <Button w="full" colorScheme="red">
-                                        Assinar Já!
-                                    </Button>
-                                </Box>
+                                {user ? (
+                                    <Box w="80%" pt={7}>
+                                        <Button
+                                            w="full"
+                                            colorScheme="red"
+                                            onClick={() => {
+                                                setPlan({
+                                                    user: user,
+                                                    plan: "Mensal",
+                                                    value: "R$ 12,99",
+                                                });
+
+                                                return onOpen();
+                                            }}
+                                        >
+                                            Assinar Já!
+                                        </Button>
+                                    </Box>
+                                ) : (
+                                    <LinkChakra
+                                        href={"/signup"}
+                                        bg={"#121214"}
+                                        p={"0.5rem 2rem"}
+                                        borderRadius={"5px"}
+                                        color={"#fff"}
+                                        fontSize={"1rem"}
+                                        textDecor={"none"}
+                                        maxW={"320px"}
+                                        w={"80%"}
+                                        textAlign={"center"}
+                                    >
+                                        Cadastre-se já!
+                                    </LinkChakra>
+                                )}
                             </VStack>
                         </Box>
                     </Box>
@@ -339,18 +389,52 @@ const Index = () => {
                                         Boletim diário personalizado
                                     </ListItem>
                                 </List>
-                                <Box w="80%" pt={7}>
-                                    <Button w="full" colorScheme="red">
-                                        Assinar Já!
-                                    </Button>
-                                </Box>
+                                {user ? (
+                                    <Box w="80%" pt={7}>
+                                        <Button
+                                            w="full"
+                                            colorScheme="red"
+                                            onClick={() => {
+                                                setPlan({
+                                                    user: user,
+                                                    plan: "Trimestral",
+                                                    value: "R$ 49,99",
+                                                });
+
+                                                return onOpen();
+                                            }}
+                                        >
+                                            Assinar Já!
+                                        </Button>
+                                    </Box>
+                                ) : (
+                                    <LinkChakra
+                                        href={"/signup"}
+                                        bg={"#121214"}
+                                        p={"0.5rem 2rem"}
+                                        borderRadius={"5px"}
+                                        color={"#fff"}
+                                        fontSize={"1rem"}
+                                        textDecor={"none"}
+                                        maxW={"320px"}
+                                        w={"80%"}
+                                        textAlign={"center"}
+                                    >
+                                        Cadastre-se já!
+                                    </LinkChakra>
+                                )}
                             </VStack>
                         </Box>
                     </Box>
                 </Flex>
             </Box>
             <Footer />
-        </Box>
+            <ModalPremiumConfirm
+                plan={plan}
+                isOpen={isOpen}
+                onClose={onClose}
+            />
+        </Flex>
     );
 };
 

@@ -99,7 +99,7 @@ export const UFS = [
         nameEG: "Brazil",
         language: "pt",
         codeTel: "+55",
-        maskTel: "+55 ** *****-****",
+        maskTel: "+55 ** ***** ****",
     },
     {
         uf: "eua",
@@ -127,11 +127,11 @@ export const UFS = [
     },
     {
         uf: "arg",
-        namePT: "Boludo",
+        namePT: "Argentina",
         nameEG: "Argentina",
         language: "pt",
         codeTel: "+54",
-        maskTel: "+48 *** ****-****",
+        maskTel: "+48 *** **** ****",
     },
     {
         uf: "pt",
@@ -139,7 +139,7 @@ export const UFS = [
         nameEG: "Portugal",
         language: "pt",
         codeTel: "+351",
-        maskTel: "+351 *** ****-****",
+        maskTel: "+351 *** **** ****",
     },
     {
         uf: "de",

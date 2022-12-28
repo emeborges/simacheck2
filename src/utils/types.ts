@@ -36,4 +36,34 @@ export interface Previews {
     colour_frame: number;
 }
 
-
+export interface BossDetailsProps {
+    created_at: Date;
+    updated_at: Date;
+    boss: string;
+    display_name: string;
+    lore: string;
+    city: string;
+    wiki_url: string;
+    gif_url: string;
+    dead_url: string;
+    is_bosstiary: boolean;
+    is_bestiary: boolean;
+    positions: any[];
+    considered_regions: any[];
+    predictions: Prediction[];
+}
+export interface Prediction {
+    created_at: Date;
+    updated_at: Date;
+    boss: string;
+    server: string;
+    valid_from: Date;
+    valid_to: Date;
+    overall_drop: number;
+    world_drop: number;
+    oa_days_since_last_view: number;
+    oa_current_prob: number;
+    oa_colour_frame: number;
+    oa_expect_in: number;
+    resp: Resps[];
+}

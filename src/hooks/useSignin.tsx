@@ -1,5 +1,5 @@
 import { useToast } from "@chakra-ui/react";
-import Router, { NextRouter } from "next/router";
+import Router, { NextRouter, useRouter } from "next/router";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { api } from "utils/services";
 import { setCookie, parseCookies, destroyCookie } from 'nookies'
@@ -15,10 +15,13 @@ interface credentialProps {
     type?: string
 }
 
-interface userProps {
+export interface userProps {
     email: string;
     premium_until?: string;
     phone_number?: string | null;
+    name?: string;
+    is_verified?: boolean;
+    premium?: boolean;
 }
 
 interface contextProps {
@@ -44,6 +47,8 @@ export async function signOut() {
         destroyCookie(undefined, "simacheck.idToken");
         destroyCookie(undefined, "simacheck.accessToken");
         destroyCookie(undefined, "simacheck.refreshToken");
+
+        Router.reload;
     }
 
     Router.push("/");
@@ -71,20 +76,38 @@ export function SigninProvider({ children }: providerProps) {
     const [user, setUser] = useState<userProps>();
     const isAthenticated = !!user;
     const toast = useToast();
+    const route = useRouter()
 
-    useEffect(()=> {
-        const { 'simacheck.accessToken': token } = parseCookies();
-        if(token != undefined){
-            api.get("/users/me").then( resp => {
-                console.log(resp.data)
-                const { email, premium_until, phone_number } = resp.data;
-                setUser({ email, premium_until, phone_number });
+    useEffect(() => {
+        const { "simacheck.accessToken": token } = parseCookies();
+        if (token != undefined) {
+            api.get("/users/me")
+                .then((resp) => {
+                    console.log(resp.data);
+                    const {
+                        email,
+                        premium_until,
+                        phone_number,
+                        name,
+                        is_verified,
+                    } = resp.data;
 
-            }).catch(() => {
-                signOut();
-            });
+                    const premium = new Date(user?.premium_until!) > new Date();
+
+                    setUser({
+                        email,
+                        premium_until,
+                        phone_number,
+                        name,
+                        is_verified,
+                        premium,
+                    });
+                })
+                .catch(() => {
+                    signOut();
+                });
         }
-    },[])
+    }, [route.pathname]);
 
     async function signIn({ email, password, type }: credentialProps) {
         setLoading(true);

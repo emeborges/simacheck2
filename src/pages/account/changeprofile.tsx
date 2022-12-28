@@ -1,16 +1,13 @@
 import {
     Flex,
-
     Heading,
-    Link,
-
+    Text,
     Button,
-    //useToast,
+    useToast,
     Select,
     FormControl,
     FormLabel,
-
-
+    Checkbox,
 } from "@chakra-ui/react";
 import { Footer } from "components/Footer";
 import { Header } from "components/Header";
@@ -26,82 +23,78 @@ import Router from "next/router";
 import { useState } from "react";
 import { languages, UFS } from "utils/gerals";
 import { useTranslation } from "hooks/useTranslation";
+import { api } from "utils/services";
 
 type changePassProps = {
     name: string;
     phone_number: string;
-    phone_numberConfirmation: string;
+    phone_country: string
     locale: string;
+    is_optin: boolean;
 };
 
 const signUpFormSchema = yup.object().shape({
-    name: yup.string(),
+    name: yup.string().required("É necessário preencher um nome"),
     phone_number: yup.string(),
-    phone_numberConfirmation: yup
-        .string()
-        .oneOf([yup.ref("phone_number"), null], "Os telefones devem ser iguais"),
-    locale: yup.string()
+    locale: yup.string().required().required("É necessário preencher um idioma."),
+    is_optin: yup.boolean().required(),
 });
 
 
 
 const ChangeProfile = () => {
+    const [load, setLoad] = useState<boolean>(false)
     const { register, handleSubmit, formState } = useForm<changePassProps>({
         resolver: yupResolver(signUpFormSchema),
     });
     const { errors } = formState;
-    //const toast = useToast();
+    const toast = useToast();
     const { locale } = useTranslation();
     const [uf, setUf] = useState(locale === "pt" ? "br" : "eua");
 
     const onSubmit: SubmitHandler<changePassProps> = async ({
         name,
         phone_number,
-        locale
+        locale,
+        //is_optin,
     }) => {
-        console.log(name, phone_number, locale)
-        {/*await api
-            .post("/auth/password/change", {
-                password: password,
-                new_password: new_password,
-            })
-            .then((resp) => {
-                console.log(resp);
+        setLoad(true)
+
+        const data = {
+            name,
+            phone_number,
+            locale,
+        };
+
+        await api
+            .put("users/me", data)
+            .then(() => {
 
                 toast({
-                    title: "Senha trocada com sucesso.",
+                    title: "Dados atualizado!.",
                     description:
-                        "Senha alterado com sucesso, você será redirecionado",
+                        "Dados atualizados com sucesso, você será redirecionado",
                     status: "success",
                     duration: 9000,
                     isClosable: true,
                     position: "top",
                 });
-                setTimeout(() => Router.push("/account"), 9000);
+                setTimeout(() => Router.push("/account"), 5000);
+                setTimeout(() => Router.reload, 4000)
             })
-            .catch((error) => {
-                if (error.response.status == 401) {
-                    toast({
-                        title: "Senha incorreta",
-                        description:
-                            "Senha anterior ou a nova senha está incorreta, por favor, tente novamente.",
-                        status: "error",
-                        duration: 9000,
-                        isClosable: true,
-                        position: "top",
-                    });
-                } else {
-                    toast({
-                        title: "Hmm! Algo deu errado.",
-                        description:
-                            "Por favor, tente novamente mais tarde, ou entre em contato com o suporte.",
-                        status: "error",
-                        duration: 9000,
-                        isClosable: true,
-                        position: "top",
-                    });
-                }
-            });*/}
+            .catch(() => {
+                toast({
+                    title: "Hmm! Algo deu errado.",
+                    description:
+                        "Por favor, tente novamente mais tarde, ou entre em contato com o suporte.",
+                    status: "error",
+                    duration: 9000,
+                    isClosable: true,
+                    position: "top",
+                });
+                setLoad(false)
+            });
+
     };
 
     return (
@@ -116,7 +109,7 @@ const ChangeProfile = () => {
                     justifyContent={"center"}
                     align={"center"}
                     flexDir={{ base: "column", md: "row" }}
-                    p={"5rem 0rem 1rem"}
+                    p={"3rem 0rem 1rem"}
                 >
                     <Flex
                         w={"100%"}
@@ -156,9 +149,10 @@ const ChangeProfile = () => {
                                 Alterar Perfil
                             </Heading>
                             <Input
-                                label={"Nome"}
-                                placeholder={"Nome"}
+                                label={"Nome*"}
+                                placeholder={"Nome*"}
                                 autoComplete={"on"}
+                                isRequired
                                 size={"sm"}
                                 error={errors.name}
                                 {...register("name")}
@@ -183,34 +177,30 @@ const ChangeProfile = () => {
                                 </Select>
                             </FormControl>
                             <InputTel
-                                label={"Telefone"}
-                                placeholder={"Telefone"}
+                                label={"WhatsApp"}
+                                placeholder={"WhatsApp"}
                                 size={"sm"}
                                 masktUF={uf}
                                 error={errors.phone_number}
                                 {...register("phone_number")}
                             />
-                            <InputTel
-                                label={"Repitir Telefone"}
-                                placeholder={"Telefone"}
-                                size={"sm"}
-                                masktUF={uf}
-                                error={errors.phone_numberConfirmation}
-                                {...register("phone_numberConfirmation")}
-                            />
+
                             <FormControl mb={2}>
                                 <FormLabel mb={"0"} fontSize={"0.8rem"}>
-                                    Idioma
+                                    Idioma*
                                 </FormLabel>
                                 <Select
                                     placeholder="Selecione um idioma"
                                     size="sm"
                                     focusBorderColor={"black"}
-                                    defaultValue={locale}
+                                    required
                                     {...register("locale")}
                                 >
                                     {languages.map((lang) => (
-                                        <option key={lang.code} value={lang.code}>
+                                        <option
+                                            key={lang.code}
+                                            value={lang.code}
+                                        >
                                             {locale === "pt"
                                                 ? lang.namePT
                                                 : lang.nameEG}
@@ -219,16 +209,36 @@ const ChangeProfile = () => {
                                 </Select>
                             </FormControl>
 
+                            <Checkbox
+                                {...register("is_optin")}
+                                maxW={"300px"}
+                                size={"sm"}
+                            >
+                                <Text fontSize={"0.75rem"}>
+                                    Concorda em receber os melhores conteúdos e
+                                    ofertas através deste número de WhatsApp?
+                                </Text>
+                            </Checkbox>
+
                             <Button
                                 mt={"1rem"}
                                 background={"#18181B"}
                                 color={"#FEFEFE"}
                                 _hover={{ bg: "#4E4E52" }}
                                 type={"submit"}
+                                isLoading={load}
                             >
                                 Salvar
                             </Button>
-                            <Link onClick={() => Router.back()}>Voltar</Link>
+                            <Button
+                                mt={"1rem"}
+                                background={"transparent"}
+                                color={"#18181B"}
+                                border={"1px solid #18181B"}
+                                onClick={() => Router.back()}
+                            >
+                                Voltar
+                            </Button>
                         </Flex>
                     </Flex>
                 </Flex>

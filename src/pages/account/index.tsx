@@ -9,14 +9,11 @@ import {
     MenuList,
     Button,
     MenuItem,
-    Alert,
-    AlertIcon,
-    AlertTitle,
-    AlertDescription,
     Menu,
 } from "@chakra-ui/react";
 import { Footer } from "components/Footer";
 import { Header } from "components/Header";
+import { IncompletRegistration, TelphoneNotCheck } from "components/PerfilFlags";
 
 import { useSignin } from "hooks/useSignin";
 import Head from "next/head";
@@ -27,7 +24,6 @@ const Account = () => {
     const { user, signOut, globalSignOut } = useSignin();
     const dataVenc = new Date(user?.premium_until!);
 
-    console.log(user);
     return (
         <>
             <Flex align={"center"} flexDir={"column"} h={"100vh"}>
@@ -43,28 +39,8 @@ const Account = () => {
                     maxW={"920px"}
                     h={"100%"}
                 >
-                    {!user?.phone_number && (
-                        <Alert
-                            status="warning"
-                            w={"100%"}
-                            borderRadius={"8px"}
-                            boxShadow={"0px 4px 10px rgba(0,0,0,0.2)"}
-                        >
-                            <Flex flexDir={"column"}>
-                                <Flex>
-                                    <AlertIcon />
-                                    <AlertTitle fontSize={"0.8rem"}>
-                                        Seu perfil não está cadastrado por
-                                        completo!!
-                                    </AlertTitle>
-                                </Flex>
-                                <AlertDescription fontSize={"0.8rem"}>
-                                    Atualize seu perfil para ter acesso a todos
-                                    os benefícios como premium.
-                                </AlertDescription>
-                            </Flex>
-                        </Alert>
-                    )}
+                    {user?.premium && !user?.phone_number === false ? !user?.is_verified && <TelphoneNotCheck />  : <IncompletRegistration />}
+
                     <Flex w={"100%"} justify={"space-between"}>
                         <Box
                             boxShadow={"0px 4px 10px rgba(0,0,0,0.2)"}
@@ -76,7 +52,6 @@ const Account = () => {
                                 boxShadow: "0px 4px 20px rgba(0,0,0,0.2)",
                             }}
                             minW={"300px"}
-
                         >
                             <Flex justify={"space-between"} align={"center"}>
                                 <Link
@@ -97,7 +72,7 @@ const Account = () => {
                                 >
                                     Perfil
                                 </Link>
-                                {dataVenc > new Date() ? (
+                                {user?.premium ? (
                                     <Badge colorScheme="green" maxH={"1rem"}>
                                         #PremiumChecker
                                     </Badge>
@@ -113,7 +88,7 @@ const Account = () => {
                                 <Text pb={"0.5rem"}>
                                     Olá,
                                     <span style={{ fontWeight: "600" }}>
-                                        {user?.email}
+                                        {user?.name ? user?.name : user?.email}
                                     </span>
                                 </Text>
                                 <Text pb={"0.5rem"}>

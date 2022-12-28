@@ -22,7 +22,7 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
     ref
 ) => {
     const mask = UFS.find((uf) => uf.uf === masktUF);
-    console.log(mask);
+
     return (
         <FormControl isInvalid={!!error} mb={2}>
             {!!label && (

@@ -23,18 +23,25 @@ const Index = () => {
     console.log(pid)
 
     return (
-        <Box maxW={"100vw"} h={"100vh"}>
+        <Flex
+            minH={"100vh"}
+            align={"space-between"}
+            flexDir={"column"}
+            justify={"space-between"}
+        >
             <Head>
                 <title>{pid} - Radar SimaCheck</title>
                 <meta name="description" content="" />
             </Head>
-            <Header page={"library"} />
-            <Box w={"100%"} maxW={"1300px"} minH={"79.5vh"} margin={"0 auto"}>
+            <Box>
+                <Header page={"library"} />
+            </Box>
+            <Box w={"100%"} maxW={"1300px"} margin={"0 auto"}>
                 <Flex
                     align={"center"}
                     direction={"column"}
                     textAlign={"center"}
-                    p={"5rem 0 4rem 0"}
+                    p={{ base: "2rem 0 4rem 0", md: "0rem 0 4rem 0" }}
                 >
                     <Text>Todo conteúdo em um lugar só </Text>
                     <Heading as={"h1"}>Conheça nossa biblioteca</Heading>
@@ -70,15 +77,17 @@ const Index = () => {
 
                         <Button
                             mt={"0.5rem"}
-                            bg={"#e1e1e6"}
-                            w={"10rem"}
-                            h={"2.5rem"}
+                            bg={"transparent"}
+                            border={"1px solid #000"}
+                            color={"#000"}
+                            w={"9rem"}
+                            h={"3rem"}
                             p={"0.5rem 0rem"}
                             display={"flex"}
                             flexDir={"column"}
                             justifyContent={"space-around"}
-                            _hover={{ bg: "#737380", color: "#fff" }}
                             onClick={onOpen}
+                            _hover={{ bg: "#000", color: "#fff" }}
                         >
                             Selecione Boss
                         </Button>
@@ -124,7 +133,7 @@ const Index = () => {
                 </Flex>
             </Box>
             <Footer />
-        </Box>
+        </Flex>
     );}
 
 export default Index

@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useSignup } from "hooks/useSignup";
 import { withSSTGuest } from "utils/withsSSRGuest";
+import { useTranslation } from "hooks/useTranslation";
 
 type SignUpProps = {
     email: string;
@@ -22,7 +23,6 @@ const signUpFormSchema = yup.object().shape({
         .email("E-mail inválido."),
     password: yup
         .string()
-
         .matches(
             /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[-+_!@#$%^&*.,?])[0-9a-zA-Z-+_!@#$%^&*.,?]{8,}$/,
             "A senha deve ser composta de letras minusculas e maiusculas, números e caracteres especiais."
@@ -38,11 +38,12 @@ const Signup = () => {
     const { register, handleSubmit, formState } = useForm<SignUpProps>({
         resolver: yupResolver(signUpFormSchema),
     });
+    const {locale} = useTranslation()
     const [valueCheck, setValeuCheck ] = useState(false)
     const { errors } = formState
 
     const onSubmit: SubmitHandler<SignUpProps> = async ({ email, password}) => {
-        const data = {email, password}
+        const data = {email, password, locale}
         signUp(data);
     };
 
@@ -127,7 +128,16 @@ const Signup = () => {
                     >
                         Cadastrar
                     </Button>
-                    <Link onClick={() => Router.back()}>Voltar</Link>
+                    <Button
+                        mt={"1rem"}
+                        background={"transparent"}
+                        color={"#18181B"}
+                        border={"1px solid #18181B"}
+                        onClick={() => Router.back()}
+                    >
+                        Voltar
+                    </Button>
+
                 </Flex>
             </Flex>
         </Flex>

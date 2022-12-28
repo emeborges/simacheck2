@@ -6,23 +6,32 @@ import { Container } from "../../styles/pages/tools"
 
 import ModalSelectServer from 'components/ModalServerSelect';
 import { Footer } from 'components/Footer';
+import { Router, useRouter } from 'next/router';
 
 const Index = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const router = useRouter()
 
     return (
-        <Container>
+        <Flex
+            minH={"100vh"}
+            align={"space-between"}
+            flexDir={"column"}
+            justify={"space-between"}
+        >
             <Head>
-                <title>SimaCheck</title>
+                <title>Ferramentas - SimaCheck</title>
                 <meta name="description" content="" />
             </Head>
-            <Header page={"tools"} />
-            <Box w={"100%"} maxW={"1300px"} minH={"79.5vh"} margin={"0 auto"}>
+            <Box>
+                <Header page={"tools"} />
+            </Box>
+            <Box w={"100%"} maxW={"1300px"} h={"100%"} margin={"0 auto"}>
                 <Flex
                     align={"center"}
                     direction={"column"}
                     textAlign={"center"}
-                    p={"5rem 0 4rem 0"}
+                    p={{ base: "2rem 0 4rem 0", md: "0rem 0 4rem 0" }}
                 >
                     <Text>Bem mais que uma "rastreador" de bosses... </Text>
                     <Heading as={"h1"}>
@@ -75,15 +84,17 @@ const Index = () => {
 
                         <Button
                             mt={"0.5rem"}
-                            bg={"#e1e1e6"}
+                            bg={"transparent"}
+                            border={"1px solid #000"}
+                            color={"#000"}
                             w={"9rem"}
                             h={"3rem"}
                             p={"0.5rem 0rem"}
                             display={"flex"}
                             flexDir={"column"}
                             justifyContent={"space-around"}
-                            _hover={{ bg: "#737380", color: "#fff" }}
                             onClick={onOpen}
+                            _hover={{ bg: "#000", color: "#fff" }}
                         >
                             Entrar no Radar
                         </Button>
@@ -160,15 +171,16 @@ const Index = () => {
 
                         <Button
                             mt={"0.5rem"}
-                            bg={"#e1e1e6"}
-                            w={"12rem"}
+                            bg={"transparent"}
+                            border={"1px solid #000"}
+                            color={"#000"}
                             h={"3rem"}
-                            p={"0.5rem 0rem"}
+                            p={"0.5rem 1rem"}
                             display={"flex"}
                             flexDir={"column"}
                             justifyContent={"space-around"}
-                            _hover={{ bg: "#737380", color: "#fff" }}
-
+                            onClick={() => router.push('/tools/calculadora')}
+                            _hover={{ bg: "#101010", color: "#fff" }}
                         >
                             Entrar na Calculadora
                         </Button>
@@ -182,7 +194,7 @@ const Index = () => {
                     w={"100%"}
                     justify={"space-evenly"}
                     wrap={"wrap"}
-                    gap={'1rem'}
+                    gap={"1rem"}
                 >
                     <LinkChakra
                         href={"/signup"}
@@ -209,14 +221,13 @@ const Index = () => {
                         maxW={"320px"}
                         w={"100%"}
                         textAlign={"center"}
-
                     >
                         Conhecer o premium
                     </LinkChakra>
                 </Flex>
             </Box>
             <Footer />
-        </Container>
+        </Flex>
     );}
 
 export default Index

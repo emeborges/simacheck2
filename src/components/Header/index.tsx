@@ -212,6 +212,7 @@ export const Header = ({ page }:any) => {
                                         <MenuItem
                                             fontSize={"0.8rem"}
                                             fontWeight={"700"}
+                                            onClick={() => router.push('/premium')}
                                         >
                                             Assinar Premium
                                         </MenuItem>
