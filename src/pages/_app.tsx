@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { AppProps } from 'next/app'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react'
 
 import Fonts from 'fonts';
 import theme from 'theme'
@@ -19,12 +19,14 @@ function MyApp({ Component, pageProps }: AppProps) {
               <meta name="description" content="Netfly Frontend Boilerplate" />
           </Head>
           <LenguageProvider>
+            <ColorModeProvider>
             <SigninProvider>
                 <SignupProvider>
                     <Fonts />
                     <Component {...pageProps} />
                 </SignupProvider>
             </SigninProvider>
+            </ColorModeProvider>
           </LenguageProvider>
       </ChakraProvider>
   );

@@ -24,10 +24,6 @@ export function Home() {
         setConteinerNum(num)
     }
 
-    /*const imagensPatro = ['https://s3.sa-east-1.amazonaws.com/simacheck.staticimages.prod/Imagens+simacheck2.0/SimaCapa.png',
-    'https://s3.sa-east-1.amazonaws.com/simacheck.staticimages.prod/Imagens+simacheck2.0/CyfCapa.png',
-    'https://s3.sa-east-1.amazonaws.com/simacheck.staticimages.prod/Imagens+simacheck2.0/bttCapa.png']
-    */
     return (
         <>
             <Head>
@@ -41,7 +37,6 @@ export function Home() {
                 p={{ base: "3rem 0.5rem", lg: "7rem 0rem 4rem" }}
                 justify={"center"}
                 align={"center"}
-
             >
                 <Box maxW={"1300px"} margin={"0 auto"}>
                     <Box textAlign={"center"} margin={"0 auto"}>
@@ -58,7 +53,6 @@ export function Home() {
                         >
                             <Button
                                 mt={"0.5rem"}
-                                bg={"#e1e1e6"}
                                 w={{ base: "8rem", md: "10rem" }}
                                 h={"5rem"}
                                 p={"0.5rem 0rem"}
@@ -77,7 +71,6 @@ export function Home() {
 
                             <Button
                                 mt={"0.5rem"}
-                                bg={"#e1e1e6"}
                                 w={{ base: "8rem", md: "10rem" }}
                                 h={"5rem"}
                                 p={"0.5rem"}
@@ -95,7 +88,6 @@ export function Home() {
 
                             <Button
                                 mt={"0.5rem"}
-                                bg={"#e1e1e6"}
                                 w={{ base: "8rem", md: "10rem" }}
                                 h={"5rem"}
                                 p={"0.5rem"}
@@ -118,10 +110,9 @@ export function Home() {
                                 bg={"transparent"}
                                 p={"0.5rem 2rem"}
                                 borderRadius={"5px"}
-                                color={"#121214"}
                                 fontSize={"1.3rem"}
                                 transition={"all 0.2s"}
-                                border={"1px solid #121214"}
+                                border={"1px solid"}
                                 textDecor={"none"}
                                 maxW={"20rem"}
                                 w={"100%"}
@@ -131,7 +122,7 @@ export function Home() {
 
                             <LinkChakra
                                 href={"/"}
-                                bg={"#121214"}
+                                bg={"#18181B"}
                                 p={"0.5rem 2rem"}
                                 borderRadius={"5px"}
                                 color={"#fff"}
@@ -148,7 +139,7 @@ export function Home() {
                 </Box>
             </Flex>
             <Box
-                bg={"linear-gradient(to top, #121214 50%, #F5F6FA 50%)"}
+                bg={"linear-gradient(to top, #18181B 50%, transparent 50%)"}
                 w={"100%"}
             >
                 <Box
@@ -166,7 +157,7 @@ export function Home() {
                 </Box>
             </Box>
 
-            <Box p={"3rem 0rem"} bg={"#121214"} w={"100%"} color={"#F5F6FA"}>
+            <Box p={"3rem 0rem"} bg={"#18181B"} w={"100%"} color={"#F5F6FA"}>
                 <Box maxW={"1300px"} margin={"0 auto"}>
                     <Box
                         w={"60%"}

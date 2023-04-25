@@ -12,8 +12,12 @@ import {
   MenuList,
   Badge,
   useDisclosure,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
 } from '@chakra-ui/react'
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
+import { HamburgerIcon, CloseIcon, ChevronDownIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
 import { Community } from 'components/Community'
 import { useRouter } from 'next/router'
@@ -31,6 +35,7 @@ export const Header = ({ page }:any) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [autent, setAutent] = useState(false)
     const { isAthenticated } = useSignin();
+
     const router = useRouter()
 
     useEffect(() => {
@@ -40,27 +45,37 @@ export const Header = ({ page }:any) => {
 
     const links = [
         {
-            'link': 'home',
-            'escrita': 'Home',
-            'referencia':'/'
+            texto: "Home",
+            rota: "/",
+            referencia: "/",
         },
         {
-            'link': 'tools',
-            'escrita': 'SimaTools',
-            'referencia':'/tools'
+            texto: "SimaTools",
+            rota: "tools",
+            referencia: [
+                {
+                    icon: "/",
+                    texto: "Teste",
+                    rota: "/tools",
+                },
+                {
+                    icon: "/",
+                    texto: "Teste",
+                    rota: "/tools",
+                },
+            ],
         },
         {
-            'link': 'library',
-            'escrita': 'SimaLibrary',
-            'referencia':'/library'
+            rota: "library",
+            texto: "SimaLibrary",
+            referencia: "/library",
         },
-
         {
-            'link': 'faq',
-            'escrita': 'FAQ',
-            'referencia':'/faq'
-        }
-    ]
+            rota: "faq",
+            texto: "FAQ",
+            referencia: "/faq",
+        },
+    ];
 
     return (
         <>
@@ -73,14 +88,77 @@ export const Header = ({ page }:any) => {
                         justify={"space-around"}
                         maxW={"1300px"}
                         m={"0 auto"}
-                        boxShadow={"0px 5px 20px 0px rgba(0,0,0,0.25)"}
+
                     >
                         <Image src={"/img/logo.svg"} w={"30%"} />
+
                         {links.map((link, key) => {
+                            if(typeof link.referencia !== 'string'){
+                                return (
+                                    <Flex minHeight={'100%'} justify={'center'} flexDir={'column'} >
+                                        <Menu isLazy key={key}>
+                                            <MenuButton
+                                                as={Button}
+                                                rightIcon={<ChevronDownIcon />}
+                                                borderWidth={{
+                                                    base: "80%",
+                                                    md: "100%",
+                                                }}
+                                                color={
+                                                    page === link.texto
+                                                        ? "#FEFEFE"
+                                                        : "#4E4E52"
+                                                }
+                                                borderRadius={0}
+                                                background={"transparent"}
+                                                borderBottom={{
+                                                    md:
+                                                        page === link.texto
+                                                            ? "4px solid #BA1813"
+                                                            : "none",
+                                                }}
+                                                _active={{
+                                                    background: "transparent",
+                                                }}
+                                                _hover={{
+                                                    borderBottom:
+                                                        page !== link.texto
+                                                            ? "2px solid #BA1813"
+                                                            : "4px solid #BA1813",
+                                                    color: "#eae9e9",
+                                                    textDecoration: "none",
+                                                }}
+
+
+                                                m={{
+                                                    base: "1rem 0rem",
+                                                    md: "0rem 0.5rem 0rem",
+                                                }}
+                                            >
+                                                {link.texto}
+                                            </MenuButton>
+                                            <MenuList>
+                                                <MenuItem minH="48px">
+                                                    <Image
+                                                        boxSize="2rem"
+                                                        borderRadius="full"
+                                                        src="https://placekitten.com/100/100"
+                                                        alt="Fluffybuns the destroyer"
+                                                        mr="12px"
+                                                    />
+                                                    <span>
+                                                        Fluffybuns the Destroyer
+                                                    </span>
+                                                </MenuItem>
+
+                                            </MenuList>
+                                        </Menu>
+                                    </Flex>
+                                );}
+
                             return (
-                                <NextLink href={link.referencia} style={{display: 'flex', alignItems: 'center'}}>
+                                <NextLink href={link.rota} key={key} >
                                     <Flex
-                                        key={key}
                                         align={"center"}
                                         justifyContent={"center"}
                                         cursor={"pointer"}
@@ -88,15 +166,16 @@ export const Header = ({ page }:any) => {
                                             base: "80%",
                                             md: "100%",
                                         }}
+                                        height={'100%'}
                                         borderBottom={{
                                             md:
-                                                page === link.link
+                                                page === link.texto
                                                     ? "4px solid #BA1813"
                                                     : "none",
                                         }}
                                         _hover={{
                                             borderBottom:
-                                                page !== link.link
+                                                page !== link.texto
                                                     ? "2px solid #BA1813"
                                                     : "4px solid #BA1813",
                                         }}
@@ -111,7 +190,7 @@ export const Header = ({ page }:any) => {
                                             textAlign={"center"}
                                             fontSize={"1rem"}
                                             color={
-                                                page === link.link
+                                                page === link.texto
                                                     ? "#FEFEFE"
                                                     : "#4E4E52"
                                             }
@@ -121,12 +200,13 @@ export const Header = ({ page }:any) => {
                                             }}
                                             cursor={"pointer"}
                                         >
-                                            {link.escrita}
+                                            {link.texto}
                                         </Text>
                                     </Flex>
                                 </NextLink>
                             );
                         })}
+
 
                         {autent == true ? (
                             <Flex
@@ -212,7 +292,9 @@ export const Header = ({ page }:any) => {
                                         <MenuItem
                                             fontSize={"0.8rem"}
                                             fontWeight={"700"}
-                                            onClick={() => router.push('/premium')}
+                                            onClick={() =>
+                                                router.push("/premium")
+                                            }
                                         >
                                             Assinar Premium
                                         </MenuItem>
@@ -263,7 +345,7 @@ export const Header = ({ page }:any) => {
                             bg={"black"}
                             right={"5"}
                             zIndex={"21"}
-                            top={"12"}
+                            top={"65px"}
                             color={"#fff"}
                             fontSize={"2rem"}
                             icon={<HamburgerIcon />}
@@ -288,11 +370,11 @@ export const Header = ({ page }:any) => {
                     pos="fixed"
                     top="0"
                     left="0"
-
                     overflowY="auto"
                     flexDir="column"
                 >
                     <Flex justify="flex-end" bg={"#121214"}>
+
                         <IconButton
                             mt={2}
                             mr={2}
@@ -307,54 +389,150 @@ export const Header = ({ page }:any) => {
 
                     <Flex flexDir="column" align="center" bg={"#121214"}>
                         {links.map((link, key) => {
-                            return (
-                                <NextLink href={link.referencia}>
-                                    <Flex
-                                        key={key}
-                                        align={"center"}
-                                        justifyContent={"center"}
-                                        cursor={"pointer"}
-                                        borderWidth={{
-                                            base: "80%",
-                                            md: "100%",
-                                        }}
-                                        borderBottom={{
-                                            md:
-                                                page === link.link
-                                                    ? "4px solid #BA1813"
-                                                    : "none",
-                                        }}
-                                        _hover={{
-                                            borderBottom:
-                                                page !== link.link
-                                                    ? "2px solid #BA1813"
-                                                    : "4px solid #BA1813",
-                                        }}
-                                        m={{
-                                            base: "1rem 0rem",
-                                            md: "0rem 0.5rem 0rem",
-                                        }}
-                                    >
-                                        <Text
-                                            width={"100%"}
-                                            minW={"6rem"}
-                                            textAlign={"center"}
-                                            fontSize={"1rem"}
-                                            color={
-                                                page === link.link
-                                                    ? "#FEFEFE"
-                                                    : "#4E4E52"
-                                            }
-                                            _hover={{
-                                                color: "#eae9e9",
-                                                textDecoration: "none",
-                                            }}
+
+                            if(typeof link.referencia === 'string'){
+                                return (
+                                    <NextLink href={link.referencia} key={key}>
+                                        <Flex
+                                            align={"center"}
+                                            justifyContent={"center"}
                                             cursor={"pointer"}
+                                            borderWidth={{
+                                                base: "80%",
+                                                md: "100%",
+                                            }}
+                                            borderBottom={{
+                                                md:
+                                                    page === link.texto
+                                                        ? "4px solid #BA1813"
+                                                        : "none",
+                                            }}
+                                            _hover={{
+                                                borderBottom:
+                                                    page !== link.texto
+                                                        ? "2px solid #BA1813"
+                                                        : "4px solid #BA1813",
+                                            }}
+                                            m={{
+                                                base: "1rem 0rem",
+                                                md: "0rem 0.5rem 0rem",
+                                            }}
                                         >
-                                            {link.escrita}
-                                        </Text>
-                                    </Flex>
-                                </NextLink>
+                                            <Text
+                                                width={"100%"}
+                                                minW={"6rem"}
+                                                textAlign={"center"}
+                                                fontSize={"1rem"}
+                                                color={
+                                                    page === link.texto
+                                                        ? "#FEFEFE"
+                                                        : "#4E4E52"
+                                                }
+                                                _hover={{
+                                                    color: "#eae9e9",
+                                                    textDecoration: "none",
+                                                }}
+                                                cursor={"pointer"}
+                                            >
+                                                {link.texto}
+                                            </Text>
+                                        </Flex>
+                                    </NextLink>
+                            )}
+
+                            return (
+                                <Accordion
+                                    width={"100%"}
+                                    borderColor={"#121214"}
+                                    defaultIndex={[0]}
+                                    allowMultiple
+                                >
+                                    <AccordionItem>
+                                        <AccordionButton border={"none"}>
+                                            <Box
+                                                as="span"
+                                                flex="1"
+                                                textAlign="center"
+                                                color={
+                                                    page === link.texto
+                                                        ? "#FEFEFE"
+                                                        : "#4E4E52"
+                                                }
+                                            >
+                                                {link.texto}
+                                            </Box>
+
+                                        </AccordionButton>
+
+                                        <AccordionPanel pb={4}>
+                                            {link.referencia.map(
+                                                (link, key) => (
+                                                    <NextLink
+                                                        href={link.texto}
+                                                        key={key}
+                                                    >
+                                                        <Flex
+                                                            align={"center"}
+                                                            justifyContent={
+                                                                "center"
+                                                            }
+                                                            cursor={"pointer"}
+                                                            borderWidth={{
+                                                                base: "80%",
+                                                                md: "100%",
+                                                            }}
+                                                            borderBottom={{
+                                                                md:
+                                                                    page ===
+                                                                    link.texto
+                                                                        ? "4px solid #BA1813"
+                                                                        : "none",
+                                                            }}
+                                                            _hover={{
+                                                                borderBottom:
+                                                                    page !==
+                                                                    link.texto
+                                                                        ? "2px solid #BA1813"
+                                                                        : "4px solid #BA1813",
+                                                            }}
+                                                            m={{
+                                                                base: "1rem 0rem",
+                                                                md: "0rem 0.5rem 0rem",
+                                                            }}
+                                                        >
+                                                            <Text
+                                                                width={"100%"}
+                                                                minW={"6rem"}
+                                                                textAlign={
+                                                                    "center"
+                                                                }
+                                                                fontSize={
+                                                                    "1rem"
+                                                                }
+                                                                color={
+                                                                    page ===
+                                                                    link.texto
+                                                                        ? "#FEFEFE"
+                                                                        : "#4E4E52"
+                                                                }
+                                                                _hover={{
+                                                                    color: "#eae9e9",
+                                                                    textDecoration:
+                                                                        "none",
+                                                                }}
+                                                                cursor={
+                                                                    "pointer"
+                                                                }
+                                                            >
+                                                                {link.texto}
+                                                            </Text>
+                                                        </Flex>
+                                                    </NextLink>
+                                                )
+                                            )}
+                                        </AccordionPanel>
+                                    </AccordionItem>
+                                </Accordion>
                             );
                         })}
                         {autent == true ? (

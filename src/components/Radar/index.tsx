@@ -83,10 +83,11 @@ const Radar = () => {
                         >
                             <Flex
                                 m={{ base: "0.25rem 0rem", md: "none" }}
-                                borderRadius={"5px"}
-                                boxShadow={"0px 0px 5px #323238"}
+                                shadow={
+                                    "0 0 5px 0 rgb(0 0 0 / 20%), 0 0 5px 0 rgb(0 0 0 / 20%)"
+                                }
                                 p={"0.5rem"}
-                                h={'6rem'}
+                                h={"6rem"}
                                 w={{ base: "99%", md: "30%" }}
                                 align={"center"}
                                 justify={"space-around"}
@@ -143,8 +144,9 @@ const Radar = () => {
                             </Flex>
                             <Flex
                                 m={{ base: "0.25rem 0rem", md: "none" }}
-                                borderRadius={"5px"}
-                                boxShadow={"0px 0px 5px #323238"}
+                                shadow={
+                                    "0 0 5px 0 rgb(0 0 0 / 20%), 0 0 5px 0 rgb(0 0 0 / 20%)"
+                                }
                                 h={"6rem"}
                                 minH={"6rem"}
                                 w={{ base: "99%", md: "39%" }}
@@ -176,7 +178,7 @@ const Radar = () => {
                                     overflowX={"hidden"}
                                 >
                                     {bossesLastView.map((boss) => (
-                                        <Box m={"0.125rem"}>
+                                        <Box m={"0.125rem"} key={boss.boss}>
                                             <Text
                                                 fontSize={"0.6rem"}
                                                 maxW={"4rem"}
@@ -194,8 +196,9 @@ const Radar = () => {
 
                             <Flex
                                 m={{ base: "0.25rem 0rem", md: "none" }}
-                                borderRadius={"5px"}
-                                boxShadow={"0px 0px 5px #323238"}
+                                shadow={
+                                    "0 0 5px 0 rgb(0 0 0 / 20%), 0 0 5px 0 rgb(0 0 0 / 20%)"
+                                }
                                 p={"0.5rem"}
                                 minH={"100%"}
                                 w={{ base: "99%", md: "30%" }}

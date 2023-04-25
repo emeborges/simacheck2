@@ -162,6 +162,7 @@ const ModalDetailsBoss: React.FC<{
                             >
                                 {boss?.resp.map((respw, key) => (
                                     <Box
+                                        key={key}
                                         fontSize={"14px"}
                                         minW={"10rem"}
                                         m={"0.5rem 0.5rem 0 0"}
@@ -301,7 +302,7 @@ const ModalDetailsBoss: React.FC<{
                             }}
                         >
                             {boss?.resp.map((resp, key) => (
-                                <Box h={"150px"} w={"100%"}>
+                                <Box h={"150px"} w={"100%"} key={key}>
                                     <Chart
                                         chartType="Calendar"
                                         width={500}
