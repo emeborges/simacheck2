@@ -1,14 +1,12 @@
-import { Box, Flex, Text, Image, Tooltip, Popover, useDisclosure, PopoverTrigger, PopoverContent, PopoverCloseButton } from "@chakra-ui/react";
+import { Box, Flex, Text, Image, Popover, useDisclosure, PopoverTrigger, PopoverContent, PopoverCloseButton } from "@chakra-ui/react";
 import Head from 'next/head'
-import { color, Porcentagem } from "../../utils/gerals";
-import { Container } from "../../styles/pages/tools";
-import { Header } from 'components/Header';
+import { color } from "../../utils/gerals";
 import { useRouter } from 'next/router';
-import { FaExchangeAlt } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import { api } from 'utils/services';
 import { BossDetailsProps } from "utils/types";
 import { Footer } from "components/Footer";
+import { Header } from "components/Header";
 
 const Index = () => {
     const route = useRouter();
@@ -30,6 +28,8 @@ const Index = () => {
         }
         getBoss();
     }, [pid]);
+
+    console.log(load)
 
     return (
         <Flex
