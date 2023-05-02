@@ -78,13 +78,14 @@ const ConteinerBosses: React.FC<{ bosses: BossesDetailsProps[] }> = ({ bosses })
                             width={"100%"}
                             justify={"space-between"}
                             p={"0.5rem 0.5rem 0.5rem"}
+                            backdropFilter={"brightness(150%)"}
                         >
                             <Flex
                                 w={"50%"}
                                 maxW={"7rem"}
                                 flexWrap={"wrap"}
                                 justify={"space-between"}
-                                flexDir={'column'}
+                                flexDir={"column"}
                             >
                                 <Text
                                     fontSize={"0.9rem"}
@@ -92,7 +93,7 @@ const ConteinerBosses: React.FC<{ bosses: BossesDetailsProps[] }> = ({ bosses })
                                 >
                                     {boss?.resp.length > 1 ? "Resps:" : "Resp:"}
                                 </Text>
-                                <Flex flexWrap={'wrap'}>
+                                <Flex flexWrap={"wrap"}>
                                     {boss?.resp.map((resp) => (
                                         <Flex
                                             key={resp.colour_frame}
@@ -101,16 +102,17 @@ const ConteinerBosses: React.FC<{ bosses: BossesDetailsProps[] }> = ({ bosses })
                                             fontSize={"0.9rem"}
                                             color={"gray.500"}
                                             align={"center"}
-
                                         >
-                                            <IoMdArrowDropup fontSize={"1rem"} />
+                                            <IoMdArrowDropup
+                                                fontSize={"1rem"}
+                                            />
                                             {Porcentagem(resp.current_prob!)}%
                                         </Flex>
                                     ))}
                                 </Flex>
                             </Flex>
                             <Flex w={"50%"} justify={"center"}>
-                                <Image src={boss.gif_url}  />
+                                <Image src={boss.gif_url} />
                             </Flex>
                         </Flex>
                     </Flex>

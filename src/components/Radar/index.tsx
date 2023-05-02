@@ -76,7 +76,12 @@ const Radar = () => {
         <>
             <Box w={"100%"} maxW={"1300px"} margin={"0 auto"}>
                 {load === true ? (
-                    <Flex width={'100%'} height={'100%'} justify={'center'} align={'center'}>
+                    <Flex
+                        width={"100%"}
+                        height={"100%"}
+                        justify={"center"}
+                        align={"center"}
+                    >
                         <Spinner size="xl" />
                     </Flex>
                 ) : (
@@ -96,6 +101,7 @@ const Radar = () => {
                                 w={{ base: "99%", md: "30%" }}
                                 align={"center"}
                                 justify={"space-around"}
+                                backdropFilter={"brightness(150%)"}
                             >
                                 <Flex
                                     w={"50%"}
@@ -156,6 +162,7 @@ const Radar = () => {
                                 align={"center"}
                                 justify={"space-around"}
                                 direction={"column"}
+                                backdropFilter={"brightness(150%)"}
                             >
                                 <Text fontSize={"0.95rem"} fontWeight={"600"}>
                                     Bosses mortos ontem:
@@ -204,11 +211,15 @@ const Radar = () => {
                                 m={{ base: "0.25rem 0rem", md: "none" }}
                                 shadow={"0 0 1px 0 "}
                                 p={"0.5rem"}
-                                minH={"100%"}
                                 w={{ base: "99%", md: "30%" }}
                                 align={"center"}
                                 justify={"space-around"}
-                            ></Flex>
+                                backdropFilter={"brightness(150%)"}
+                                h={"6rem"}
+                                minH={"6rem"}
+                            >
+                                ANÚNCIE AQUI
+                            </Flex>
                         </Flex>
                         <Box>
                             <Flex
