@@ -1,11 +1,11 @@
 import { CopyIcon } from "@chakra-ui/icons";
-import { Box, Button, Flex, FormLabel, IconButton, Input, Skeleton, SkeletonText, Stack, Text, Textarea } from "@chakra-ui/react";
+import { Box, Button, Flex, FormLabel, IconButton, Text, Textarea } from "@chakra-ui/react";
 import { useState } from "react";
 import copy from "copy-to-clipboard";
 
 const Index = () => {
     const [texto, setTexto] = useState('Sima é um grande gordo')
-
+    setTexto("Sima é um grande gordo");
     return (
     <>
         <Flex w={"100%"}>
