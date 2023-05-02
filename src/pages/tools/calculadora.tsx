@@ -1,8 +1,7 @@
-import {  Box, Flex, Heading, Tab, TabList, TabPanel, TabPanels, Tabs, Text, } from '@chakra-ui/react';
+import {  Box, Flex,} from '@chakra-ui/react';
 import Head from 'next/head'
 import { Header } from 'components/Header';
 import { Footer } from 'components/Footer';
-import SplitLoot from 'components/SplitLoot';
 
 
 
@@ -24,7 +23,7 @@ const Index = () => {
                 <Header page={"tools"} />
             </Box>
             <Flex flexDir={'column'} h={'100%'} w={"100%"} maxW={"1300px"} margin={"0 auto"}>
-                <Flex align={"center"} flexDir={"column"} w={"100%"} mb={'0.5rem'}>
+               {/* <Flex align={"center"} flexDir={"column"} w={"100%"} mb={'0.5rem'}>
                     <Heading
                         fontSize={{ base: "0.8rem", md: "2rem" }}
                         position={"relative"}
@@ -95,7 +94,7 @@ const Index = () => {
 
                         </TabPanels>
                     </Tabs>
-                </Box>
+                </Box>*/}
             </Flex>
             <Footer />
         </Flex>
