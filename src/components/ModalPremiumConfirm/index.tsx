@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+//import { useRouter } from 'next/router'
 import {
     Modal,
     ModalOverlay,
@@ -13,20 +13,19 @@ import {
     } from '@chakra-ui/react'
 import { api } from 'utils/services';
 import { useTranslation } from 'hooks/useTranslation';
-import { PlanProps } from 'pages/premium';
 
 interface Props {
     isOpen: boolean;
     onClose: () => void;
-    plan: PlanProps | undefined;
+    plan: any | undefined;
 }
 
 const ModalPremiumConfirm = ({ isOpen, onClose, plan }: Props) => {
     const [servers, setServers] = useState([]);
     const { t } = useTranslation();
-    const router = useRouter();
+    //const router = useRouter();
     const [loading, setLoading] = useState(true);
-    const [value, setValue] = useState<any>();
+    //const [value, setValue] = useState<any>();
 
     useEffect(() => {
         getBosses();
@@ -42,14 +41,16 @@ const ModalPremiumConfirm = ({ isOpen, onClose, plan }: Props) => {
         }
     }
 
+    console.log(loading, servers, );
+
     function altPages() {
         onClose();
 
-        if (value === undefined) {
+        {/*if (value === undefined) {
             console.log("nulo");
         } else {
             router.push(`/library/${value}`);
-        }
+        }*/}
     }
 
     return (
