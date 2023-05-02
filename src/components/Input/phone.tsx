@@ -14,7 +14,7 @@ interface InputProps extends InputPropsChakra {
     name: string;
     label?: string;
     error?: FieldError;
-    masktUF?: string;
+    masktUF?: string
 }
 
 const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
