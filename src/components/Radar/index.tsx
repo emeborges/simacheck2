@@ -6,7 +6,9 @@ import {
     Tooltip,
     UnorderedList,
     useDisclosure,
-    Image
+    Image,
+    useColorMode,
+    Spinner
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
@@ -33,6 +35,7 @@ const Radar = () => {
     >([]);
     const { bosses, pid, bossesLastView, load } = useRadarBosses();
     const userCanSeeComponent = useCan({permissions: new Date(), roles: "premium"});
+    const { colorMode } = useColorMode();
 
     useEffect(() => {
         if (bosses) {
@@ -72,7 +75,11 @@ const Radar = () => {
     return (
         <>
             <Box w={"100%"} maxW={"1300px"} margin={"0 auto"}>
-                {load === true ? null : (
+                {load === true ? (
+                    <Flex width={'100%'} height={'100%'} justify={'center'} align={'center'}>
+                        <Spinner size="xl" />
+                    </Flex>
+                ) : (
                     <>
                         <Flex
                             flexDir={{ base: "column", md: "row" }}
@@ -83,9 +90,7 @@ const Radar = () => {
                         >
                             <Flex
                                 m={{ base: "0.25rem 0rem", md: "none" }}
-                                shadow={
-                                    "0 0 5px 0 rgb(0 0 0 / 20%), 0 0 5px 0 rgb(0 0 0 / 20%)"
-                                }
+                                shadow={"0 0 1px 0 "}
                                 p={"0.5rem"}
                                 h={"6rem"}
                                 w={{ base: "99%", md: "30%" }}
@@ -144,9 +149,7 @@ const Radar = () => {
                             </Flex>
                             <Flex
                                 m={{ base: "0.25rem 0rem", md: "none" }}
-                                shadow={
-                                    "0 0 5px 0 rgb(0 0 0 / 20%), 0 0 5px 0 rgb(0 0 0 / 20%)"
-                                }
+                                shadow={"0 0 1px 0 "}
                                 h={"6rem"}
                                 minH={"6rem"}
                                 w={{ base: "99%", md: "39%" }}
@@ -164,14 +167,17 @@ const Radar = () => {
                                     minW={"100%"}
                                     css={{
                                         "&::-webkit-scrollbar": {
-                                            width: "10px",
+                                            width: "5px",
                                         },
                                         "&::-webkit-scrollbar-track": {
-                                            background: "#ffffff",
+                                            background: "transparent",
                                         },
                                         "&::-webkit-scrollbar-thumb": {
-                                            background: "#323238",
-                                            border: "3px solid #ffffff",
+                                            background:
+                                                colorMode === "light"
+                                                    ? "#323238"
+                                                    : "#fff",
+                                            border: "2px solid transparent",
                                         },
                                     }}
                                     overflowY={"auto"}
@@ -196,9 +202,7 @@ const Radar = () => {
 
                             <Flex
                                 m={{ base: "0.25rem 0rem", md: "none" }}
-                                shadow={
-                                    "0 0 5px 0 rgb(0 0 0 / 20%), 0 0 5px 0 rgb(0 0 0 / 20%)"
-                                }
+                                shadow={"0 0 1px 0 "}
                                 p={"0.5rem"}
                                 minH={"100%"}
                                 w={{ base: "99%", md: "30%" }}
@@ -219,7 +223,7 @@ const Radar = () => {
                                 </Text>
                                 <Box
                                     w={"100%"}
-                                    borderBottom={"1px solid #121214"}
+                                    borderBottom={"1px solid "}
                                     opacity={"0.3"}
                                 />
                             </Flex>
@@ -238,7 +242,6 @@ const Radar = () => {
                                             cursor={"pointer"}
                                             margin={"5px"}
                                             textDecoration={"none"}
-                                            color={"#121214"}
                                             fontWeight={
                                                 view === "status"
                                                     ? "600"
@@ -259,7 +262,6 @@ const Radar = () => {
                                             cursor={"pointer"}
                                             margin={"5px"}
                                             textDecoration={"none"}
-                                            color={"#121214"}
                                             fontWeight={
                                                 view === "lore"
                                                     ? "600"
@@ -281,7 +283,6 @@ const Radar = () => {
                                                 cursor={"pointer"}
                                                 margin={"5px"}
                                                 textDecoration={"none"}
-                                                color={"#121214"}
                                                 fontWeight={
                                                     view === "city"
                                                         ? "600"
@@ -304,7 +305,6 @@ const Radar = () => {
                                                     margin={"5px"}
                                                     display={"flex"}
                                                     alignItems={"center"}
-                                                    color={"#4d4d4f"}
                                                     cursor={"not-allowed"}
                                                     textDecor={"line-through"}
                                                 >

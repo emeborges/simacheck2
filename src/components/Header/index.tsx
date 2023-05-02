@@ -23,8 +23,11 @@ import { Community } from 'components/Community'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
-import { FaUserShield } from 'react-icons/fa'
+import { FaUserShield, FaWikipediaW } from "react-icons/fa";
 import { GiAxeSword } from 'react-icons/gi'
+import { VscPreview } from "react-icons/vsc";
+import { BiRadar, BiCalculator } from "react-icons/bi";
+
 import { Can } from 'components/Can'
 import { signOut, useSignin } from 'hooks/useSignin'
 import ModalSelectServer from 'components/ModalServerSelect'
@@ -35,6 +38,7 @@ export const Header = ({ page }:any) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [autent, setAutent] = useState(false)
     const { isAthenticated } = useSignin();
+    const route = useRouter()
 
     const router = useRouter()
 
@@ -54,21 +58,37 @@ export const Header = ({ page }:any) => {
             rota: "tools",
             referencia: [
                 {
-                    icon: "/",
-                    texto: "Teste",
-                    rota: "/tools",
+                    icon: <BiRadar />,
+                    texto: "SimaBosses",
+                    rota: "",
+                    tipo: "function",
+                    funcao: onOpen,
                 },
                 {
-                    icon: "/",
-                    texto: "Teste",
-                    rota: "/tools",
+                    icon: <BiCalculator />,
+                    texto: "SimaCalculadora",
+                    rota: "/tools/calculadora",
+                    tipo: "link",
                 },
             ],
         },
         {
             rota: "library",
             texto: "SimaLibrary",
-            referencia: "/library",
+            referencia: [
+                {
+                    icon: <VscPreview />,
+                    texto: "SimaJournal",
+                    rota: "",
+                    tipo: "link",
+                },
+                {
+                    icon: <FaWikipediaW />,
+                    texto: "SimaWiki",
+                    rota: "/",
+                    tipo: "link",
+                },
+            ],
         },
         {
             rota: "faq",
@@ -95,7 +115,11 @@ export const Header = ({ page }:any) => {
                         {links.map((link, key) => {
                             if(typeof link.referencia !== 'string'){
                                 return (
-                                    <Flex minHeight={'100%'} justify={'center'} flexDir={'column'} >
+                                    <Flex
+                                        minHeight={"100%"}
+                                        justify={"center"}
+                                        flexDir={"column"}
+                                    >
                                         <Menu isLazy key={key}>
                                             <MenuButton
                                                 as={Button}
@@ -128,8 +152,6 @@ export const Header = ({ page }:any) => {
                                                     color: "#eae9e9",
                                                     textDecoration: "none",
                                                 }}
-
-
                                                 m={{
                                                     base: "1rem 0rem",
                                                     md: "0rem 0.5rem 0rem",
@@ -138,19 +160,28 @@ export const Header = ({ page }:any) => {
                                                 {link.texto}
                                             </MenuButton>
                                             <MenuList>
-                                                <MenuItem minH="48px">
-                                                    <Image
-                                                        boxSize="2rem"
-                                                        borderRadius="full"
-                                                        src="https://placekitten.com/100/100"
-                                                        alt="Fluffybuns the destroyer"
-                                                        mr="12px"
-                                                    />
-                                                    <span>
-                                                        Fluffybuns the Destroyer
-                                                    </span>
-                                                </MenuItem>
-
+                                                {link.referencia.map((ref) => (
+                                                    <MenuItem
+                                                        minH="48px"
+                                                        onClick={() => {
+                                                            ref.tipo === "link"
+                                                                ? route.push(
+                                                                      ref.rota
+                                                                  )
+                                                                : ref.funcao &&
+                                                                  ref.funcao();
+                                                        }}
+                                                    >
+                                                        {ref.icon}
+                                                        <Text
+                                                            marginLeft={
+                                                                "0.25rem"
+                                                            }
+                                                        >
+                                                            {ref.texto}
+                                                        </Text>
+                                                    </MenuItem>
+                                                ))}
                                             </MenuList>
                                         </Menu>
                                     </Flex>

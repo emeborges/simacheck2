@@ -79,12 +79,10 @@ const ModalSelectServer = ({isOpen, onClose}:any) => {
 
                 <ModalFooter>
                     <Button
-                        bg={"#e1e1e6"}
                         p={"0.5rem 2rem"}
                         display={"flex"}
                         flexDir={"column"}
                         justifyContent={"space-around"}
-                        _hover={{ bg: "#737380", color: "#fff" }}
                         onClick={altPages}
                     >
                         {t("Modal_SelectServerGo")}

@@ -1,7 +1,6 @@
 import {
     Box,
     Flex,
-    Heading,
     Text,
     HStack,
     List,
@@ -12,18 +11,12 @@ import {
     Button,
     useDisclosure,
 } from "@chakra-ui/react";
-import Head from "next/head";
-
-
-import { Header } from "components/Header";
-
-import { Footer } from "components/Footer";
-
 import { FaCheckCircle } from "react-icons/fa";
 import { FiXCircle } from "react-icons/fi";
 import { useSignin, userProps } from "hooks/useSignin";
 import ModalPremiumConfirm from "components/ModalPremiumConfirm";
 import { useState } from "react";
+import Compare from "./Compare";
 /* import { useTranslation } from "hooks/useTranslation"; */
 
 export interface PlanProps {
@@ -32,61 +25,15 @@ export interface PlanProps {
     value: string;
 }
 
-const Index = () => {
+const UserPlans = () => {
     /*const { t } = useTranslation();*/
-    const { user } = useSignin()
+    const { user } = useSignin();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [plan, setPlan] = useState<PlanProps>()
+    const [plan, setPlan] = useState<PlanProps>();
 
     return (
-        <Flex
-            minH={"100vh"}
-            align={"space-between"}
-            flexDir={"column"}
-            justify={"space-between"}
-        >
-            <Head>
-                <title> Seja Premium - Simacheck</title>
-                <meta name="description" content="" />
-            </Head>
-            <Box>
-                <Header page={"faq"} />
-            </Box>
-            <Box w={"100%"} maxW={"1300px"} margin={"0 auto"}>
-                <Flex
-                    align={"center"}
-                    direction={"column"}
-                    textAlign={"center"}
-                    p={"1rem 0 2rem 0"}
-                >
-                    <Heading
-                        as={"h1"}
-                        position={"relative"}
-                        _after={{
-                            content: "''",
-                            width: "20px",
-                            height: "8%",
-                            position: "absolute",
-                            bottom: 1.5,
-                            left: 0,
-                            bg: "red.400",
-                            zIndex: -1,
-                        }}
-                    >
-                        PREMIUM TIME
-                    </Heading>
-                    <Heading
-                        as={"h3"}
-                        fontSize={"1rem"}
-                        fontWeight={"400"}
-                        maxW={"600px"}
-                    >
-                        Quer ter acesso a todas as previsões e as ferramentas
-                        mais precisas do mundo tibiano?
-                        <br />
-                        <Text fontWeight={"700"}>Assine já!</Text>
-                    </Heading>
-                </Flex>
+        <>
+            <Box w={"100%"} maxW={"1300px"} margin={"0 auto"} p={'1rem 0'}>
                 <Flex
                     justify={"space-evenly"}
                     flexDir={{ base: "column", lg: "row" }}
@@ -111,7 +58,7 @@ const Index = () => {
                                 </Text>
                             </HStack>
                         </Box>
-                        <VStack bg={"gray.50"} py={4} borderBottomRadius={"xl"}>
+                        <VStack py={4} borderBottomRadius={"xl"}>
                             <List spacing={3} textAlign="start" px={12}>
                                 <ListItem>
                                     <ListIcon
@@ -215,7 +162,6 @@ const Index = () => {
                                 </HStack>
                             </Box>
                             <VStack
-                                bg={"gray.50"}
                                 py={4}
                                 borderBottomRadius={"xl"}
                             >
@@ -348,7 +294,6 @@ const Index = () => {
                                 </HStack>
                             </Box>
                             <VStack
-                                bg={"gray.50"}
                                 py={4}
                                 borderBottomRadius={"xl"}
                             >
@@ -428,14 +373,14 @@ const Index = () => {
                     </Box>
                 </Flex>
             </Box>
-
+            <Compare />
             <ModalPremiumConfirm
                 plan={plan}
                 isOpen={isOpen}
                 onClose={onClose}
             />
-        </Flex>
+        </>
     );
 };
 
-export default Index;
+export default UserPlans;

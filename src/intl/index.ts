@@ -61,8 +61,8 @@ export const LangStrings = {
             "As melhores ferramentas para o seu jogo você encontra aqui!",
         Home_Call: "Conheça-as agora!",
         Home_CallRegister: "Cadastre-se já",
-        Home_Tolls: "CONHEÇA NOSSAS FERRAMENTAS",
-        Home_TollsDescription: "As melhores ferramentas para seu jogo",
+        Home_Tolls: "CONHEÇA O SIMACHECK",
+        Home_TollsDescription: "Aqui, não erramos dia, não chutamos data, nem calculamos por médias básicas, tudo que está aqui é altamente testado, pensado e calculado, não estimamos por estimar, estimamos para acertar.",
         Home_RadarDefine: "Rastrear, mensurar e planejar..",
         Home_TollsButtonPremium: "Conheça os benefícios do premium!",
         Home_RadarObjetive:

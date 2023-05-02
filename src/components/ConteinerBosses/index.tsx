@@ -23,13 +23,10 @@ const ConteinerBosses: React.FC<{ bosses: BossesDetailsProps[] }> = ({ bosses })
     }
 
     return (
-        <Flex wrap={"wrap"} justify={"space-around"}>
+        <Flex wrap={"wrap"} justify={"space-around"} gap={"1.5rem"}>
             {bosses?.map((boss) => (
                 <Flex
-                    shadow={
-                        "0 1px 5px 0 rgb(0 0 0 / 10%), 0 1px 5px 0 rgb(0 0 0 / 6%)"
-                    }
-                    m={"0.2rem 0.2rem"}
+                    shadow={"0 0 1px 0"}
                     w={{ base: "100%", md: "32%", lg: "15rem" }}
                     flexDir={"column"}
                     align={"center"}
@@ -76,37 +73,44 @@ const ConteinerBosses: React.FC<{ bosses: BossesDetailsProps[] }> = ({ bosses })
                                 {boss?.lore}
                             </Text>
                         </Flex>
-                        <Text fontSize={"0.9rem"} p={"0.5rem 0.5rem 0rem"}>
-                            {boss?.resp.length > 1 ? "Resps:" : "Resp:"}
-                        </Text>
+
                         <Flex
                             width={"100%"}
                             justify={"space-between"}
-                            p={"0rem 0.5rem 0.5rem"}
+                            p={"0.5rem 0.5rem 0.5rem"}
                         >
                             <Flex
                                 w={"50%"}
                                 maxW={"7rem"}
                                 flexWrap={"wrap"}
                                 justify={"space-between"}
+                                flexDir={'column'}
                             >
-                                {boss?.resp.map((resp) => (
-                                    <Flex
-                                        key={resp.colour_frame}
-                                        minW={"2.5rem"}
-                                        display={"flex"}
-                                        justify={"center"}
-                                        fontSize={"0.9rem"}
-                                        color={"gray.500"}
-                                        align={"center"}
-                                    >
-                                        <IoMdArrowDropup fontSize={"1rem"} />
-                                        {Porcentagem(resp.current_prob!)}%
-                                    </Flex>
-                                ))}
+                                <Text
+                                    fontSize={"0.9rem"}
+                                    p={"0.5rem 0.5rem 0rem"}
+                                >
+                                    {boss?.resp.length > 1 ? "Resps:" : "Resp:"}
+                                </Text>
+                                <Flex flexWrap={'wrap'}>
+                                    {boss?.resp.map((resp) => (
+                                        <Flex
+                                            key={resp.colour_frame}
+                                            minW={"2.5rem"}
+                                            justify={"center"}
+                                            fontSize={"0.9rem"}
+                                            color={"gray.500"}
+                                            align={"center"}
+
+                                        >
+                                            <IoMdArrowDropup fontSize={"1rem"} />
+                                            {Porcentagem(resp.current_prob!)}%
+                                        </Flex>
+                                    ))}
+                                </Flex>
                             </Flex>
                             <Flex w={"50%"} justify={"center"}>
-                                <Image src={boss.gif_url} />
+                                <Image src={boss.gif_url}  />
                             </Flex>
                         </Flex>
                     </Flex>

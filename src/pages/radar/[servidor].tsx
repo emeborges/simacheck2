@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import Head from 'next/head'
 
 
@@ -13,17 +13,24 @@ const Index = () => {
     const pid: any = route.query.servidor;
 
     return (
-        <Box maxW={"100vw"} h={"100vh"} minH={'100vh'}>
+        <Flex
+            minH={"100vh"}
+            align={"space-between"}
+            flexDir={"column"}
+            justify={"space-between"}
+        >
             <Head>
                 <title>{pid} - Radar SimaCheck</title>
                 <meta name="description" content="" />
             </Head>
-            <Header page={"tools"} />
+            <Box>
+                <Header page={"tools"} />
+            </Box>
             <BossesProvider>
                 <Radar />
             </BossesProvider>
             <Footer />
-        </Box>
+        </Flex>
     );}
 
 export default Index

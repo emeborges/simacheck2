@@ -185,7 +185,7 @@ const Index = () => {
                                                 preciso, as melhores
                                                 experiências para o jogador.
                                             </Text>
-                                            <Link href={"/tools/"}>
+                                            <Link href={"/"}>
                                                 Conheça nossas ferramentas
                                             </Link>
                                         </AccordionPanel>

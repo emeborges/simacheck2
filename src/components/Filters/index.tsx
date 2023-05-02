@@ -29,12 +29,8 @@ const Filters = ({ sortName, sortDrop, filterOn }: Props) => {
                             <Button
                                 mt={"1rem"}
                                 onClick={() => sortName()}
-                                color={filterOn == "boss" ? "#fff" : "#18181B"}
-                                bg={filterOn == "boss" ? "#18181B" : "#fff"}
-                                border={
-                                    filterOn == "boss"
-                                        ? "none"
-                                        : "1px solid #18181B"
+                                variant={
+                                    filterOn === "boss" ? "solid" : "outline"
                                 }
                             >
                                 Nome
@@ -42,20 +38,8 @@ const Filters = ({ sortName, sortDrop, filterOn }: Props) => {
                             <Button
                                 mt={"1rem"}
                                 onClick={() => sortDrop()}
-                                color={
-                                    filterOn == "colour_frame"
-                                        ? "#fff"
-                                        : "#18181B"
-                                }
-                                bg={
-                                    filterOn == "colour_frame"
-                                        ? "#18181B"
-                                        : "#fff"
-                                }
-                                border={
-                                    filterOn == "colour_frame"
-                                        ? "none"
-                                        : "1px solid #18181B"
+                                variant={
+                                    filterOn === "colour_frame" ? "solid" : "outline"
                                 }
                             >
                                 Chance de Aparecimento
@@ -64,7 +48,7 @@ const Filters = ({ sortName, sortDrop, filterOn }: Props) => {
                     </DrawerBody>
 
                     <DrawerFooter>
-                        <Button variant="outline" w={'100%'} onClick={onClose}>
+                        <Button variant="outline" w={"100%"} onClick={onClose}>
                             Fechar
                         </Button>
                     </DrawerFooter>
