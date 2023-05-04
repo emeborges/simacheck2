@@ -18,12 +18,17 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { api } from "utils/services";
 import Router from "next/router";
+import { verifyLogin } from "utils/gerals";
 
 type changePassProps = {
     password: string;
     new_password: string;
     new_passwordConfirmation: string;
 };
+
+interface Props {
+    acess: boolean;
+}
 
 const signUpFormSchema = yup.object().shape({
     password: yup
@@ -47,7 +52,7 @@ const signUpFormSchema = yup.object().shape({
 
 
 
-const Account = () => {
+const Account = ({ acess }: Props) => {
     const { register, handleSubmit, formState } = useForm<changePassProps>({
         resolver: yupResolver(signUpFormSchema),
     });
@@ -61,7 +66,7 @@ const Account = () => {
         await api
             .post("/auth/password/change", {
                 password: password,
-                new_password: new_password
+                new_password: new_password,
             })
             .then((resp) => {
                 console.log(resp);
@@ -75,12 +80,10 @@ const Account = () => {
                     isClosable: true,
                     position: "top",
                 });
-                setTimeout(() => Router.push('/account'), 9000);
-
-
+                setTimeout(() => Router.push("/account"), 9000);
             })
             .catch((error) => {
-                if(error.response.status == 401){
+                if (error.response.status == 401) {
                     toast({
                         title: "Senha incorreta",
                         description:
@@ -88,9 +91,8 @@ const Account = () => {
                         status: "error",
                         duration: 9000,
                         isClosable: true,
-                        position: 'top',
+                        position: "top",
                     });
-
                 } else {
                     toast({
                         title: "Hmm! Algo deu errado.",
@@ -102,9 +104,10 @@ const Account = () => {
                         position: "top",
                     });
                 }
-            }
-        );
+            });
     };
+
+    console.log('ace', acess)
 
     return (
         <>
@@ -113,7 +116,7 @@ const Account = () => {
                     <title> Trocas Senha - SimaCheck</title>
                     <meta name="description" content="" />
                 </Head>
-                <Header />
+                <Header page={""} acess={acess} />
                 <Flex
                     justifyContent={"center"}
                     align={"center"}
@@ -131,7 +134,7 @@ const Account = () => {
                             boxShadow={"0px 4px 10px rgba(0,0,0,0.2)"}
                             p={"2rem 2rem"}
                             maxW={"100%"}
-                            minW={{base:'300px', md:"330px"}}
+                            minW={{ base: "300px", md: "330px" }}
                             borderRadius={"8px"}
                             transition={"all 0.2s"}
                             _hover={{
@@ -198,16 +201,18 @@ const Account = () => {
                         </Flex>
                     </Flex>
                 </Flex>
-
             </Flex>
             <Footer />
         </>
-    );}
+    );
+};
 
 export default Account;
 
-export const getServerSideProps = withsSSRAuth(async () => {
+export const getServerSideProps = withsSSRAuth(async (ctx) => {
     return {
-        props: {},
+        props: {
+            acess: verifyLogin(ctx),
+        },
     };
 });

@@ -40,11 +40,8 @@ const ModalBossSelect = ({isOpen, onClose}:any) => {
     function altPages(){
         onClose()
 
-        if(value === undefined ){
-            console.log('nulo')
-        }else{
-            router.push(`/library/${value}`)
-
+        if(value !== undefined ){
+            return router.push(`/library/${value}`)
         }
     }
 

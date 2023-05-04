@@ -10,7 +10,6 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  Badge,
   useDisclosure,
   Accordion,
   AccordionItem,
@@ -32,20 +31,23 @@ import { Can } from 'components/Can'
 import { signOut, useSignin } from 'hooks/useSignin'
 import ModalSelectServer from 'components/ModalServerSelect'
 
+interface ComponentProps {
+    page: string;
+    acess?: boolean;
+}
 
-export const Header = ({ page }:any) => {
-    const [display, setChangeDisplay] = useState('none')
+export const Header = ({ page, acess }: ComponentProps) => {
+    const [display, setChangeDisplay] = useState("none");
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [autent, setAutent] = useState(false)
+    const [autent, setAutent] = useState(false);
     const { isAthenticated } = useSignin();
-    const route = useRouter()
+    const route = useRouter();
 
-    const router = useRouter()
+    const router = useRouter();
 
     useEffect(() => {
         setAutent(isAthenticated);
     }, [isAthenticated]);
-
 
     const links = [
         {
@@ -108,12 +110,11 @@ export const Header = ({ page }:any) => {
                         justify={"space-around"}
                         maxW={"1300px"}
                         m={"0 auto"}
-
                     >
                         <Image src={"/img/logo.svg"} w={"30%"} />
 
                         {links.map((link, key) => {
-                            if(typeof link.referencia !== 'string'){
+                            if (typeof link.referencia !== "string") {
                                 return (
                                     <Flex
                                         minHeight={"100%"}
@@ -185,10 +186,11 @@ export const Header = ({ page }:any) => {
                                             </MenuList>
                                         </Menu>
                                     </Flex>
-                                );}
+                                );
+                            }
 
                             return (
-                                <NextLink href={link.rota} key={key} >
+                                <NextLink href={link.rota} key={key}>
                                     <Flex
                                         align={"center"}
                                         justifyContent={"center"}
@@ -197,7 +199,7 @@ export const Header = ({ page }:any) => {
                                             base: "80%",
                                             md: "100%",
                                         }}
-                                        height={'100%'}
+                                        height={"100%"}
                                         borderBottom={{
                                             md:
                                                 page === link.texto
@@ -238,56 +240,12 @@ export const Header = ({ page }:any) => {
                             );
                         })}
 
-
-                        {autent == true ? (
+                        {acess || autent == true ? (
                             <Flex
                                 align={"center"}
                                 justifyContent={"center"}
                                 mr={"1rem"}
                             >
-                                <Can permissions={new Date()} roles="premium">
-                                    <Menu>
-                                        <MenuButton
-                                            as={IconButton}
-                                            aria-label="Options"
-                                            icon={<GiAxeSword />}
-                                            color={"#4E4E52"}
-                                            bg={"none"}
-                                            borderRadius={"none"}
-                                            borderWidth={"50%"}
-                                            _hover={{
-                                                color: "#eae9e9",
-                                                borderBottom: "2px solid red",
-                                            }}
-                                            mr={"0.5rem"}
-                                            fontSize={"1.5rem"}
-                                        />
-                                        <MenuList>
-                                            <Text
-                                                fontSize={"0.7rem"}
-                                                textAlign={"center"}
-                                            >
-                                                Acesso Rápido
-                                                <Badge
-                                                    colorScheme="green"
-                                                    fontSize={"0.7rem"}
-                                                    ml={"0.5rem"}
-                                                >
-                                                    PREMIUM
-                                                </Badge>
-                                            </Text>
-                                            <MenuItem
-                                                fontSize={"0.8rem"}
-                                                onClick={onOpen}
-                                            >
-                                                Radar
-                                            </MenuItem>
-                                            <MenuItem fontSize={"0.8rem"}>
-                                                Calculadoras
-                                            </MenuItem>
-                                        </MenuList>
-                                    </Menu>
-                                </Can>
                                 <Menu>
                                     <MenuButton
                                         as={IconButton}
@@ -405,7 +363,6 @@ export const Header = ({ page }:any) => {
                     flexDir="column"
                 >
                     <Flex justify="flex-end" bg={"#121214"}>
-
                         <IconButton
                             mt={2}
                             mr={2}
@@ -420,8 +377,7 @@ export const Header = ({ page }:any) => {
 
                     <Flex flexDir="column" align="center" bg={"#121214"}>
                         {links.map((link, key) => {
-
-                            if(typeof link.referencia === 'string'){
+                            if (typeof link.referencia === "string") {
                                 return (
                                     <NextLink href={link.referencia} key={key}>
                                         <Flex
@@ -469,7 +425,8 @@ export const Header = ({ page }:any) => {
                                             </Text>
                                         </Flex>
                                     </NextLink>
-                            )}
+                                );
+                            }
 
                             return (
                                 <Accordion
@@ -492,7 +449,6 @@ export const Header = ({ page }:any) => {
                                             >
                                                 {link.texto}
                                             </Box>
-
                                         </AccordionButton>
 
                                         <AccordionPanel pb={4}>
@@ -653,4 +609,4 @@ export const Header = ({ page }:any) => {
             <ModalSelectServer isOpen={isOpen} onClose={onClose} />
         </>
     );
-}
+};

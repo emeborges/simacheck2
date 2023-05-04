@@ -14,13 +14,18 @@ import { Header } from 'components/Header';
 import { useRouter } from 'next/router';
 import ModalBossSelect from "components/ModalBossSelect";
 import { Footer } from "components/Footer";
+import { withsLogin } from "utils/withsLogin";
 
-const Index = () => {
+interface Props {
+    acess: boolean;
+}
+
+const Index = ({ acess }: Props) => {
     const route = useRouter();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const pid: any = route.query.boss;
 
-    console.log(pid)
+    console.log(pid);
 
     return (
         <Flex
@@ -34,7 +39,7 @@ const Index = () => {
                 <meta name="description" content="" />
             </Head>
             <Box>
-                <Header page={"library"} />
+                <Header page={"library"} acess={acess} />
             </Box>
             <Box w={"100%"} maxW={"1300px"} margin={"0 auto"}>
                 <Flex
@@ -134,6 +139,9 @@ const Index = () => {
             </Box>
             <Footer />
         </Flex>
-    );}
+    );
+};
 
 export default Index
+
+export const getServerSideProps = withsLogin();

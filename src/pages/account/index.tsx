@@ -18,9 +18,14 @@ import { IncompletRegistration, TelphoneNotCheck } from "components/PerfilFlags"
 import { useSignin } from "hooks/useSignin";
 import Head from "next/head";
 import { IoSettingsSharp } from "react-icons/io5";
+import { verifyLogin } from "utils/gerals";
 import { withsSSRAuth } from "utils/withsSSRAuth";
 
-const Account = () => {
+interface Props {
+    acess: boolean;
+}
+
+const Account = ({ acess }: Props) => {
     const { user, signOut, globalSignOut } = useSignin();
     const dataVenc = new Date(user?.premium_until!);
 
@@ -31,7 +36,7 @@ const Account = () => {
                     <title> Perfil - SimaCheck</title>
                     <meta name="description" content="" />
                 </Head>
-                <Header />
+                <Header page={""} acess={acess} />
                 <Flex
                     flexDir={"column"}
                     p={"2rem 0rem 1rem"}
@@ -39,7 +44,11 @@ const Account = () => {
                     maxW={"920px"}
                     h={"100%"}
                 >
-                    {user?.premium && !user?.phone_number === false ? !user?.is_verified && <TelphoneNotCheck />  : <IncompletRegistration />}
+                    {user?.premium && !user?.phone_number === false ? (
+                        !user?.is_verified && <TelphoneNotCheck />
+                    ) : (
+                        <IncompletRegistration />
+                    )}
 
                     <Flex w={"100%"} justify={"space-between"}>
                         <Box
@@ -282,8 +291,10 @@ const Account = () => {
 
 export default Account;
 
-export const getServerSideProps = withsSSRAuth(async () => {
+export const getServerSideProps = withsSSRAuth(async (ctx) => {
     return {
-        props: {},
+        props: {
+            acess: verifyLogin(ctx),
+        },
     };
 });

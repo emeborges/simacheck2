@@ -9,12 +9,17 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useSignin } from "hooks/useSignin";
 import { withSSTGuest } from "../../utils/withsSSRGuest";
+import { verifyLogin } from "utils/gerals";
 
 type SigninProps = {
     email: string;
     password: string;
     confirmationPassword: string;
 };
+
+interface Props {
+    acess: boolean;
+}
 
 const signInFormSchema = yup.object().shape({
     email: yup
@@ -26,7 +31,7 @@ const signInFormSchema = yup.object().shape({
         .required("Senha obrigatória."),
 });
 
-const SigninPage = () => {
+const SigninPage = ({ acess }: Props) => {
     const { register, handleSubmit, formState } = useForm<SigninProps>({
         resolver: yupResolver(signInFormSchema),
     });
@@ -37,9 +42,8 @@ const SigninPage = () => {
         email,
         password,
     }) => {
-        const data = { email, password, type: 'USERPASS' };
+        const data = { email, password, type: "USERPASS" };
         signIn(data);
-
     };
 
     return (
@@ -49,7 +53,7 @@ const SigninPage = () => {
                     <title> Entrar - SimaCheck</title>
                     <meta name="description" content="" />
                 </Head>
-                <Header />
+                <Header page={""} acess={acess} />
                 <Flex
                     maxW={"330px"}
                     h={"100%"}
@@ -172,12 +176,15 @@ const SigninPage = () => {
             </Flex>
             <Footer />
         </>
-    );}
+    );
+};
 
 export default SigninPage;
 
-export const getServerSideProps = withSSTGuest(async () => {
+export const getServerSideProps = withSSTGuest(async (ctx) => {
     return {
-        props: {},
+        props: {
+            acess: verifyLogin(ctx),
+        },
     };
 });

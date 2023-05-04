@@ -16,7 +16,6 @@ const ModalDetailsBoss: React.FC<{
     onClose: any;
 }> = ({ boss, isOpen, onClose }) => {
 
-    console.log(boss)
     function dataChart(prediction_frame?: Previews[] | null) {
         if(prediction_frame){
             let final = [];

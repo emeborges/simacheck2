@@ -9,12 +9,18 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useSignup } from "hooks/useSignup";
 import { withSSTGuest } from "utils/withsSSRGuest";
 import { useTranslation } from "hooks/useTranslation";
+import { verifyLogin } from "utils/gerals";
 
 type SignUpProps = {
     email: string;
     password: string;
     confirmationPassword: string;
 };
+
+interface Props {
+    acess: boolean;
+}
+
 
 const signUpFormSchema = yup.object().shape({
     email: yup
@@ -33,17 +39,20 @@ const signUpFormSchema = yup.object().shape({
         .oneOf([yup.ref("password"), null], "As senhas devem ser iguais"),
 });
 
-const Signup = () => {
+const Signup = ({ acess }: Props) => {
     const { signUp, Router, loading } = useSignup();
     const { register, handleSubmit, formState } = useForm<SignUpProps>({
         resolver: yupResolver(signUpFormSchema),
     });
-    const {locale} = useTranslation()
-    const [valueCheck, setValeuCheck ] = useState(false)
-    const { errors } = formState
+    const { locale } = useTranslation();
+    const [valueCheck, setValeuCheck] = useState(false);
+    const { errors } = formState;
 
-    const onSubmit: SubmitHandler<SignUpProps> = async ({ email, password}) => {
-        const data = {email, password, locale}
+    const onSubmit: SubmitHandler<SignUpProps> = async ({
+        email,
+        password,
+    }) => {
+        const data = { email, password, locale };
         signUp(data);
     };
 
@@ -53,7 +62,7 @@ const Signup = () => {
                 <title> Entrar - SimaCheck</title>
                 <meta name="description" content="" />
             </Head>
-            <Header />
+            <Header page={""} acess={acess} />
             <Flex maxW={"330px"} h={"100%"} align={"center"} justify={"center"}>
                 <Flex
                     flexDir={"column"}
@@ -137,16 +146,16 @@ const Signup = () => {
                     >
                         Voltar
                     </Button>
-
                 </Flex>
             </Flex>
         </Flex>
-    );}
+    );
+};
 
 export default Signup
 
-export const getServerSideProps = withSSTGuest(async () => {
-    return {
-        props: {},
-    };
-});
+export const getServerSideProps = withSSTGuest(async (ctx) => ({
+    props: {
+        acess: verifyLogin(ctx),
+    },
+}));

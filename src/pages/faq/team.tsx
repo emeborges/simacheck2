@@ -10,16 +10,21 @@ import { Header } from "components/Header";
 import { Footer } from "components/Footer";
 import { useState } from "react";
 import Link from "next/link";
+import { withsLogin } from "utils/withsLogin";
 
-const Team = () => {
-    const [selected, setSelected] = useState(1)
+interface Props {
+    acess: boolean;
+}
+
+const Team = ({ acess }: Props) => {
+    const [selected, setSelected] = useState(1);
 
     return (
         <Box maxW={"100vw"} h={"100vh"}>
             <Head>
                 <meta name="description" content="" />
             </Head>
-            <Header page={"faq"} />
+            <Header page={"faq"} acess={acess} />
             <Box w={"100%"} minH={"81.5vh"} maxW={"1300px"} margin={"0 auto"}>
                 <Flex
                     align={"center"}
@@ -56,12 +61,16 @@ const Team = () => {
                         melhor! Esse projeto foi criado e gerenciado por:
                     </Heading>
                 </Flex>
-                <Flex justify={"center"} flexDir={{base: 'column', md: 'row'}} pb={"1rem"} maxW={'100vw'}>
+                <Flex
+                    justify={"center"}
+                    flexDir={{ base: "column", md: "row" }}
+                    pb={"1rem"}
+                    maxW={"100vw"}
+                >
                     <Box
                         as={"button"}
                         p={"7.5rem"}
                         bgPos={"top"}
-
                         bgRepeat={"no-repeat"}
                         bgImage={"/img/uri.png"}
                         borderRadius={"8px 0 0 8px"}
@@ -72,7 +81,6 @@ const Team = () => {
                     <Box
                         as={"button"}
                         p={"7.5rem"}
-
                         bgRepeat={"no-repeat"}
                         bgPos={"top"}
                         bgImage={"/img/mar.png"}
@@ -158,3 +166,5 @@ const Team = () => {
 };
 
 export default Team;
+
+export const getServerSideProps = withsLogin();

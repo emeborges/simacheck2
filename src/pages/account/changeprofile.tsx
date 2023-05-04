@@ -21,7 +21,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 //import { api } from "utils/services";
 import Router from "next/router";
 import { useState } from "react";
-import { languages, UFS } from "utils/gerals";
+import { languages, UFS, verifyLogin } from "utils/gerals";
 import { useTranslation } from "hooks/useTranslation";
 import { api } from "utils/services";
 
@@ -33,6 +33,10 @@ type changePassProps = {
     is_optin: boolean;
 };
 
+interface Props {
+    acess: boolean;
+}
+
 const signUpFormSchema = yup.object().shape({
     name: yup.string().required("É necessário preencher um nome"),
     phone_number: yup.string(),
@@ -40,10 +44,8 @@ const signUpFormSchema = yup.object().shape({
     is_optin: yup.boolean().required(),
 });
 
-
-
-const ChangeProfile = () => {
-    const [load, setLoad] = useState<boolean>(false)
+const ChangeProfile = ({ acess }: Props) => {
+    const [load, setLoad] = useState<boolean>(false);
     const { register, handleSubmit, formState } = useForm<changePassProps>({
         resolver: yupResolver(signUpFormSchema),
     });
@@ -58,7 +60,7 @@ const ChangeProfile = () => {
         locale,
         //is_optin,
     }) => {
-        setLoad(true)
+        setLoad(true);
 
         const data = {
             name,
@@ -69,7 +71,6 @@ const ChangeProfile = () => {
         await api
             .put("users/me", data)
             .then(() => {
-
                 toast({
                     title: "Dados atualizado!.",
                     description:
@@ -80,7 +81,7 @@ const ChangeProfile = () => {
                     position: "top",
                 });
                 setTimeout(() => Router.push("/account"), 5000);
-                setTimeout(() => Router.reload, 4000)
+                setTimeout(() => Router.reload, 4000);
             })
             .catch(() => {
                 toast({
@@ -92,9 +93,8 @@ const ChangeProfile = () => {
                     isClosable: true,
                     position: "top",
                 });
-                setLoad(false)
+                setLoad(false);
             });
-
     };
 
     return (
@@ -104,7 +104,7 @@ const ChangeProfile = () => {
                     <title> Alterar Perfil - SimaCheck</title>
                     <meta name="description" content="" />
                 </Head>
-                <Header />
+                <Header page={""} acess={acess} />
                 <Flex
                     justifyContent={"center"}
                     align={"center"}
@@ -245,12 +245,15 @@ const ChangeProfile = () => {
             </Flex>
             <Footer />
         </>
-    );}
+    );
+};
 
 export default ChangeProfile;
 
-export const getServerSideProps = withsSSRAuth(async () => {
+export const getServerSideProps = withsSSRAuth(async (ctx) => {
     return {
-        props: {},
+        props: {
+            acess: verifyLogin(ctx),
+        },
     };
 });

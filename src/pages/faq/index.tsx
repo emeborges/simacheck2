@@ -20,10 +20,13 @@ import Head from "next/head";
 import { Header } from "components/Header";
 import { Footer } from "components/Footer";
 import Link from "next/link";
+import { withsLogin } from "utils/withsLogin";
 
-const Index = () => {
+interface Props {
+    acess: boolean;
+}
 
-
+const Index = ({ acess }: Props) => {
     return (
         <Flex
             minH={"100vh"}
@@ -36,7 +39,7 @@ const Index = () => {
                 <meta name="description" content="" />
             </Head>
             <Box>
-                <Header page={"faq"} />
+                <Header page={"faq"} acess={acess} />
             </Box>
 
             <Box w={"100%"} maxW={"1300px"} margin={"0 auto"}>
@@ -290,3 +293,5 @@ const Index = () => {
 };
 
 export default Index;
+
+export const getServerSideProps = withsLogin();

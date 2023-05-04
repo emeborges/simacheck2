@@ -7,8 +7,13 @@ import { api } from 'utils/services';
 import { BossDetailsProps } from "utils/types";
 import { Footer } from "components/Footer";
 import { Header } from "components/Header";
+import { withsLogin } from "utils/withsLogin";
 
-const Index = () => {
+interface Props {
+    acess: boolean;
+}
+
+const Index = ({ acess }: Props) => {
     const route = useRouter();
     const pid: any = route.query.boss;
     const [load, setLoad] = useState(true);
@@ -29,7 +34,7 @@ const Index = () => {
         getBoss();
     }, [pid]);
 
-    console.log(load)
+    console.log(load);
 
     return (
         <Flex
@@ -43,7 +48,7 @@ const Index = () => {
                 <meta name="description" content="" />
             </Head>
             <Box>
-                <Header page={"library"} />
+                <Header page={"library"} acess={acess} />
             </Box>
             <Flex w={"100%"} h={"100%"} maxW={"1300px"} margin={"0 auto"}>
                 <Flex
@@ -270,6 +275,9 @@ const Index = () => {
             </Flex>
             <Footer />
         </Flex>
-    );}
+    );
+};
 
 export default Index
+
+export const getServerSideProps = withsLogin();

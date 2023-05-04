@@ -16,10 +16,14 @@ import { Header } from "components/Header";
 import { useSignin } from "hooks/useSignin";
 import Head from 'next/head'
 import { IoSettingsSharp } from "react-icons/io5";
+import { verifyLogin } from "utils/gerals";
 import { withsSSRAuth } from "utils/withsSSRAuth";
 
+interface Props {
+    acess: boolean;
+}
 
-const Requests = () => {
+const Requests = ({ acess }: Props) => {
     const { user, signOut, globalSignOut } = useSignin();
 
     return (
@@ -29,7 +33,7 @@ const Requests = () => {
                     <title> Perfil - SimaCheck</title>
                     <meta name="description" content="" />
                 </Head>
-                <Header />
+                <Header page={""} acess={acess} />
                 <Flex
                     justifyContent={"center"}
                     align={"center"}
@@ -208,12 +212,16 @@ const Requests = () => {
             </Flex>
             <Footer />
         </>
-    );}
+    );
+};
 
 export default Requests;
 
-export const getServerSideProps = withsSSRAuth(async () => {
+export const getServerSideProps = withsSSRAuth(async (ctx) => {
     return {
-        props: {},
+        props: {
+            acess: verifyLogin(ctx),
+        },
     };
 });
+

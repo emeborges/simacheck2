@@ -7,12 +7,17 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useSignup } from "hooks/useSignup";
+import { withSSTGuest } from "utils/withsSSRGuest";
+import { verifyLogin } from "utils/gerals";
 
 type ConfirmationProps = {
     confirmation: string;
     email?: string;
 };
 
+interface Props {
+    acess: boolean;
+}
 
 const ConfirmationFormSchema = yup.object().shape({
     confirmation: yup
@@ -22,10 +27,10 @@ const ConfirmationFormSchema = yup.object().shape({
         .required("Campo obrigatório."),
 });
 
-const Signup = () => {
+const Signup = ({ acess }: Props) => {
     const { Router, email, signUpConfirmation, resendConfirmation, loading } =
         useSignup();
-    const [ valor, setValor ] = useState<number>(10);
+    const [valor, setValor] = useState<number>(10);
     const { register, handleSubmit, formState } = useForm<ConfirmationProps>({
         resolver: yupResolver(ConfirmationFormSchema),
     });
@@ -39,7 +44,7 @@ const Signup = () => {
     const { errors } = formState;
 
     const onSubmit: SubmitHandler<ConfirmationProps> = async ({
-        confirmation
+        confirmation,
     }) => {
         const data = { email, confirmation };
         signUpConfirmation(data);
@@ -51,7 +56,7 @@ const Signup = () => {
                 <title> Entrar - SimaCheck</title>
                 <meta name="description" content="" />
             </Head>
-            <Header />
+            <Header page={""} acess={acess} />
             <Flex maxW={"330px"} h={"100%"} align={"center"} justify={"center"}>
                 <Flex
                     flexDir={"column"}
@@ -132,3 +137,11 @@ const Signup = () => {
 };
 
 export default Signup;
+
+export const getServerSideProps = withSSTGuest(async (ctx) => {
+    return {
+        props: {
+            acess: verifyLogin(ctx),
+        },
+    };
+});

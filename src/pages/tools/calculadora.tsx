@@ -2,12 +2,13 @@ import {  Box, Flex,} from '@chakra-ui/react';
 import Head from 'next/head'
 import { Header } from 'components/Header';
 import { Footer } from 'components/Footer';
+import { withsLogin } from 'utils/withsLogin';
 
+interface Props {
+    acess: boolean;
+}
 
-
-const Index = () => {
-
-
+const Index = ({ acess }: Props) => {
     return (
         <Flex
             minH={"100vh"}
@@ -20,10 +21,16 @@ const Index = () => {
                 <meta name="description" content="" />
             </Head>
             <Box>
-                <Header page={"tools"} />
+                <Header page={"tools"} acess={acess} />
             </Box>
-            <Flex flexDir={'column'} h={'100%'} w={"100%"} maxW={"1300px"} margin={"0 auto"}>
-               {/* <Flex align={"center"} flexDir={"column"} w={"100%"} mb={'0.5rem'}>
+            <Flex
+                flexDir={"column"}
+                h={"100%"}
+                w={"100%"}
+                maxW={"1300px"}
+                margin={"0 auto"}
+            >
+                {/* <Flex align={"center"} flexDir={"column"} w={"100%"} mb={'0.5rem'}>
                     <Heading
                         fontSize={{ base: "0.8rem", md: "2rem" }}
                         position={"relative"}
@@ -98,6 +105,10 @@ const Index = () => {
             </Flex>
             <Footer />
         </Flex>
-    );}
+    );
+};
 
 export default Index
+
+
+export const getServerSideProps = withsLogin();

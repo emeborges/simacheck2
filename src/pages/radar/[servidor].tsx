@@ -7,8 +7,13 @@ import Radar from 'components/Radar';
 import { BossesProvider } from "hooks/useRadarBosses";
 import { useRouter } from 'next/router';
 import { Footer } from 'components/Footer';
+import { withsLogin } from 'utils/withsLogin';
 
-const Index = () => {
+interface Props {
+    acess: boolean;
+}
+
+const Index = ({ acess }: Props) => {
     const route = useRouter();
     const pid: any = route.query.servidor;
 
@@ -24,13 +29,16 @@ const Index = () => {
                 <meta name="description" content="" />
             </Head>
             <Box>
-                <Header page={"tools"} />
+                <Header page={"tools"} acess={acess}/>
             </Box>
             <BossesProvider>
                 <Radar />
             </BossesProvider>
             <Footer />
         </Flex>
-    );}
+    );
+};
 
 export default Index
+
+export const getServerSideProps = withsLogin();

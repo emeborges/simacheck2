@@ -1,4 +1,6 @@
+import { GetServerSidePropsContext } from 'next';
 import { useRouter } from "next/router";
+import { parseCookies } from "nookies";
 
 export function color(dados:number, porcentagemColor?: number) {
 
@@ -180,3 +182,10 @@ export const languages = [
         code: "en",
     },
 ];
+
+
+export const verifyLogin = (ctx?: GetServerSidePropsContext) => {
+    const cookies = parseCookies(ctx);
+
+    return !!cookies["simacheck.accessToken"];
+};

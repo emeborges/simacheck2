@@ -13,14 +13,17 @@ import { Footer } from 'components/Footer'
 import { useTranslation } from 'hooks/useTranslation';
 import UserPlans from 'components/UserPlans';
 
-export function Home() {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const [conteinerNum, setConteinerNum] = useState<number>(1)
+interface ComponentProps {
+    acess?: boolean
+}
+export function Home({ acess }: ComponentProps) {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [conteinerNum, setConteinerNum] = useState<number>(1);
 
     const { t } = useTranslation();
 
-    function selectConteiner(num:number) {
-        setConteinerNum(num)
+    function selectConteiner(num: number) {
+        setConteinerNum(num);
     }
 
     return (
@@ -30,7 +33,7 @@ export function Home() {
                 <meta name="description" content="" />
             </Head>
 
-            <Header page={"home"} />
+            <Header page={"home"} acess={acess} />
             <Flex
                 maxW={"100%"}
                 p={{ base: "3rem 0.5rem", lg: "7rem 0rem 4rem" }}
