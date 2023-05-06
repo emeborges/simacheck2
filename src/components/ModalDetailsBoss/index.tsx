@@ -2,12 +2,12 @@
 import { PluralOuSing, Porcentagem } from "../../utils/gerals"
 import { Badge, Box, Button, Flex, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stat, StatArrow, StatHelpText,  Text, Tooltip, } from "@chakra-ui/react"
 import { Chart } from "react-google-charts"
-import Link from 'next/link'
 import { BossesDetailsProps, Previews } from "utils/types"
 import { FaSkull } from "react-icons/fa"
 import { BsStopwatchFill } from "react-icons/bs";
 import { Can } from "components/Can";
-import { IoLibraryOutline } from "react-icons/io5";
+import { FaWikipediaW } from "react-icons/fa";
+import { useRouter } from "next/router"
 
 
 const ModalDetailsBoss: React.FC<{
@@ -15,6 +15,7 @@ const ModalDetailsBoss: React.FC<{
     isOpen: any;
     onClose: any;
 }> = ({ boss, isOpen, onClose }) => {
+        const route = useRouter();
 
     function dataChart(prediction_frame?: Previews[] | null) {
         if(prediction_frame){
@@ -204,7 +205,7 @@ const ModalDetailsBoss: React.FC<{
                                         <Flex
                                             align={"center"}
                                             justify={"space-between"}
-                                            bg={"#f1f1f1"}
+                                            bg={"gray"}
                                             p={"0 0.5rem"}
                                         >
                                             <Tooltip label="Possível aparecimento em:">
@@ -329,39 +330,41 @@ const ModalDetailsBoss: React.FC<{
                         </Box>
                     </Can>
 
-                    <Flex justify={"space-around"} align={"center"}>
-                        <Flex cursor={"pointer"}>
-                            <Link href={`${boss?.wiki_url}`}>
-                                <Image
-                                    src={"/img/fandom.svg"}
-                                    style={{ width: "80px" }}
-                                />
-                            </Link>
-                        </Flex>
-                        <Flex cursor={"pointer"}>
-                            <Link href={"/"}>
+                    <Box>
+                        <Text fontSize={'0.8rem'}>Saiba mais:</Text>
+                        <Flex justify={"space-around"} align={"center"}>
+                            <Flex cursor={"pointer"}>
                                 <Button
                                     mt={"0.5rem"}
                                     bg={"transparent"}
                                     w={"10rem"}
                                     h={"5rem"}
                                     p={"0.5rem"}
-                                    display={"flex"}
-                                    flexDir={"column"}
-                                    justifyContent={"space-around"}
-                                    _hover={{ bg: "#737380", color: "#fff" }}
+                                    onClick={() =>
+                                        route.push(`${boss?.wiki_url}`)
+                                    }
                                 >
-                                    <IoLibraryOutline
-                                        style={{
-                                            height: "2rem",
-                                            width: "2rem",
-                                        }}
+                                    <Image
+                                        src={"/img/fandom.svg"}
+                                        style={{ width: "120px" }}
                                     />
-                                    SimaLibrary
                                 </Button>
-                            </Link>
+                            </Flex>
+                            <Flex cursor={"pointer"}>
+                                <Button
+                                    mt={"0.5rem"}
+                                    bg={"transparent"}
+                                    w={"10rem"}
+                                    h={"5rem"}
+                                    p={"0.5rem"}
+                                    leftIcon={<FaWikipediaW />}
+                                    onClick={() => route.push("/")}
+                                >
+                                    SimaWiki
+                                </Button>
+                            </Flex>
                         </Flex>
-                    </Flex>
+                    </Box>
                 </ModalBody>
 
                 <ModalFooter>
