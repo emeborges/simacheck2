@@ -26,12 +26,15 @@ api.interceptors.response.use(
     response => response
     , (error) => {
         if(error.response?.status == 401){
+            let mensage = error.response.data.Message;
+            console.log(mensage !== "The password is incorrect");
 
             if (
-                error.response.data.message == "Access Token Expired" ||
-                "The incoming token has expired"
-            ) {
+                mensage === "Access Token Expired" ||
+                mensage === "The incoming token has expired"
 
+            ) {
+                console.log("bateu aqui veio");
                 const { "simacheck.accessToken": acessToken } = parseCookies();
                 const { "simacheck.refreshToken": refreshToken } =
                     parseCookies();
@@ -81,7 +84,7 @@ api.interceptors.response.use(
 
                             if (process.browser) {
                                 signOut();
-                                console.log('refresh deu errado')
+                                console.log("refresh deu errado");
                             }
                         })
                         .finally(() => {
@@ -102,7 +105,7 @@ api.interceptors.response.use(
                         },
                     });
                 });
-            } else {
+            } else if(mensage !== "The password is incorrect"){
                 signOut();
             }
         }

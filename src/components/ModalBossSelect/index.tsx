@@ -41,7 +41,7 @@ const ModalBossSelect = ({isOpen, onClose}:any) => {
         onClose()
 
         if(value !== undefined ){
-            return router.push(`/library/${value}`)
+            return router.push(`/wiki/${value}`)
         }
     }
 
@@ -76,7 +76,6 @@ const ModalBossSelect = ({isOpen, onClose}:any) => {
 
                 <ModalFooter>
                     <Button
-                        bg={"#e1e1e6"}
                         p={"0.5rem 2rem"}
                         display={"flex"}
                         flexDir={"column"}
